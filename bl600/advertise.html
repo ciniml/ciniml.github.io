@@ -1,16 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>BL600でアドバタイズする &mdash; ふがふが</title>
-    
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
+    <title>BL600でアドバタイズする — ふがふが</title>
+    <link rel="stylesheet" href="../css/default.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -20,168 +14,188 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
     <link rel="top" title="ふがふが" href="../index.html" />
     <link rel="up" title="BL600関係" href="../bl600.html" />
-    <link rel="prev" title="BL600関係" href="../bl600.html" /> 
+    <link rel="prev" title="BL600関係" href="../bl600.html" />
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../bl600.html" title="BL600関係"
-             accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">ふがふが</a> &raquo;</li>
-          <li><a href="../bl600.html" accesskey="U">BL600関係</a> &raquo;</li> 
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="../bl600.html" title="BL600関係" accesskey="P">previous</a> |</li>
+        <li>
+          <a href="../index.html">ふがふが</a> »</li>
+        <li>
+          <a href="../bl600.html" accesskey="U">BL600関係</a> »</li>
       </ul>
-    </div>  
-
+    </div>
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
-            
-  <div class="section" id="bl600">
-<h1>BL600でアドバタイズする<a class="headerlink" href="#bl600" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>BL600でセンサの値を読んでPCに送信してみたかったので，とりあえず独自のSERVICEを定義してセンサの値をGATTクライアントから読み取れるようにしてみた．
+            <div class="section" id="bl600">
+              <h1>BL600でアドバタイズする<a class="headerlink" href="#bl600" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id1">
+                <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+                <p>BL600でセンサの値を読んでPCに送信してみたかったので，とりあえず独自のSERVICEを定義してセンサの値をGATTクライアントから読み取れるようにしてみた．
 その中でまずはBL600でADVERTISEしてPCからスキャンした際に表示される部分までを説明する．</p>
-</div>
-<div class="section" id="id2">
-<h2>BL600とは<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>Laird Technologies製の技適付きBluetooth Low Energyモジュール．￥1,500くらいでdigikeyなどで買える．
+              </div>
+              <div class="section" id="id2">
+                <h2>BL600とは<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+                <p>Laird Technologies製の技適付きBluetooth Low Energyモジュール．￥1,500くらいでdigikeyなどで買える．
 特に専用の書き込み器などを必要とせず，UART経由でsmart BASICなる言語で動作を記述できる．まさか世の中にsmartなBASICがあるとは思っていなかった．</p>
-<p>Lairdのサイトのこのページからドキュメントやツール類がダウンロードできるが，最新のファームウェアやドキュメントをダウンロードするにはユーザー登録が必要．登録はこのページからできる．
+                <p>Lairdのサイトのこのページからドキュメントやツール類がダウンロードできるが，最新のファームウェアやドキュメントをダウンロードするにはユーザー登録が必要．登録はこのページからできる．
 smart BASIC
 BL600の動作を記述するための専用言語．Windows上で動作する専用のコンパイラにより中間コードに変換した後，UART経由でBL600に転送し，BL600上の実行エンジンで実行する．
 VBAのような構造化されたBASICなので，言うほど辛くは無い．VBA書けるならサラサラ書けると思われる．</p>
-<p>文字列演算や算術演算用の関数に加えてBLEモジュールを扱うための専用関数が用意されていて，それなりに簡単にBLEモジュールを扱うことが出来る．</p>
-</div>
-<div class="section" id="advertise">
-<h2>ADVERTISEする<a class="headerlink" href="#advertise" title="Permalink to this headline">¶</a></h2>
-<p>とりあえずSERVICEを定義する前にまずPCからデバイスを見つけられるようにADVERTISEしてみる．
+                <p>文字列演算や算術演算用の関数に加えてBLEモジュールを扱うための専用関数が用意されていて，それなりに簡単にBLEモジュールを扱うことが出来る．</p>
+              </div>
+              <div class="section" id="advertise">
+                <h2>ADVERTISEする<a class="headerlink" href="#advertise" title="Permalink to this headline">¶</a></h2>
+                <p>とりあえずSERVICEを定義する前にまずPCからデバイスを見つけられるようにADVERTISEしてみる．
 以下，smart BASICのコード:</p>
-<div class="highlight-python"><div class="highlight"><pre>Dim rc  // result code
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>Dim rc  // result code
 Dim advReport$
 Dim scanReport$
 Dim peerAddr$
 
 // initialize services
-rc = BleGapSvcInit(&quot;BL600&quot;, 0, 256, 500000, 1000000, 4000000, 0)
+rc = BleGapSvcInit("BL600", 0, 256, 500000, 1000000, 4000000, 0)
 // start advertisement
-advReport$ = &quot;&quot;
-scanReport$ = &quot;&quot;
-peerAddr$ = &quot;&quot;
+advReport$ = ""
+scanReport$ = ""
+peerAddr$ = ""
 rc = BleAdvRptInit(advReport$, 0x06, 1, 10)
 rc = BleAdvRptsCommit(advReport$, scanReport$)
 rc = BleAdvertStart(0, peerAddr$, 1000, 0, 0)
 
 // Wait events
 WaitEvent
-</pre></div>
-</div>
-<p>BleGapSvcInit関数でGAPのDevice Name，Appearance，Peripheral Preferred Connection Parametersを設定する．ADVERTISEする前に呼び出しておかないとデフォルト値が使われてしまう．</p>
-<p>関数のシグネチャは</p>
-<p>BleGapSvcInit(ByRef deviceName AS STRING, ByVal nameWritable AS INTEGER, ByVal nAppearance AS INTEGER, ByVal nMinConnInterval AS INTEGER, ByVal nMaxConnInterval AS INTEGER, ByVal nSupervisionTimeout AS INTEGER, ByVal nSlaveLatency AS INTEGER)　AS INTEGER</p>
-<p>となっている．とりあえず，deviceNameにADVERTISE時に表示したいデバイス名を指定する以外は適当に指定する．</p>
-<p>次にBleAdvRptInit関数でADVERTISE用のデータ(Advertising Data)を構築する．smart BASICではバイト列もSTRINGとして扱われるが，ADVERTISEデータなどのバイト列を組み込み関数で構築するのが難しいため，BleAdvRptInitのようにデータを構築してSTRING型変数に格納する関数が多数用意されている．</p>
-<p>BleAdvRptInit関数のシグネチャは次の通りである：</p>
-<p>BleAdvRptInit(ByRef advRpt$ AS STRING, ByVal nFlagsAD AS INTEGER, ByVal nAdvAppearance AS INTEGER, ByVal nMaxDevName AS INTEGER) AS INTEGER</p>
-<p>第1引数のadvRpt$に構築したAdvertising Dataを格納するSTRING型変数を指定する．
+</pre>
+                  </div>
+                </div>
+                <p>BleGapSvcInit関数でGAPのDevice Name，Appearance，Peripheral Preferred Connection Parametersを設定する．ADVERTISEする前に呼び出しておかないとデフォルト値が使われてしまう．</p>
+                <p>関数のシグネチャは</p>
+                <p>BleGapSvcInit(ByRef deviceName AS STRING, ByVal nameWritable AS INTEGER, ByVal nAppearance AS INTEGER, ByVal nMinConnInterval AS INTEGER, ByVal nMaxConnInterval AS INTEGER, ByVal nSupervisionTimeout AS INTEGER, ByVal nSlaveLatency AS INTEGER)　AS INTEGER</p>
+                <p>となっている．とりあえず，deviceNameにADVERTISE時に表示したいデバイス名を指定する以外は適当に指定する．</p>
+                <p>次にBleAdvRptInit関数でADVERTISE用のデータ(Advertising Data)を構築する．smart BASICではバイト列もSTRINGとして扱われるが，ADVERTISEデータなどのバイト列を組み込み関数で構築するのが難しいため，BleAdvRptInitのようにデータを構築してSTRING型変数に格納する関数が多数用意されている．</p>
+                <p>BleAdvRptInit関数のシグネチャは次の通りである：</p>
+                <p>BleAdvRptInit(ByRef advRpt$ AS STRING, ByVal nFlagsAD AS INTEGER, ByVal nAdvAppearance AS INTEGER, ByVal nMaxDevName AS INTEGER) AS INTEGER</p>
+                <p>第1引数のadvRpt$に構築したAdvertising Dataを格納するSTRING型変数を指定する．
 nFlagsADにはAdvertising DataのFlagsフィールドの値を指定する．とりあえずLE General Discoverable Mode(0x02)とBR/EDR Not Supported(0x04)をセットするので0x06としている．
 nAdvAppearanceには1を指定して，Advertising DataにGAPのAppearanceの値を含めるようにする．
 nMaxDevNameには10を指定して，Advertising Dataにデバイス名を10文字まで含めるようにしている．</p>
-<p>これでAdvertising Dataが構築できたので，Advertising Dataを設定するためにBleAdvRptsCommit関数を呼び出す．</p>
-<p>BleAdvRptsCommit関数のシグネチャは次の通りである：</p>
-<p>BleAdvRptsCommit(ByRef advRpt$ AS STRING, ByRef scanRpt$ AS STRING) AS INTEGER</p>
-<p>advRpt$にはAdvertising Dataを表すSTRINGを指定する．scanRpt$はScan Response Dataを表すSTRINGを指定する．
+                <p>これでAdvertising Dataが構築できたので，Advertising Dataを設定するためにBleAdvRptsCommit関数を呼び出す．</p>
+                <p>BleAdvRptsCommit関数のシグネチャは次の通りである：</p>
+                <p>BleAdvRptsCommit(ByRef advRpt$ AS STRING, ByRef scanRpt$ AS STRING) AS INTEGER</p>
+                <p>advRpt$にはAdvertising Dataを表すSTRINGを指定する．scanRpt$はScan Response Dataを表すSTRINGを指定する．
 今回はADVERTISEすることが目的なので，advRpt$に構築したAdvertising Dataを指定し，scanRpt$には空の文字列を指定する．</p>
-<p>最後にBleAdvertStart関数を呼び出して，ADVERTISEを開始する．</p>
-<p>BleAdvertStart関数のシグネチャは次の通りである：</p>
-<p>BleAdvertStart(ByVal nAdvType AS INTEGER, ByRef peerAddr$ AS STRING, ByVal nAdvInterval AS INTEGER, ByVal nAdvTimeout AS INTEGER, ByVal nFilterPolicy AS INTEGER) AS INTEGER</p>
-<p>nAdvTypeにはADVERTISEの種類を表す数値を指定する．今回は接続要求を受け付け可能にして不特定のデバイスに対してADVERTISEを行いたいので，ADV_INDを表す0を指定する．
+                <p>最後にBleAdvertStart関数を呼び出して，ADVERTISEを開始する．</p>
+                <p>BleAdvertStart関数のシグネチャは次の通りである：</p>
+                <p>BleAdvertStart(ByVal nAdvType AS INTEGER, ByRef peerAddr$ AS STRING, ByVal nAdvInterval AS INTEGER, ByVal nAdvTimeout AS INTEGER, ByVal nFilterPolicy AS INTEGER) AS INTEGER</p>
+                <p>nAdvTypeにはADVERTISEの種類を表す数値を指定する．今回は接続要求を受け付け可能にして不特定のデバイスに対してADVERTISEを行いたいので，ADV_INDを表す0を指定する．
 peerAddr$にはnAdvTypeがADV_DIRECT_INDであり特定のデバイスに対してADVERTISEしたい場合にデバイスのアドレスを指定する．今回はADV_INDなのでから文字列を指定する．
 nAdvIntervalにはADVERTISEの送信間隔をミリ秒単位で指定する．今回は適当に1,000ミリ秒にしている．
 nAdvTimeoutにはADVERTISEを開始してから終了するまでのタイムアウト時間をミリ秒単位で指定する．今回は0を指定してタイムアウトしないようにしているが，消費電力が増えるので実際に使用する際には適切な値に設定しなければならない．
 nFilterPolicyにはスキャン要求や接続要求のフィルタリングのタイプを表す数値を指定する．今回は特にフィルタリングしないので0を指定する．</p>
-</div>
-<div class="section" id="id3">
-<h2>ADVERTISEの確認<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>ADVERTISEしているか確認するためにWindows PCからスキャンする．</p>
-<img alt="../_images/ble_advertise.png" src="../_images/ble_advertise.png" />
-<p>BL600という名前のデバイスが表示されれば成功である．BleGapSvcInitに与えるdeviceNameを変更するとスキャン時に表示されるデバイス名も変化する．</p>
-</div>
-<div class="section" id="id4">
-<h2>次<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>やる気が続けばSERVICEの定義の説明をする．たぶん．</p>
-</div>
-</div>
-
-
+              </div>
+              <div class="section" id="id3">
+                <h2>ADVERTISEの確認<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+                <p>ADVERTISEしているか確認するためにWindows PCからスキャンする．</p>
+                <img alt="../_images/ble_advertise.png" src="../images/ble_advertise.png" />
+                <p>BL600という名前のデバイスが表示されれば成功である．BleGapSvcInitに与えるdeviceNameを変更するとスキャン時に表示されるデバイス名も変化する．</p>
+              </div>
+              <div class="section" id="id4">
+                <h2>次<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+                <p>やる気が続けばSERVICEの定義の説明をする．たぶん．</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">BL600でアドバタイズする</a><ul>
-<li><a class="reference internal" href="#id1">概要</a></li>
-<li><a class="reference internal" href="#id2">BL600とは</a></li>
-<li><a class="reference internal" href="#advertise">ADVERTISEする</a></li>
-<li><a class="reference internal" href="#id3">ADVERTISEの確認</a></li>
-<li><a class="reference internal" href="#id4">次</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../bl600.html"
-                        title="previous chapter">BL600関係</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/bl600/advertise.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">BL600でアドバタイズする</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id1">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id2">BL600とは</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#advertise">ADVERTISEする</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id3">ADVERTISEの確認</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id4">次</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="../bl600.html" title="previous chapter">BL600関係</a>
+          </p>
+          <h3>This Page</h3>
+          <ul class="this-page-menu">
+            <li>
+              <a href="../_sources/bl600/advertise.txt" rel="nofollow">Show Source</a>
+            </li>
+          </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <input type="text" name="q" />
+              <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+            <p class="searchtip" style="font-size: 90%">
     Enter search terms or a module, class or function name.
     </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-      <div class="clearer"></div>
+      <div class="clearer">
+      </div>
     </div>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../bl600.html" title="BL600関係"
-             >previous</a> |</li>
-        <li><a href="../index.html">ふがふが</a> &raquo;</li>
-          <li><a href="../bl600.html" >BL600関係</a> &raquo;</li> 
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="../bl600.html" title="BL600関係">previous</a> |</li>
+        <li>
+          <a href="../index.html">ふがふが</a> »</li>
+        <li>
+          <a href="../bl600.html">BL600関係</a> »</li>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, Kenta IDA.
+        © Copyright 2014, Kenta IDA.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
