@@ -1,0 +1,251 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"0x",
+				"0x3fc00"
+			],
+			[
+				"nrf51",
+				"nrf51"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "conf.py",
+			"settings":
+			{
+				"buffer_size": 7961,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/dl/ocd/tcl/target/nrf51_cmsis-dap.tcl",
+		"/D/wk/a700/proprietary-files.txt",
+		"/D/repos/ciniml.github.io/index.html",
+		"/D/repos/BL600/ble_send_sensor.sb",
+		"/F/keys/aws/aws-bzr.pem",
+		"/F/keys/aws/ciniml-aws-key.pem",
+		"/D/repos/BL600/Board/Stencil/BL600BaseBoard-F_Paste.dxf",
+		"/D/repos/BL600/Board/Gerber/BL600BaseBoard.txt",
+		"/D/repos/BL600/smartBASIC_Sample_Apps/lib/custom.battery.service.sblib",
+		"/D/repos/BL600/ble_advertise.sb",
+		"/D/repos/BL600/Board/Gerber/renameall.cmd",
+		"/C/Program Files (x86)/Microsoft Visual Studio 12.0/Common7/IDE/devenv.exe.config",
+		"/D/dl/Roslyn SDK Preview/Samples/CSharp/MakeConst/MakeConstCS.csproj",
+		"/D/repos/BL600/Board/Gerber/BL600BaseBoard-drl_map.pho",
+		"/D/repos/BL600/smartBASIC_Sample_Apps/lib/cli.proximity.sblib",
+		"/D/repos/BL600/smartBASIC_Sample_Apps/prx.proximity.sb",
+		"/D/repos/BL600/smartBASIC_Sample_Apps/lib/cli.gatts.server.sblib",
+		"/D/dl/ocd/tcl/softdev.hex",
+		"/D/dl/ocd/tcl/app.HEX",
+		"/D/repos/openocd-code/src/jtag/drivers/cmsis_dap_usb.c",
+		"/D/dl/ocd/tcl/target/lpc810_swd_flash.cfg",
+		"/D/dl/ocd/tcl/target/nrf51_stlink.tcl",
+		"/D/repos/VersaWriter/Image/Image.cs",
+		"/D/repos/VersaWriter/Image/ImageBuilder.cs",
+		"/D/repos/openocd-code/README",
+		"/D/dl/ocd/tcl/ITSE01021_08_s110_nrf51822_6.0.0_softdevice.hex",
+		"/D/dl/ocd/tcl/IENG01020_06A_BL600Phase1COMBINED_v1_5_65_0.HEX",
+		"/D/dl/IENG01020_06A_BL600_Firmware_and_Sample_smartBASIC_Apps_v1_5_65_0-r3/IENG01020_06A_BL600Phase1COMBINED_v1_5_65_0.HEX",
+		"/D/dl/ocd/tcl/target/lpc11xxx_8xx.cfg",
+		"/D/repos/AVR32Board/firm/bleskel/bleskel/profile.gatt",
+		"/D/repos/CMSIS-DAP/interface/Common/src/DAP.c",
+		"/D/repos/CMSIS-DAP/interface/mdk/lpc11u35/lpc11u35_interface.uvproj",
+		"/D/repos/CMSIS-DAP/tools/build.py",
+		"/D/repos/CMSIS-DAP/README.md",
+		"/D/repos/openocd-code/README.Windows",
+		"/D/dl/ocd/tcl/target/swj-dp.tcl",
+		"/D/dl/ocd/tcl/target/stm32f4x.cfg",
+		"/D/dl/ocd/FROM_NEMUISAN_2U.txt",
+		"/D/dl/ocd/tcl/target/readme.txt",
+		"/D/repos/BL600/sample_io_1.sb",
+		"/D/repos/BL600/sample_blink_led.sb",
+		"/D/repos/AVR32Board/firm/bleskel/bleskel/task.hpp",
+		"/D/dl/testlink-1.9.9/README",
+		"/D/dl/BL600_iBeacon_smartBASIC_(r1.0)/$autorun$.iBeacon.sblib",
+		"/D/dl/ocd/tcl/interface/altera-usb-blaster2.cfg",
+		"/D/repos/AVR32Board/firm/bleskel/bleskel/bleskel.cpp"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" Documentation",
+			"BleCharValueNotigy",
+			"BleCharValueWrite",
+			"Write",
+			"nRF"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "conf.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 7961,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "pages.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

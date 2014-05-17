@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>BL600でアドバタイズする &mdash; ふがふが</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="ふがふが" href="../index.html" />
+    <link rel="up" title="BL600関係" href="../bl600.html" />
+    <link rel="prev" title="BL600関係" href="../bl600.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../bl600.html" title="BL600関係"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">ふがふが</a> &raquo;</li>
+          <li><a href="../bl600.html" accesskey="U">BL600関係</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="bl600">
+<h1>BL600でアドバタイズする<a class="headerlink" href="#bl600" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>BL600でセンサの値を読んでPCに送信してみたかったので，とりあえず独自のSERVICEを定義してセンサの値をGATTクライアントから読み取れるようにしてみた．
+その中でまずはBL600でADVERTISEしてPCからスキャンした際に表示される部分までを説明する．</p>
+</div>
+<div class="section" id="id2">
+<h2>BL600とは<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Laird Technologies製の技適付きBluetooth Low Energyモジュール．￥1,500くらいでdigikeyなどで買える．
+特に専用の書き込み器などを必要とせず，UART経由でsmart BASICなる言語で動作を記述できる．まさか世の中にsmartなBASICがあるとは思っていなかった．</p>
+<p>Lairdのサイトのこのページからドキュメントやツール類がダウンロードできるが，最新のファームウェアやドキュメントをダウンロードするにはユーザー登録が必要．登録はこのページからできる．
+smart BASIC
+BL600の動作を記述するための専用言語．Windows上で動作する専用のコンパイラにより中間コードに変換した後，UART経由でBL600に転送し，BL600上の実行エンジンで実行する．
+VBAのような構造化されたBASICなので，言うほど辛くは無い．VBA書けるならサラサラ書けると思われる．</p>
+<p>文字列演算や算術演算用の関数に加えてBLEモジュールを扱うための専用関数が用意されていて，それなりに簡単にBLEモジュールを扱うことが出来る．</p>
+</div>
+<div class="section" id="advertise">
+<h2>ADVERTISEする<a class="headerlink" href="#advertise" title="Permalink to this headline">¶</a></h2>
+<p>とりあえずSERVICEを定義する前にまずPCからデバイスを見つけられるようにADVERTISEしてみる．
+以下，smart BASICのコード:</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">BL600でアドバタイズする</a><ul>
+<li><a class="reference internal" href="#id1">概要</a></li>
+<li><a class="reference internal" href="#id2">BL600とは</a></li>
+<li><a class="reference internal" href="#advertise">ADVERTISEする</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../bl600.html"
+                        title="previous chapter">BL600関係</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/bl600/advertise.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../bl600.html" title="BL600関係"
+             >previous</a> |</li>
+        <li><a href="../index.html">ふがふが</a> &raquo;</li>
+          <li><a href="../bl600.html" >BL600関係</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
