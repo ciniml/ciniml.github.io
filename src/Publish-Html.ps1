@@ -59,4 +59,5 @@ foreach( $file in $htmlFiles )
 $stylesheets = Get-ChildItem -Path "$targetDir/_static" -Filter *.css
 $stylesheets | Copy-Item -Destination $cssDir
 
-Rename-Item -Path "$destinationDir/_images" -NewName "images"
+Remove-Item -Path "$destinationDir/images" -Force
+Copy-Item -Path "$targetDir/_images" -Destination "$destinationDir/images" -Force -Recurse -Container

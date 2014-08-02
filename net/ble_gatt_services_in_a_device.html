@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法 — ふがふが</title>
+    <link rel="stylesheet" href="../css/default.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
+    <link rel="top" title="ふがふが" href="../index.html" />
+    <link rel="up" title=".NET/WinRT関係" href="../net.html" />
+    <link rel="prev" title=".NET/WinRT関係" href="../net.html" />
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="../net.html" title=".NET/WinRT関係" accesskey="P">previous</a> |</li>
+        <li>
+          <a href="../index.html">ふがふが</a> »</li>
+        <li>
+          <a href="../net.html" accesskey="U">.NET/WinRT関係</a> »</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="section" id="winrtgatt">
+              <h1>WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法<a class="headerlink" href="#winrtgatt" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id1">
+                <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+                <p>WinRTでGATTクライアント周りを操作する際に，あるGATTサービスがどのデバイスにあるか判別する方法について説明する</p>
+              </div>
+              <div class="section" id="gatt">
+                <h2>GATTサービスの列挙<a class="headerlink" href="#gatt" title="Permalink to this headline">¶</a></h2>
+                <p>例として，short UUIDが0xfff0であるGATTサービスの列挙は以下のコードで行うことが出来る．コード片では変数の型が分かりづらいので型推論を使用せずに記述している．:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>String filter = GattDeviceService.GetDeviceSelectorFromShortId(0xfff0);
+DeviceInformationCollection devices = await DeviceInformation.FindAllAsync(filter).AsTask();
+</pre>
+                  </div>
+                </div>
+                <p>WinRTでは各GATTサービスが一つのサービスデバイスとして扱われ，上記コードではdevicesに0xfff0のshort UUIDを持つデバイスのデバイス情報のコレクションが格納される．</p>
+                <p>実際にサービスにアクセスするためには，上記のDeviceInformationCollection中のDeviceInformationを用いて:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>DeviceInformation device = device.First(); // とりあえず先頭
+GattDeviceService service = await GattDeviceService.FromIdAsync(device);
+</pre>
+                  </div>
+                </div>
+                <p>としてGattDeviceServiceを取得する．このGattDeviceServiceは，あるデバイス中の１つのGATTサービスに対応している．</p>
+              </div>
+              <div class="section" id="id2">
+                <h2>問題点<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+                <p>前述のサービス列挙の流れから分かるように，ある1つのデバイス中のサービスを列挙するという流れになっておらず，
+あくまでシステムが認識している全てのGattDeviceServiceの中から指定したサービスUUIDを持つサービスデバイスを検索するようになっている．
+よって，この方法ではある1つのデバイス中の複数のサービスを関連づけることができない．</p>
+                <p>これでは，例えば，ある温度センサデバイスが残りの電池容量を通知するために温度データサービスに加えてBatteryInformationServiceにより残電池容量を公開しており，センサデータとともに電池容量を表示したいとしても
+どの温度データサービスがどのBatteryInformationServiceに結びつくのかわからない．</p>
+                <p>上記問題を解決するためには，各GattDeviceServiceがどのBluetoothデバイスに属するのかを取得する必要がある．</p>
+              </div>
+              <div class="section" id="id3">
+                <h2>解決方法<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+                <p>各GattDeviceServiceを取得するのに用いたDeviceInformationクラスには，Propertiesと言う名前の読み取り専用のIReadOnlyDictionary&lt;String,Object&gt;型のプロパティがある．
+このプロパティには様々なデバイスに関する情報が格納されているが，標準では必要な情報が格納されていない．</p>
+                <p>一方，DeviceInformation.FindAllAsyncメソッドには，前述のfilter文字列(AQS文字列というらしい)1つを指定する他に，FindAllAsync(String aqsFilter, IEnumerable&lt;String&gt; additionalProperties)という形式の
+オーバーロードがある．
+引数の名前からわかるように，第2引数に追加で取得したいプロパティ名を指定することにより，Propertiesプロパティに値が格納される．</p>
+                <p>この機能を用いて，あるデバイスが属するデバイスIDを表すプロパティである <cite>System.Devices.ContainerId</cite> プロパティを取得する．
+サービスデバイスの場合，これはサービスデバイスが表すサービスが属するBluetoothデバイスとなるので，この <cite>System.Devices.ContainerId</cite> プロパティが一致するサービスデバイスは同一のBluetoothデバイスに属することとなる．</p>
+                <p>また，DeviceInformation.FindAllAsyncメソッドの第1引数は，AQSというクエリ文字列となっている．
+実際に，GattDeviceService.GetDeviceSelectorFromId/GetDeviceSelectorShortFromId()メソッドは指定したサービスUUIDを持つサービスデバイスを検索するための以下のようなクエリ文字列となっている．:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>
+                      <span class="s">"System.Devices.InterfaceClassGuid:=</span>
+                      <span class="se">\"</span>
+                      <span class="s">{6E3BB679-4372-40C8-9EAA-4509DF260CD8}</span>
+                      <span class="se">\"</span>
+                      <span class="s"> AND System.DeviceInterface.Bluetooth.ServiceGuid:=</span>
+                      <span class="se">\"</span>
+                      <span class="s">{00001800-0000-1000-8000-00805F9B34FB}</span>
+                      <span class="se">\"</span>
+                      <span class="s"> AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True"</span>
+</pre>
+                  </div>
+                </div>
+                <p>ここから分かるように，”プロパティ名:=条件”という形式の文字列をANDでつなげればプロパティに関する条件を指定できることが分かる．
+よって，前述のSystem.Devices.ContainerIdプロパティが一致する条件式を追加すればDeviceInformation.FindAllAsyncメソッドで特定のBluetoothデバイスに属するサービスデバイスを取得することができる．</p>
+                <p>以上より，指定したサービスデバイスと同一のBluetoothデバイスに属する他のサービスを取得するGetOtherServiceAsyncは以下のコードで実装できる:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>private const string ContainerIdProperty = "System.Devices.ContainerId";
+static async Task&lt;GattDeviceService&gt; GetOtherServiceAsync(DeviceInformation serviceInformation, Guid serviceUuid, CancellationToken cancellationToken)
+{
+    var containerId = serviceInformation.Properties[ContainerIdProperty].ToString();
+    var selector = GattDeviceService.GetDeviceSelectorFromUuid(serviceUuid);
+    var selectorWithContainer = String.Format("{0} AND System.Devices.ContainerId:=\"{{{1}}}\"", selector, containerId);
+    var serviceInformations = await DeviceInformation.FindAllAsync(selectorWithContainer, new[] { ContainerIdProperty }).AsTask(cancellationToken);
+    return await GattDeviceService.FromIdAsync(serviceInformations.Single().Id);
+}
+</pre>
+                  </div>
+                </div>
+                <p>使用する前提条件として，serviceInformation引数に渡すサービス情報は，DeviceInformation.FindAllAsync(filter, new[] { ContainerIdProperty })として，System.Devices.ContainerIdプロパティを取得しておく必要がある．</p>
+              </div>
+              <div class="section" id="id4">
+                <h2>サンプルコード<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+                <p>例として，Texas InstrumentsのCC2541 SensorTag開発キットのスイッチ入力とDeviceInformationServiceによるデバイス情報を結びつけて表示するコンソールアプリケーションを作成した．
+以下にその画面を示す．</p>
+                <img alt="../_images/GetOtherServiceExample.png" src="../images/GetOtherServiceExample.png" />
+                <p>1行目のDevice(TI BLE Sensor Tag)の”TI BLE Sensor Tag”の部分は，GenericAttributeProfileのDevice Name Characteristicから取得している．
+また，2行目のSystemID(...)の内容は，DeviceInformationServiceのSystem ID Characteristicから取得している．
+3行目以降のKeyInputChangedはキー入力情報のCharacteristicから取得している．</p>
+                <p>サンプルコードのソースコードはgithub上にアップロードしてある．
+<a class="reference external" href="https://github.com/ciniml/SensorTagTest/tree/master/SensorTagTest">https://github.com/ciniml/SensorTagTest/tree/master/SensorTagTest</a></p>
+              </div>
+              <div class="section" id="id5">
+                <h2>参考<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+                <ul class="simple">
+                  <li>
+                    <a class="reference external" href="http://msdn.microsoft.com/ja-jp/library/windows/apps/hh825872.aspx">関連する PnP オブジェクトの取得</a>
+                  </li>
+                  <li>
+                    <a class="reference external" href="http://www.hanselman.com/blog/HowToCallWinRTAPIsInWindows8FromCDesktopApplicationsWinRTDiagram.aspx">http://www.hanselman.com/blog/HowToCallWinRTAPIsInWindows8FromCDesktopApplicationsWinRTDiagram.aspx</a>&gt;</li>
+                  <li>
+                    <a class="reference external" href="http://processors.wiki.ti.com/index.php/SensorTag_User_Guide#Contactless_IR_Temperature_Sensor">SensorTag User Guide - Texas Intruments Wiki</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id1">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#gatt">GATTサービスの列挙</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id2">問題点</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id3">解決方法</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id4">サンプルコード</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id5">参考</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="../net.html" title="previous chapter">.NET/WinRT関係</a>
+          </p>
+          <h3>This Page</h3>
+          <ul class="this-page-menu">
+            <li>
+              <a href="../_sources/net/ble_gatt_services_in_a_device.txt" rel="nofollow">Show Source</a>
+            </li>
+          </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <input type="text" name="q" />
+              <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+            <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer">
+      </div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="../net.html" title=".NET/WinRT関係">previous</a> |</li>
+        <li>
+          <a href="../index.html">ふがふが</a> »</li>
+        <li>
+          <a href="../net.html">.NET/WinRT関係</a> »</li>
+      </ul>
+    </div>
+    <div class="footer">
+        © Copyright 2014, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
