@@ -47,7 +47,7 @@
               <h1>WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法<a class="headerlink" href="#winrtgatt" title="Permalink to this headline">¶</a></h1>
               <div class="section" id="id1">
                 <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-                <p>WinRTでGATTクライアント周りを操作する際に，あるGATTサービスがどのデバイスにあるか判別する方法について説明する</p>
+                <p>WinRTでGATTクライアント周りを操作する際に，あるGATTサービスがどのBluetoothデバイスにあるか判別する方法について説明する</p>
               </div>
               <div class="section" id="gatt">
                 <h2>GATTサービスの列挙<a class="headerlink" href="#gatt" title="Permalink to this headline">¶</a></h2>
@@ -89,7 +89,7 @@ GattDeviceService service = await GattDeviceService.FromIdAsync(device);
               </div>
               <div class="section" id="id4">
                 <h2>問題点<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-                <p>前述のサービス列挙の流れから分かるように，ある1つのデバイス中のサービスを列挙するという流れになっておらず，
+                <p>前述のサービス列挙の流れから分かるように，ある1つのBluetoothデバイス中のサービスを列挙するという流れになっておらず，
 あくまでシステムが認識している全てのGattDeviceServiceの中から指定したサービスUUIDを持つサービスデバイスを検索するようになっている．
 よって，この方法ではある1つのデバイス中の複数のサービスを関連づけることができない．</p>
                 <p>これでは，例えば，ある温度センサデバイスが残りの電池容量を通知するために温度データサービスに加えてBatteryInformationServiceにより残電池容量を公開しており，センサデータとともに電池容量を表示したいとしても
@@ -99,7 +99,7 @@ GattDeviceService service = await GattDeviceService.FromIdAsync(device);
               <div class="section" id="id5">
                 <h2>解決方法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
                 <p>各GattDeviceServiceを取得するのに用いたDeviceInformationクラスには，Propertiesと言う名前の読み取り専用のIReadOnlyDictionary&lt;String,Object&gt;型のプロパティがある．
-このプロパティには様々なデバイスに関する情報が格納されているが，標準では必要な情報が格納されていない．</p>
+このプロパティにはデバイスに関する様々な情報が格納されているが，標準では必要な情報が格納されていない．</p>
                 <p>一方，DeviceInformation.FindAllAsyncメソッドには，前述のfilter文字列(AQS文字列というらしい)1つを指定する他に，FindAllAsync(String aqsFilter, IEnumerable&lt;String&gt; additionalProperties)という形式の
 オーバーロードがある．
 引数の名前からわかるように，第2引数に追加で取得したいプロパティ名を指定することにより，Propertiesプロパティに値が格納される．</p>
