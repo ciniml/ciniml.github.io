@@ -59,7 +59,7 @@ DeviceInformationCollection devices = await DeviceInformation.FindAllAsync(filte
 </pre>
                   </div>
                 </div>
-                <p>WinRTでは各GATTサービスが一つのサービスデバイスとして扱われ，上記コードではdevicesに0xfff0のshort UUIDを持つデバイスのデバイス情報のコレクションが格納される．</p>
+                <p>WinRTでは各GATTサービスが一つのサービスデバイスとして扱われ，上記コードではdevicesに0xfff0のshort UUIDを持つサービスデバイスのデバイス情報のコレクションが格納される．</p>
                 <p>実際にサービスにアクセスするためには，上記のDeviceInformationCollection中のDeviceInformationを用いて:</p>
                 <div class="highlight-python">
                   <div class="highlight">
@@ -68,10 +68,27 @@ GattDeviceService service = await GattDeviceService.FromIdAsync(device);
 </pre>
                   </div>
                 </div>
-                <p>としてGattDeviceServiceを取得する．このGattDeviceServiceは，あるデバイス中の１つのGATTサービスに対応している．</p>
+                <p>としてGattDeviceServiceを取得する．このGattDeviceServiceは，あるBluetoothデバイス　<a class="footnote-reference" href="#id3" id="id2">[1]</a> 中の１つのGATTサービスに対応している．</p>
+                <div class="admonition note">
+                  <p class="first admonition-title">Note</p>
+                  <table class="last docutils footnote" frame="void" id="id3" rules="none">
+                    <colgroup>
+                      <col class="label" />
+                      <col />
+                    </colgroup>
+                    <tbody valign="top">
+                      <tr>
+                        <td class="label">
+                          <a class="fn-backref" href="#id2">[1]</a>
+                        </td>
+                        <td>実際の物理的なデバイスとサービスごとのデバイスがややこしいので，前者をBluetoothデバイス，後者をサービスデバイスと呼ぶことにする．</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <div class="section" id="id2">
-                <h2>問題点<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+              <div class="section" id="id4">
+                <h2>問題点<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
                 <p>前述のサービス列挙の流れから分かるように，ある1つのデバイス中のサービスを列挙するという流れになっておらず，
 あくまでシステムが認識している全てのGattDeviceServiceの中から指定したサービスUUIDを持つサービスデバイスを検索するようになっている．
 よって，この方法ではある1つのデバイス中の複数のサービスを関連づけることができない．</p>
@@ -79,8 +96,8 @@ GattDeviceService service = await GattDeviceService.FromIdAsync(device);
 どの温度データサービスがどのBatteryInformationServiceに結びつくのかわからない．</p>
                 <p>上記問題を解決するためには，各GattDeviceServiceがどのBluetoothデバイスに属するのかを取得する必要がある．</p>
               </div>
-              <div class="section" id="id3">
-                <h2>解決方法<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+              <div class="section" id="id5">
+                <h2>解決方法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
                 <p>各GattDeviceServiceを取得するのに用いたDeviceInformationクラスには，Propertiesと言う名前の読み取り専用のIReadOnlyDictionary&lt;String,Object&gt;型のプロパティがある．
 このプロパティには様々なデバイスに関する情報が格納されているが，標準では必要な情報が格納されていない．</p>
                 <p>一方，DeviceInformation.FindAllAsyncメソッドには，前述のfilter文字列(AQS文字列というらしい)1つを指定する他に，FindAllAsync(String aqsFilter, IEnumerable&lt;String&gt; additionalProperties)という形式の
@@ -115,8 +132,8 @@ static async Task&lt;GattDeviceService&gt; GetOtherServiceAsync(DeviceInformatio
                 </div>
                 <p>使用する前提条件として，serviceInformation引数に渡すサービス情報は，DeviceInformation.FindAllAsync(filter, new[] { ContainerIdProperty })として，System.Devices.ContainerIdプロパティを取得しておく必要がある．</p>
               </div>
-              <div class="section" id="id4">
-                <h2>サンプルコード<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+              <div class="section" id="id6">
+                <h2>サンプルコード<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
                 <p>例として，Texas InstrumentsのCC2541 SensorTag開発キットのスイッチ入力とDeviceInformationServiceによるデバイス情報を結びつけて表示するコンソールアプリケーションを作成した．
 以下にその画面を示す．</p>
                 <img alt="../_images/GetOtherServiceExample.png" src="../images/GetOtherServiceExample.png" />
@@ -130,8 +147,8 @@ static async Task&lt;GattDeviceService&gt; GetOtherServiceAsync(DeviceInformatio
 <a class="reference external" href="https://github.com/ciniml/SensorTagTest/tree/master/SensorTagTest">https://github.com/ciniml/SensorTagTest/tree/master/SensorTagTest</a></p>
                 <p>上記リポジトリのmasterブランチにはGattOtherServiceAsyncを用いてGAPサービスを取得するコードが，wo_otherserviceasyncブランチにはGattOtherServiceAsyncを使わないコードが含まれている．</p>
               </div>
-              <div class="section" id="id5">
-                <h2>参考<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+              <div class="section" id="id7">
+                <h2>参考<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
                 <ul class="simple">
                   <li>
                     <a class="reference external" href="http://msdn.microsoft.com/ja-jp/library/windows/apps/hh825872.aspx">関連する PnP オブジェクトの取得</a>
@@ -163,16 +180,16 @@ static async Task&lt;GattDeviceService&gt; GetOtherServiceAsync(DeviceInformatio
                   <a class="reference internal" href="#gatt">GATTサービスの列挙</a>
                 </li>
                 <li>
-                  <a class="reference internal" href="#id2">問題点</a>
+                  <a class="reference internal" href="#id4">問題点</a>
                 </li>
                 <li>
-                  <a class="reference internal" href="#id3">解決方法</a>
+                  <a class="reference internal" href="#id5">解決方法</a>
                 </li>
                 <li>
-                  <a class="reference internal" href="#id4">サンプルコード</a>
+                  <a class="reference internal" href="#id6">サンプルコード</a>
                 </li>
                 <li>
-                  <a class="reference internal" href="#id5">参考</a>
+                  <a class="reference internal" href="#id7">参考</a>
                 </li>
               </ul>
             </li>

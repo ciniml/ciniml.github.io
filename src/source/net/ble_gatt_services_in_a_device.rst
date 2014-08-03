@@ -12,14 +12,17 @@ GATTサービスの列挙
     String filter = GattDeviceService.GetDeviceSelectorFromShortId(0xfff0);
     DeviceInformationCollection devices = await DeviceInformation.FindAllAsync(filter).AsTask();
 
-WinRTでは各GATTサービスが一つのサービスデバイスとして扱われ，上記コードではdevicesに0xfff0のshort UUIDを持つデバイスのデバイス情報のコレクションが格納される．
+WinRTでは各GATTサービスが一つのサービスデバイスとして扱われ，上記コードではdevicesに0xfff0のshort UUIDを持つサービスデバイスのデバイス情報のコレクションが格納される．
 
 実際にサービスにアクセスするためには，上記のDeviceInformationCollection中のDeviceInformationを用いて::
     
     DeviceInformation device = device.First(); // とりあえず先頭
     GattDeviceService service = await GattDeviceService.FromIdAsync(device);
 
-としてGattDeviceServiceを取得する．このGattDeviceServiceは，あるデバイス中の１つのGATTサービスに対応している．
+としてGattDeviceServiceを取得する．このGattDeviceServiceは，あるBluetoothデバイス　[#]_ 中の１つのGATTサービスに対応している．
+
+.. note::
+    .. [#] 実際の物理的なデバイスとサービスごとのデバイスがややこしいので，前者をBluetoothデバイス，後者をサービスデバイスと呼ぶことにする．
 
 問題点
 -------
