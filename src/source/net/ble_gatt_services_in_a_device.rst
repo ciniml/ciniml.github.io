@@ -47,7 +47,7 @@ WinRTでは各GATTサービスが一つのサービスデバイスとして扱�
 また，DeviceInformation.FindAllAsyncメソッドの第1引数は，AQSというクエリ文字列となっている．
 実際に，GattDeviceService.GetDeviceSelectorFromId/GetDeviceSelectorShortFromId()メソッドは指定したサービスUUIDを持つサービスデバイスを検索するための以下のようなクエリ文字列となっている．::
 
-    "System.Devices.InterfaceClassGuid:=\"{6E3BB679-4372-40C8-9EAA-4509DF260CD8}\" AND System.DeviceInterface.Bluetooth.ServiceGuid:=\"{00001800-0000-1000-8000-00805F9B34FB}\" AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True"
+    System.Devices.InterfaceClassGuid:="{6E3BB679-4372-40C8-9EAA-4509DF260CD8}" AND System.DeviceInterface.Bluetooth.ServiceGuid:="{00001800-0000-1000-8000-00805F9B34FB}" AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True
 
 ここから分かるように，"プロパティ名:=条件"という形式の文字列をANDでつなげればプロパティに関する条件を指定できることが分かる．
 よって，前述のSystem.Devices.ContainerIdプロパティが一致する条件式を追加すればDeviceInformation.FindAllAsyncメソッドで特定のBluetoothデバイスに属するサービスデバイスを取得することができる．
@@ -77,8 +77,14 @@ WinRTでは各GATTサービスが一つのサービスデバイスとして扱�
 また，2行目のSystemID(...)の内容は，DeviceInformationServiceのSystem ID Characteristicから取得している．
 3行目以降のKeyInputChangedはキー入力情報のCharacteristicから取得している．
 
+このプログラム実行時には，CC2541 SensorTag開発キット以外に，LBT-VRU01というLogitec製のBLEデバイスもPCに接続している．
+そのため，今回説明したGattOtherServiceAsyncを用いなければ，Generic Access Profile(GAP)経由で取得するデバイス名にCC2540 SensorTag開発キットのデバイス名ではなくLBT-VRU01のデバイス名が表示される可能性があるが，
+上記の結果より正しく同一デバイス上のサービスを結びつけられていることがわかる．
+
 サンプルコードのソースコードはgithub上にアップロードしてある．
 https://github.com/ciniml/SensorTagTest/tree/master/SensorTagTest
+
+上記リポジトリのmasterブランチにはGattOtherServiceAsyncを用いてGAPサービスを取得するコードが，wo_otherserviceasyncブランチにはGattOtherServiceAsyncを使わないコードが含まれている．
 
 参考
 -----

@@ -92,16 +92,7 @@ GattDeviceService service = await GattDeviceService.FromIdAsync(device);
 実際に，GattDeviceService.GetDeviceSelectorFromId/GetDeviceSelectorShortFromId()メソッドは指定したサービスUUIDを持つサービスデバイスを検索するための以下のようなクエリ文字列となっている．:</p>
                 <div class="highlight-python">
                   <div class="highlight">
-                    <pre>
-                      <span class="s">"System.Devices.InterfaceClassGuid:=</span>
-                      <span class="se">\"</span>
-                      <span class="s">{6E3BB679-4372-40C8-9EAA-4509DF260CD8}</span>
-                      <span class="se">\"</span>
-                      <span class="s"> AND System.DeviceInterface.Bluetooth.ServiceGuid:=</span>
-                      <span class="se">\"</span>
-                      <span class="s">{00001800-0000-1000-8000-00805F9B34FB}</span>
-                      <span class="se">\"</span>
-                      <span class="s"> AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True"</span>
+                    <pre>System.Devices.InterfaceClassGuid:="{6E3BB679-4372-40C8-9EAA-4509DF260CD8}" AND System.DeviceInterface.Bluetooth.ServiceGuid:="{00001800-0000-1000-8000-00805F9B34FB}" AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True
 </pre>
                   </div>
                 </div>
@@ -132,8 +123,12 @@ static async Task&lt;GattDeviceService&gt; GetOtherServiceAsync(DeviceInformatio
                 <p>1行目のDevice(TI BLE Sensor Tag)の”TI BLE Sensor Tag”の部分は，GenericAttributeProfileのDevice Name Characteristicから取得している．
 また，2行目のSystemID(...)の内容は，DeviceInformationServiceのSystem ID Characteristicから取得している．
 3行目以降のKeyInputChangedはキー入力情報のCharacteristicから取得している．</p>
+                <p>このプログラム実行時には，CC2541 SensorTag開発キット以外に，LBT-VRU01というLogitec製のBLEデバイスもPCに接続している．
+そのため，今回説明したGattOtherServiceAsyncを用いなければ，Generic Access Profile(GAP)経由で取得するデバイス名にCC2540 SensorTag開発キットのデバイス名ではなくLBT-VRU01のデバイス名が表示される可能性があるが，
+上記の結果より正しく同一デバイス上のサービスを結びつけられていることがわかる．</p>
                 <p>サンプルコードのソースコードはgithub上にアップロードしてある．
 <a class="reference external" href="https://github.com/ciniml/SensorTagTest/tree/master/SensorTagTest">https://github.com/ciniml/SensorTagTest/tree/master/SensorTagTest</a></p>
+                <p>上記リポジトリのmasterブランチにはGattOtherServiceAsyncを用いてGAPサービスを取得するコードが，wo_otherserviceasyncブランチにはGattOtherServiceAsyncを使わないコードが含まれている．</p>
               </div>
               <div class="section" id="id5">
                 <h2>参考<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
