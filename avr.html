@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>BL600関係 — ふがふが</title>
+    <title>AVR関係 — ふがふが</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -21,8 +21,8 @@
     <script type="text/javascript" src="_static/doctools.js">
     </script>
     <link rel="top" title="ふがふが" href="index.html" />
-    <link rel="next" title="BL600でアドバタイズする" href="bl600/advertise.html" />
-    <link rel="prev" title="ふがふが" href="index.html" />
+    <link rel="next" title="FT232HでATtiny10に書き込む" href="avr/tpiprogrammer.html" />
+    <link rel="prev" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法" href="net/ble_gatt_services_in_a_device.html" />
   </head>
   <body>
     <div class="related">
@@ -32,9 +32,9 @@
           <a href="genindex.html" title="General Index" accesskey="I">index</a>
         </li>
         <li class="right">
-          <a href="bl600/advertise.html" title="BL600でアドバタイズする" accesskey="N">next</a> |</li>
+          <a href="avr/tpiprogrammer.html" title="FT232HでATtiny10に書き込む" accesskey="N">next</a> |</li>
         <li class="right">
-          <a href="index.html" title="ふがふが" accesskey="P">previous</a> |</li>
+          <a href="net/ble_gatt_services_in_a_device.html" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法" accesskey="P">previous</a> |</li>
         <li>
           <a href="index.html">ふがふが</a> »</li>
       </ul>
@@ -43,28 +43,31 @@
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
-            <div class="section" id="bl600">
-              <h1>BL600関係<a class="headerlink" href="#bl600" title="Permalink to this headline">¶</a></h1>
+            <div class="section" id="avr">
+              <h1>AVR関係<a class="headerlink" href="#avr" title="Permalink to this headline">¶</a></h1>
               <p>ページ:</p>
               <div class="toctree-wrapper compound">
                 <ul>
                   <li class="toctree-l1">
-                    <a class="reference internal" href="bl600/advertise.html">BL600でアドバタイズする</a>
+                    <a class="reference internal" href="avr/tpiprogrammer.html">FT232HでATtiny10に書き込む</a>
                     <ul>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="bl600/advertise.html#id1">概要</a>
+                        <a class="reference internal" href="avr/tpiprogrammer.html#id1">概要</a>
                       </li>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="bl600/advertise.html#id2">BL600とは</a>
+                        <a class="reference internal" href="avr/tpiprogrammer.html#attiny10-tpi">ATtiny10の書き込みインターフェース(TPI)</a>
                       </li>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="bl600/advertise.html#advertise">ADVERTISEする</a>
+                        <a class="reference internal" href="avr/tpiprogrammer.html#ft232htpi">FT232Hの信号とTPI</a>
                       </li>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="bl600/advertise.html#id3">ADVERTISEの確認</a>
+                        <a class="reference internal" href="avr/tpiprogrammer.html#ft232h">FT232Hの制御</a>
                       </li>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="bl600/advertise.html#id4">次</a>
+                        <a class="reference internal" href="avr/tpiprogrammer.html#id5">確認</a>
+                      </li>
+                      <li class="toctree-l2">
+                        <a class="reference internal" href="avr/tpiprogrammer.html#id6">参考</a>
                       </li>
                     </ul>
                   </li>
@@ -78,16 +81,16 @@
         <div class="sphinxsidebarwrapper">
           <h4>Previous topic</h4>
           <p class="topless">
-            <a href="index.html" title="previous chapter">ふがふが</a>
+            <a href="net/ble_gatt_services_in_a_device.html" title="previous chapter">WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法</a>
           </p>
           <h4>Next topic</h4>
           <p class="topless">
-            <a href="bl600/advertise.html" title="next chapter">BL600でアドバタイズする</a>
+            <a href="avr/tpiprogrammer.html" title="next chapter">FT232HでATtiny10に書き込む</a>
           </p>
           <h3>This Page</h3>
           <ul class="this-page-menu">
             <li>
-              <a href="_sources/bl600.txt" rel="nofollow">Show Source</a>
+              <a href="_sources/avr.txt" rel="nofollow">Show Source</a>
             </li>
           </ul>
           <div id="searchbox" style="display: none">
@@ -115,9 +118,9 @@
           <a href="genindex.html" title="General Index">index</a>
         </li>
         <li class="right">
-          <a href="bl600/advertise.html" title="BL600でアドバタイズする">next</a> |</li>
+          <a href="avr/tpiprogrammer.html" title="FT232HでATtiny10に書き込む">next</a> |</li>
         <li class="right">
-          <a href="index.html" title="ふがふが">previous</a> |</li>
+          <a href="net/ble_gatt_services_in_a_device.html" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法">previous</a> |</li>
         <li>
           <a href="index.html">ふがふが</a> »</li>
       </ul>

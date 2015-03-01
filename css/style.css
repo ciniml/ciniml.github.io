@@ -1,0 +1,14 @@
+@import url('default.css');
+
+div.section>ul, blockquote>div>ul {
+	padding-left: 20px;
+}
+
+li>blockquote {
+	margin-top: 2px;
+	margin-left: 0px;
+}
+
+ul p {
+	margin-bottom: 2px;
+}
