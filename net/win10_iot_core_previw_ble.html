@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Windows 10 IoT Core Preview版でBLEのAdvertisementを受信する — ふがふが</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
+    <link rel="top" title="ふがふが" href="../index.html" />
+    <link rel="up" title=".NET/WinRT関係" href="../net.html" />
+    <link rel="next" title="AVR関係" href="../avr.html" />
+    <link rel="prev" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法" href="ble_gatt_services_in_a_device.html" />
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="../avr.html" title="AVR関係" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="ble_gatt_services_in_a_device.html" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../net.html" accesskey="U">.NET/WinRT関係</a> »</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            <div class="section" id="windows-10-iot-core-previewbleadvertisement">
+              <h1>Windows 10 IoT Core Preview版でBLEのAdvertisementを受信する<a class="headerlink" href="#windows-10-iot-core-previewbleadvertisement" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id1">
+                <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+                <p>Windows 10 IoT CoreのPreview版が公開されたので、Bluetooth4.0のUSBドングルを接続したRaspberryPi2に入れてAdvertisementパケットを受信してみた。</p>
+                <img alt="../_images/RPi2W10BLE_thumb.jpg" src="../images/RPi2W10BLE_thumb.jpg" />
+              </div>
+              <div class="section" id="id2">
+                <h2>動機<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+                <p>RaspberryPi2(以降RPi2)が発表されたと同時に予約して買ったはいいものの、お約束通りMonoが動いたのを確認して以降積んでいた。
+そこに先日のBuild2015にてWindows 10 IoT Coreが発表されたので、早速DLしてセットアップしてみたところ、とりあえず起動までは簡単にできた。
+Visual Studio 2015からサンプルアプリのビルド、配置、デバッグが簡単にできることも確認した。</p>
+                <p>元々、BLEデバイスにつながる &amp;&amp; ネットワークにつながる &amp;&amp; C#で楽ちん開発ができる環境が欲しかったので、あとはBLEデバイスにさえつながれば完璧である。
+そこで、以前Windows8.1のPCで動作を確認したBluetooth4.0対応のUSB Bluetooth アダプタを接続したが、どうもBluetoothアダプタを認識しないようなので、あれこれ試したみた。</p>
+              </div>
+              <div class="section" id="id3">
+                <h2>作ったもの<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+                <p>ソースコードは <a class="reference external" href="https://github.com/ciniml/Win10IoTBLEScanner">GitHubのリポジトリ</a> にて公開している。</p>
+                <ul>
+                  <li>
+                    <dl class="first docutils">
+                      <dt>受信したAdvertisementの送信元BLEデバイスの名前とアドレス、RSSI値を表示するアプリケーション</dt>
+                      <dd>
+                        <ul class="first last simple">
+                          <li>Windows 10 IoT CoreもしくはWindows10TP上で動作する。</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li>
+                    <dl class="first docutils">
+                      <dt>Windows 10 IoT Coreで特定のVID/PIDを持つデバイス用に標準BluetoothドライバをインストールするためのINFファイル生成ツール</dt>
+                      <dd>
+                        <ul class="first last simple">
+                          <li>Windows 10 IoT Coreのシステム上にある <em>BTH_MC.inf</em> に後述の手順の加工を施したものを生成する</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                </ul>
+              </div>
+              <div class="section" id="bluetooth">
+                <h2>Bluetoothアダプタを認識させる<a class="headerlink" href="#bluetooth" title="Permalink to this headline">¶</a></h2>
+                <p>以前Windows8.1で動作確認したアダプタは、BroadcommのBCM20702というチップが使われているものだった。
+このアダプタは、Windows8.1のPCに接続した場合、 “Broadcomm BCM20702 Bluetooth4.0 USB Device”として認識され、Broadcomm製のドライバがロードされる。
+そのため、Windows 10 IoT　Core on RPi2に接続しただけでは、ドライバが見つからず動作しなかった。</p>
+                <img alt="../_images/BCM20702_DeviceManager.PNG" src="../images/BCM20702_DeviceManager.PNG" />
+                <p>一方、Bluetoothの規格では、ホストとBluetoothコントローラとの通信はHCIとして定義されているので、基本的にはHCIに従ったドライバがあれば動作するはずである。
+Windows10にも、HCIに従ったBluetoothコントローラ用のドライバが標準で入っている。</p>
+                <p>そこで、デスクトップPCでデバイスマネージャ上で標準ドライバ(Generic Bluetooth Adapter)に入れ替えてみたところ、Bluetoothマウスが動作することを確認できた。</p>
+                <img alt="../_images/BCM20702_ChangeToGenericDriver.PNG" src="../images/BCM20702_ChangeToGenericDriver.PNG" />
+                <img alt="../_images/BCM20702_GenericDriver.PNG" src="../images/BCM20702_GenericDriver.PNG" />
+                <p>Windows 10 IoT Core on RPi2 の C:WindowsInf ディレクトリ内を調べたところ、BTH_MC.inf というファイルにGeneric Bluetooth Adapterの定義があることがわかったので、
+Windows 10 IoT Coreでも標準ドライバに入れ替えられればBluetoothアダプタを動作させられそうである。</p>
+              </div>
+              <div class="section" id="id4">
+                <h2>ドライバの入れ替え<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+                <p>Windows 10 IoT Coreでにはデバイスマネージャが付属していない代わりに devcon.exe というコマンドラインツールが付属している。このコマンドを用いてデバイスドライバの変更を行う。
+まず、現在のデバイスの状況を <em>status</em>　コマンドで確認する。:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>&gt; devcon.exe status USB\*
+...
+USB\VID_0A5C&amp;PID_21E8\000272C973A1
+    Name: BCM20702
+    The device has the following problem: 28
+</pre>
+                  </div>
+                </div>
+                <p>devconの出力より、BCM20702は”28”というエラーコードのエラーが発生していることがわかる。この”28”はドライバが見つからないというエラーである。
+試しに BTH_MC.infを使用するように <em>updateni</em>　コマンドでドライバの更新をしてみる。:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>&gt; cd C:\Windows\Inf
+&gt; devcon.exe updateni BTH_MC.inf 'USB\VID_0A5c&amp;PID_21E8\000272C973A1'
+Updating drivers for USB\VID_0A5c&amp;PID_21E8\000272C973A1 from C:\Windows\Inf\BTH_MC.inf.
+</pre>
+                  </div>
+                </div>
+                <p>とりあえずどうなったか確認したところ、:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>&gt; devcon.exe status USB\*
+...
+USB\VID_0A5C&amp;PID_21E8\000272C973A1
+    Name: BCM20702
+    The device has the following problem: 28
+</pre>
+                  </div>
+                </div>
+                <p>何も変化していないようである。devcon.exeのエラーの詳細は画面に表示されないようなので、何かログなどは出ないのかとググった <a class="footnote-reference" href="#drvinst" id="id5">[1]</a> ところ、 <em>setupapi.dev.log</em> というファイルが出力されるようである。
+中身は以下の通りであり特にエラーとみられるメッセージは出力されていない。:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>
+                      <span class="gp">&gt;&gt;&gt; </span> <span class="p">[</span><span class="n">Import</span> <span class="n">Driver</span> <span class="n">Package</span> <span class="o">-</span> <span class="n">C</span><span class="p">:</span>\<span class="n">windows</span>\<span class="n">inf</span>\<span class="n">BTH_MC</span><span class="o">.</span><span class="n">inf</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">Section</span> <span class="n">start</span> <span class="mi">2015</span><span class="o">/</span><span class="mo">05</span><span class="o">/</span><span class="mo">06</span> <span class="mo">05</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mf">14.551</span>
+<span class="go">      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&amp;PID_21E8\000272C973A1</span>
+<span class="go">     sto: Driver Package = C:\windows\inf\BTH_MC.inf</span>
+<span class="go">     sto: Flags          = 0x00000000</span>
+<span class="go">     inf: Provider       = Microsoft</span>
+<span class="go">     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}</span>
+<span class="go">     inf: Driver Version = 06/21/2006,10.0.10069.0</span>
+<span class="go">     inf: Version Flags  = 0x00000001</span>
+<span class="go">     sto: Driver package already imported as 'bth_mc.inf'.</span>
+<span class="go">     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf</span>
+<span class="go">&lt;&lt;&lt;  Section end 2015/05/06 05:12:14.680</span>
+<span class="go">&lt;&lt;&lt;  [Exit status: SUCCESS]</span>
+</pre>
+                  </div>
+                </div>
+                <p>他に何か情報はないのかとdevcon.exeのコマンドをいろいろ試したところ、 <em>hwids</em> コマンドでBCM20702のクラスコードが(0xff,0x01,0x01)となっていることがわかった。:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>&gt; devcon hwids USB\*
+...
+USB\VID_0A5C&amp;PID_21E8\000272C973A1
+    Name: Generic Bluetooth Adapter
+    Hardware IDs:
+        USB\VID_0A5C&amp;PID_21E8&amp;REV_0112
+        USB\VID_0A5C&amp;PID_21E8
+    Compatible IDs:
+        USB\DevClass_FF&amp;SubClass_01&amp;Prot_01
+        USB\DevClass_FF&amp;SubClass_01
+        USB\DevClass_FF
+</pre>
+                  </div>
+                </div>
+                <p>通常、Bluetoothアダプタのクラスコードは (0xE0, 0x01, 0x01)　となっているはずである。
+さらに調べたところ、BCM20702は新しいファームウェアをRAMにダウンロードする機能があるため <a class="footnote-reference" href="#bcm-patchram" id="id6">[2]</a> 、標準ではないクラスコードとなっているようである。
+とりあえずファームウェアをダウンロードしなくてもROM上のファームウェアが使われるだけのようなので、どうにかして標準ドライバを使用することを考える。</p>
+                <p>ドライバがどのデバイスに対応しているのかは、INFファイル内に記載されている対応デバイスのIDやクラスコードで判定されている。たとえば、
+BTH_MC.inf では以下のよに記述されている。</p>
+                <blockquote>
+                  <div>Generic Bluetooth Adapter=                       Bthusb, USBClass_E0&amp;SubClass_01&amp;Prot_01
+Generic Bluetooth Adapter=                       Bthusb, USBMS_COMP_BLUTUTH
+Generic Bluetooth Adapter=                       BthUsb, USBVid_0B05&amp;Pid_1712</div>
+                </blockquote>
+                <p>Bluetoothアダプタのクラスコード (0xE0, 0x01, 0x01) を持つデバイスや、一部のMicrosoft製デバイスが対応するようになっている。
+よって、この部分にBCM20702のデバイスIDを追加すればdevconによりインストールできそうである。</p>
+                <p>オリジナルのBTH_MC.infを変更するのはアレなので、BTH_BROADCOMM.infという名前でコピーして対応デバイスの記述を以下の通り置き換えた。:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>Generic Bluetooth Adapter=                       BthUsb, USB\VID_0A5C&amp;PID_21E8
+</pre>
+                  </div>
+                </div>
+                <p>BCM20702に対してこのinfファイルのドライバパッケージが対応するように指定しdevcon.exeを実行したところ、以下のエラーが発生した。:</p>
+                <div class="highlight-python">
+                  <div class="highlight">
+                    <pre>
+                      <span class="gp">&gt;&gt;&gt; </span> <span class="p">[</span><span class="n">Import</span> <span class="n">Driver</span> <span class="n">Package</span> <span class="o">-</span> <span class="n">C</span><span class="p">:</span>\<span class="n">windows</span>\<span class="n">inf</span>\<span class="n">BTH_BROADCOMM</span><span class="o">.</span><span class="n">inf</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">Section</span> <span class="n">start</span> <span class="mi">2015</span><span class="o">/</span><span class="mo">05</span><span class="o">/</span><span class="mo">06</span> <span class="mo">05</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mf">17.934</span>
+<span class="go">      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_BROADCOMM.inf USB\VID_0A5C&amp;PID_21E8\000272C973A1</span>
+<span class="go">     sto: Driver Package = C:\windows\inf\BTH_BROADCOMM.inf</span>
+<span class="go">・・・</span>
+<span class="go">     flq: Copying 'C:\windows\inf\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}\BTH_BROADCOMM.inf'.</span>
+<span class="go">!!!  flq: Error installing file (0x00000002)</span>
+<span class="go">!!!  flq: Error 2: The system cannot find the file specified.</span>
+<span class="go">!    flq:      SourceFile   - 'C:\windows\inf\BTHUSB.SYS'</span>
+<span class="go">!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}\BTHUSB.SYS'</span>
+<span class="go">!!!  cpy: Failed to copy file 'C:\windows\inf\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}\BTHUSB.SYS'. Error = 0x00000002</span>
+<span class="go">!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.</span>
+<span class="go">!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.</span>
+<span class="go">!!!  flq: FileQueueCommit aborting!</span>
+<span class="go">!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.</span>
+<span class="go">!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}'. Error = 0x00000002</span>
+<span class="go">&lt;&lt;&lt;  Section end 2015/05/06 05:31:18.216</span>
+<span class="go">&lt;&lt;&lt;  [Exit status: FAILURE(0x00000002)]</span>
+</pre>
+                  </div>
+                </div>
+                <p>上記のメッセージより、ドライバ本体のファイルである BTHUSB.SYS が見つからないためエラーになっていることがわかる。
+ドライバ本体のファイルは元々インストールされているはずなので、INFファイル内のファイルコピーを行う部分をすべて削除して再度実行したところ、標準ドライバへの置き換えに成功した。</p>
+                <img alt="../_images/BCM20702_DevCon_Installed.PNG" src="../images/BCM20702_DevCon_Installed.PNG" />
+              </div>
+              <div class="section" id="id7">
+                <h2>Bluetoothデバイスのペアリング<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+                <p>Windows 10 IoT CoreではBluetoothデバイスのペアリング画面が実装されておらず、デバイスとの接続が行えない。また、ペアリングを行うためのAPIも現時点では用意されていない <a class="footnote-reference" href="#winble-pairing" id="id8">[3]</a> ということなので、BLEデバイスとの接続は試すことができなかった。
+BLEデバイスの場合、デバイスへの接続に認証を必要としない使い方もできるため、OSによるペアリング操作を必須とすると利用方法が限られてしまう。将来的にOSによるペアリング操作なしで接続できるようになることを期待したい。</p>
+                <p>ここで一旦Windows 10 IoT CoreでのBLEデバイスとの通信をあきらめようと思ったが、Windows10で新たにAdvertisementをスキャンするためのAPIが追加されていることが分かったので、Advertisementのスキャンを試してみた。</p>
+              </div>
+              <div class="section" id="bluetoothleadvertisementwatcher">
+                <h2>BluetoothLEAdvertisementWatcher<a class="headerlink" href="#bluetoothleadvertisementwatcher" title="Permalink to this headline">¶</a></h2>
+                <p>Advertisementのスキャンには、 <em>BluetoothLEAdvertisementWatcher</em><a class="footnote-reference" href="#winble-watcher" id="id9">[4]</a> もしくは <em>BluetoothLEAdvertisementWatcherTrigger</em><a class="footnote-reference" href="#winble-trigger" id="id10">[5]</a>　を用いる。</p>
+                <p>前者はフィルタ条件に合致したAdvertisementを受信した場合にReceivedイベントを受け取ることができる。後者はフィルタ条件に合致した際にバックグラウンド処理を開始させることができる。
+今回は単純にアプリケーション起動中に受信したAdvertisementを受信するだけなので、 BluetoothLEAdvertisementWatcher を用いる。</p>
+                <p>Advertisementを受信すると、BluetoothLEAdvertisementWatcherのReceivedイベントが発生し、引数として <em>BluetoothLEAdvertisementReceivedEventArgs</em> 型のオブジェクトを受け取ることができる。
+BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに含まれるデータを表すBluetoothLEAdvertisementのほかに、Advertisementを送信したBLEデバイスのアドレスと信号強度を表すRSSI値が含まれている。</p>
+                <p class="rubric">脚注</p>
+                <table class="docutils footnote" frame="void" id="drvinst" rules="none">
+                  <colgroup>
+                    <col class="label" />
+                    <col />
+                  </colgroup>
+                  <tbody valign="top">
+                    <tr>
+                      <td class="label">
+                        <a class="fn-backref" href="#id5">[1]</a>
+                      </td>
+                      <td>
+                        <a class="reference external" href="http://blogs.msdn.com/b/jpwdkblog/archive/2009/07/06/9819612.aspx">ドライバ インストール時のトラブルシューティングの第一歩</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="docutils footnote" frame="void" id="bcm-patchram" rules="none">
+                  <colgroup>
+                    <col class="label" />
+                    <col />
+                  </colgroup>
+                  <tbody valign="top">
+                    <tr>
+                      <td class="label">
+                        <a class="fn-backref" href="#id6">[2]</a>
+                      </td>
+                      <td>
+                        <a class="reference external" href="http://comments.gmane.org/gmane.linux.bluez.kernel/47197">[PATCH] Bluetooth: btusb: Add BCM20702 firmware upgrade support</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="docutils footnote" frame="void" id="winble-pairing" rules="none">
+                  <colgroup>
+                    <col class="label" />
+                    <col />
+                  </colgroup>
+                  <tbody valign="top">
+                    <tr>
+                      <td class="label">
+                        <a class="fn-backref" href="#id8">[3]</a>
+                      </td>
+                      <td>
+                        <a class="reference external" href="https://social.msdn.microsoft.com/Forums/windowsdesktop/en-US/3b62bdbf-9a55-4c0f-becf-f4e91d4bc027/windows-8-bluetooth-le-and?forum=wdk">Windows 8, Bluetooth LE and BluetoothFindFirstDevice/BluetoothFindNextDevice/BluetoothFindDeviceClose</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="docutils footnote" frame="void" id="winble-watcher" rules="none">
+                  <colgroup>
+                    <col class="label" />
+                    <col />
+                  </colgroup>
+                  <tbody valign="top">
+                    <tr>
+                      <td class="label">
+                        <a class="fn-backref" href="#id9">[4]</a>
+                      </td>
+                      <td>
+                        <a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows.devices.bluetooth.advertisement.bluetoothleadvertisementwatcher.aspx">BluetoothLEAdvertisementWatcher</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="docutils footnote" frame="void" id="winble-trigger" rules="none">
+                  <colgroup>
+                    <col class="label" />
+                    <col />
+                  </colgroup>
+                  <tbody valign="top">
+                    <tr>
+                      <td class="label">
+                        <a class="fn-backref" href="#id10">[5]</a>
+                      </td>
+                      <td>
+                        <a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows.applicationmodel.background.bluetoothleadvertisementwatchertrigger.aspx">BluetoothLEAdvertisementWatcherTrigger</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">Windows 10 IoT Core Preview版でBLEのAdvertisementを受信する</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id1">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id2">動機</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id3">作ったもの</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#bluetooth">Bluetoothアダプタを認識させる</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id4">ドライバの入れ替え</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id7">Bluetoothデバイスのペアリング</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#bluetoothleadvertisementwatcher">BluetoothLEAdvertisementWatcher</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="ble_gatt_services_in_a_device.html" title="previous chapter">WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法</a>
+          </p>
+          <h4>Next topic</h4>
+          <p class="topless">
+            <a href="../avr.html" title="next chapter">AVR関係</a>
+          </p>
+          <div role="note" aria-label="source link">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li>
+                <a href="../_sources/net/win10_iot_core_previw_ble.txt" rel="nofollow">Show Source</a>
+              </li>
+            </ul>
+          </div>
+          <div id="searchbox" style="display: none" role="search">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <input type="text" name="q" />
+              <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+            <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer">
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="../avr.html" title="AVR関係">next</a> |</li>
+        <li class="right">
+          <a href="ble_gatt_services_in_a_device.html" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../net.html">.NET/WinRT関係</a> »</li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2014, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

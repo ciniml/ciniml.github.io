@@ -16,98 +16,39 @@
 	"buffers":
 	[
 		{
-			"file": "net.rst",
+			"file": "net/win10_iot_core_previw_ble.rst",
 			"settings":
 			{
-				"buffer_size": 83,
+				"buffer_size": 5017,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "conf.py",
+			"file": "//yacht/C$/Windows/Inf/BTH_MC.INF",
 			"settings":
 			{
-				"buffer_size": 7961,
+				"buffer_size": 34114,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "net/ble_gatt_services_in_a_device.rst",
+			"file": "//yacht/C$/Windows/Inf/setupapi.dev.log",
 			"settings":
 			{
-				"buffer_size": 5005,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/dl/SIMD Sample/C#/RayTracer/bin/Release/RayTracer.exe.config",
-			"settings":
-			{
-				"buffer_size": 179,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/dl/SIMD Sample/C#/RayTracer/bin/Release/RayTracer.vshost.exe.config",
-			"settings":
-			{
-				"buffer_size": 179,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/repos/ReflowOven/.gitignore",
-			"settings":
-			{
-				"buffer_size": 83,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/F/src/BT_IO/btstack/hal/bt_pic32_hal.c",
-			"settings":
-			{
-				"buffer_size": 2522,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/F/src/BT_IO/HardwareProfile.h",
-			"settings":
-			{
-				"buffer_size": 2404,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/repos/ReflowOven/Firmware/bleskel/btstack.sh",
-			"settings":
-			{
-				"buffer_size": 317,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/repos/ReflowOven/Firmware/bleskel/btstack/ble/compile-gatt.py",
-			"settings":
-			{
-				"buffer_size": 9430,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "index.rst",
-			"settings":
-			{
-				"buffer_size": 334,
+				"buffer_size": 38289,
 				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -115,9 +56,10 @@
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 126.0,
 		"history":
 		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
 		]
 	},
 	"distraction_free":
@@ -131,10 +73,47 @@
 	},
 	"expanded_folders":
 	[
-		"/D/repos/ciniml.github.io/src"
+		"/D/repos/ciniml.github.io/src",
+		"/D/repos/ciniml.github.io/src/source",
+		"/D/repos/ciniml.github.io/src/source/avr",
+		"/D/repos/ciniml.github.io/src/source/bl600",
+		"/D/repos/ciniml.github.io/src/source/defaultex",
+		"/D/repos/ciniml.github.io/src/source/net"
 	],
 	"file_history":
 	[
+		"/D/repos/ciniml.github.io/src/source/avr/tpiprogrammer.rst",
+		"/D/repos/ciniml.github.io/src/source/index.rst",
+		"/D/repos/ciniml.github.io/src/source/net.rst",
+		"/D/repos/ciniml.github.io/src/source/bl600.rst",
+		"/D/repos/ciniml.github.io/src/source/avr.rst",
+		"/D/repos/ciniml.github.io/src/source/net/ble_gatt_services_in_a_device.rst",
+		"/D/repos/BLE_BL600/mbed-src/targets/hal/TARGET_NORDIC/TARGET_MCU_NRF51822/serial_api.c",
+		"/D/repos/ciniml.github.io/.gitignore",
+		"/D/repos/ciniml.github.io/src/source/conf.py",
+		"/D/repos/mbed-src/hal/serial_api.h",
+		"/C/Users/Kenta/Downloads/flashrom-0.9.8.tar/flashrom-0.9.8/ichspi.c",
+		"/C/Users/Kenta/Downloads/flashrom-0.9.8.tar/flashrom-0.9.8/internal.c",
+		"/C/Users/Kenta/AppData/Local/Temp/spvdmqpi.4je/ubqrosjj.45i.c",
+		"/D/repos/TileProgClassic/TileProg/Translator/linetracer.xsl",
+		"/D/repos/TileProgClassic/TileProg/Tiles/sensor.xml",
+		"/C/Users/Kenta/AppData/Local/Temp/spvdmqpi.4je/linetracer.c",
+		"/D/repos/TileProgClassic/linetracer.xsl",
+		"/F/bak/src/vcs.net/gbman/gbman/Program.cs",
+		"/C/Users/Kenta/Downloads/Console-2.00b148-Beta_32bit/Console2/console.xml",
+		"/D/repos/BLE_BL600/.hgignore",
+		"/D/repos/ciniml.github.io/.git/config",
+		"/D/repos/ciniml.github.io/src/source/defaultex/theme.conf",
+		"/D/repos/ciniml.github.io/src/source/defaultex/static/style.css",
+		"/D/repos/ciniml.github.io/src/source/defaultex/style.css",
+		"/C/app/dev/Python34/Lib/site-packages/sphinx/themes/default/static/default.css_t",
+		"/D/repos/ReflowOven/Firmware/bleskel/btstack/ble/compile-gatt.py",
+		"/D/dl/SIMD Sample/C#/RayTracer/bin/Release/RayTracer.exe.config",
+		"/D/dl/SIMD Sample/C#/RayTracer/bin/Release/RayTracer.vshost.exe.config",
+		"/D/repos/ReflowOven/.gitignore",
+		"/F/src/BT_IO/btstack/hal/bt_pic32_hal.c",
+		"/F/src/BT_IO/HardwareProfile.h",
+		"/D/repos/ReflowOven/Firmware/bleskel/btstack.sh",
 		"/D/dl/PIC32/ancs/btstack-config.h",
 		"/D/repos/ReflowOven/Firmware/bleskel/btstack/src/hci.c",
 		"/F/Users/Kenta/Documents/tvrock/tvrock.log",
@@ -152,7 +131,6 @@
 		"/D/repos/GCodeTools/SplitDrill/SplitDrill.py",
 		"/D/repos/AVR32Board/firm/bleskel/bleskel/bleskel.cpp",
 		"/D/repos/BL600/ble_swing.sb",
-		"/D/repos/ReflowOven/.gitignore",
 		"/D/repos/BL600/ble_blink_led.sb",
 		"/D/repos/AvrLib/AvrLib/AvrCore.cs",
 		"/D/repos/AVR32Board/firm/taskSample/taskSample/src/main.c",
@@ -167,7 +145,6 @@
 		"/D/repos/ReflowOven/Schematic/Build/ReflowOven-drl_map.pho",
 		"/D/repos/ReflowOven/Schematic/Build/ReflowOven-NPTH.drl.ngc",
 		"/D/repos/ReflowOven/Schematic/Build/ReflowOven-NPTH.drl",
-		"/D/repos/ciniml.github.io/src/source/index.rst",
 		"/D/repos/RedmineClient/.gitignore",
 		"/D/repos/ReflowOven/Schematic/akiduki_components.lib",
 		"/D/wk/kicad-winbuilder-3.3/build/Release/eeschema/CMakeFiles/CMakeDirectoryInformation.cmake",
@@ -177,9 +154,7 @@
 		"/D/dl/fess-server-8.2.0/bin/setenv.bat",
 		"/D/wk/hoge.xml",
 		"/D/dl/ocd/tcl/target/swj-dp.tcl",
-		"/D/repos/ciniml.github.io/src/source/bl600.rst",
 		"/D/repos/ciniml.github.io/src/source/bl600/advertise.rst",
-		"/D/repos/ciniml.github.io/src/source/conf.py",
 		"/D/dev/env/Python33_x64/Lib/site-packages/sphinx-1.2.2-py3.3.egg/sphinx/builders/html.py",
 		"/D/repos/ReflowOven/Schematic/ReflowOven.kicad_pcb",
 		"/D/repos/ReflowOven/Schematic/ReflowOven.net",
@@ -194,7 +169,6 @@
 		"/D/repos/BL600/sample_blink_led.sb",
 		"/D/dl/ocd/tcl/target/nrf51_stlink.cfg",
 		"/D/dl/ocd/tcl/interface/stlink-v2.cfg",
-		"/D/repos/ciniml.github.io/.gitignore",
 		"/D/repos/ciniml.github.io/css/default.css",
 		"/D/repos/ciniml.github.io/src/build/html/index.html",
 		"/D/repos/ciniml.github.io/index.html",
@@ -235,18 +209,11 @@
 		"/D/repos/CMSIS-DAP/tools/build.py",
 		"/D/repos/CMSIS-DAP/README.md",
 		"/D/repos/openocd-code/README.Windows",
-		"/D/dl/ocd/tcl/target/stm32f4x.cfg",
-		"/D/dl/ocd/FROM_NEMUISAN_2U.txt",
-		"/D/dl/ocd/tcl/target/readme.txt",
-		"/D/repos/BL600/sample_io_1.sb",
-		"/D/repos/AVR32Board/firm/bleskel/bleskel/task.hpp",
-		"/D/dl/testlink-1.9.9/README",
-		"/D/dl/BL600_iBeacon_smartBASIC_(r1.0)/$autorun$.iBeacon.sblib",
-		"/D/dl/ocd/tcl/interface/altera-usb-blaster2.cfg"
+		"/D/dl/ocd/tcl/target/stm32f4x.cfg"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -260,6 +227,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"AE-FT232H",
 			"DRILL_LINE",
 			"M78A",
 			"M78AR",
@@ -275,6 +243,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"AE-FT232HL",
 			""
 		],
 		"reverse": false,
@@ -286,80 +255,24 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "net.rst",
+					"file": "net/win10_iot_core_previw_ble.rst",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 83,
+						"buffer_size": 5017,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								80,
-								80
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/RestructuredText/reStructuredText.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "conf.py",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 7961,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "net/ble_gatt_services_in_a_device.rst",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5005,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								312,
-								312
+								4305,
+								4305
 							]
 						],
 						"settings":
@@ -369,83 +282,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 679.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/D/dl/SIMD Sample/C#/RayTracer/bin/Release/RayTracer.exe.config",
+					"buffer": 1,
+					"file": "//yacht/C$/Windows/Inf/BTH_MC.INF",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 179,
+						"buffer_size": 34114,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/D/dl/SIMD Sample/C#/RayTracer/bin/Release/RayTracer.vshost.exe.config",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 179,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/D/repos/ReflowOven/.gitignore",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 83,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								83,
-								83
+								1206,
+								961
 							]
 						],
 						"settings":
@@ -456,151 +313,37 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/F/src/BT_IO/btstack/hal/bt_pic32_hal.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2522,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1137,
-								1137
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": -0.0,
-						"translation.y": 1026.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/F/src/BT_IO/HardwareProfile.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2404,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "/D/repos/ReflowOven/Firmware/bleskel/btstack.sh",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 317,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								34,
-								50
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "/D/repos/ReflowOven/Firmware/bleskel/btstack/ble/compile-gatt.py",
+					"buffer": 2,
+					"file": "//yacht/C$/Windows/Inf/setupapi.dev.log",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9430,
+						"buffer_size": 38289,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2011,
-								2011
+								6212,
+								6212
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 2700.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "index.rst",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 334,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								334,
-								334
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/RestructuredText/reStructuredText.tmLanguage"
-						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1440.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -608,7 +351,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -641,15 +384,17 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "",
 	"project": "pages.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -658,6 +403,7 @@
 	"select_project":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -666,6 +412,7 @@
 	"select_symbol":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -679,7 +426,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 312.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
