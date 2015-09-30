@@ -25,8 +25,16 @@ Visual Studio 2015からサンプルアプリのビルド、配置、デバッ�
 * Windows 10 IoT Coreで特定のVID/PIDを持つデバイス用に標準BluetoothドライバをインストールするためのINFファイル生成ツール
     - Windows 10 IoT Coreのシステム上にある *BTH_MC.inf* に後述の手順の加工を施したものを生成する
 
+注意
+-----
+BUFFALOの `BSBT4D09BK <http://buffalo.jp/product/peripheral/wireless-adapter/bsbt4d09bk/>`_ がWin8対応になって、Windows標準BLEスタックが使えるようになった模様。
+下記の方法を使わなくてもこれを買ってしまえば Win10 IoT Core でBLEが使えるようになるので、BSBT4D09BK を買うことをお勧めする。
+
+また、下記の方法は、Win10 IoT Core Public Releaseでは動作するが、そのあとに出たInsider Preview版では動作しない。
+
 Bluetoothアダプタを認識させる
 --------------------------
+
 以前Windows8.1で動作確認したアダプタは、BroadcommのBCM20702というチップが使われているものだった。
 このアダプタは、Windows8.1のPCに接続した場合、 "Broadcomm BCM20702 Bluetooth4.0 USB Device"として認識され、Broadcomm製のドライバがロードされる。
 そのため、Windows 10 IoT　Core on RPi2に接続しただけでは、ドライバが見つからず動作しなかった。

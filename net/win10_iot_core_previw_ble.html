@@ -22,7 +22,7 @@
     </script>
     <link rel="top" title="ふがふが" href="../index.html" />
     <link rel="up" title=".NET/WinRT関係" href="../net.html" />
-    <link rel="next" title="AVR関係" href="../avr.html" />
+    <link rel="next" title="Windows10 IoT Core on RPi2のSPIのパフォーマンス" href="win10_iot_core_spi.html" />
     <link rel="prev" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法" href="ble_gatt_services_in_a_device.html" />
   </head>
   <body role="document">
@@ -33,7 +33,7 @@
           <a href="../genindex.html" title="General Index" accesskey="I">index</a>
         </li>
         <li class="right">
-          <a href="../avr.html" title="AVR関係" accesskey="N">next</a> |</li>
+          <a href="win10_iot_core_spi.html" title="Windows10 IoT Core on RPi2のSPIのパフォーマンス" accesskey="N">next</a> |</li>
         <li class="right">
           <a href="ble_gatt_services_in_a_device.html" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
@@ -87,6 +87,12 @@ Visual Studio 2015からサンプルアプリのビルド、配置、デバッ�
                   </li>
                 </ul>
               </div>
+              <div class="section" id="id4">
+                <h2>注意<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+                <p>BUFFALOの <a class="reference external" href="http://buffalo.jp/product/peripheral/wireless-adapter/bsbt4d09bk/">BSBT4D09BK</a> がWin8対応になって、Windows標準BLEスタックが使えるようになった模様。
+下記の方法を使わなくてもこれを買ってしまえば Win10 IoT Core でBLEが使えるようになるので、BSBT4D09BK を買うことをお勧めする。</p>
+                <p>また、下記の方法は、Win10 IoT Core Public Releaseでは動作するが、そのあとに出たInsider Preview版では動作しない。</p>
+              </div>
               <div class="section" id="bluetooth">
                 <h2>Bluetoothアダプタを認識させる<a class="headerlink" href="#bluetooth" title="Permalink to this headline">¶</a></h2>
                 <p>以前Windows8.1で動作確認したアダプタは、BroadcommのBCM20702というチップが使われているものだった。
@@ -101,8 +107,8 @@ Windows10にも、HCIに従ったBluetoothコントローラ用のドライバ�
                 <p>Windows 10 IoT Core on RPi2 の C:WindowsInf ディレクトリ内を調べたところ、BTH_MC.inf というファイルにGeneric Bluetooth Adapterの定義があることがわかったので、
 Windows 10 IoT Coreでも標準ドライバに入れ替えられればBluetoothアダプタを動作させられそうである。</p>
               </div>
-              <div class="section" id="id4">
-                <h2>ドライバの入れ替え<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+              <div class="section" id="id5">
+                <h2>ドライバの入れ替え<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
                 <p>Windows 10 IoT Coreでにはデバイスマネージャが付属していない代わりに devcon.exe というコマンドラインツールが付属している。このコマンドを用いてデバイスドライバの変更を行う。
 まず、現在のデバイスの状況を <em>status</em>　コマンドで確認する。:</p>
                 <div class="highlight-python">
@@ -136,7 +142,7 @@ USB\VID_0A5C&amp;PID_21E8\000272C973A1
 </pre>
                   </div>
                 </div>
-                <p>何も変化していないようである。devcon.exeのエラーの詳細は画面に表示されないようなので、何かログなどは出ないのかとググった <a class="footnote-reference" href="#drvinst" id="id5">[1]</a> ところ、 <em>setupapi.dev.log</em> というファイルが出力されるようである。
+                <p>何も変化していないようである。devcon.exeのエラーの詳細は画面に表示されないようなので、何かログなどは出ないのかとググった <a class="footnote-reference" href="#drvinst" id="id6">[1]</a> ところ、 <em>setupapi.dev.log</em> というファイルが出力されるようである。
 中身は以下の通りであり特にエラーとみられるメッセージは出力されていない。:</p>
                 <div class="highlight-python">
                   <div class="highlight">
@@ -175,7 +181,7 @@ USB\VID_0A5C&amp;PID_21E8\000272C973A1
                   </div>
                 </div>
                 <p>通常、Bluetoothアダプタのクラスコードは (0xE0, 0x01, 0x01)　となっているはずである。
-さらに調べたところ、BCM20702は新しいファームウェアをRAMにダウンロードする機能があるため <a class="footnote-reference" href="#bcm-patchram" id="id6">[2]</a> 、標準ではないクラスコードとなっているようである。
+さらに調べたところ、BCM20702は新しいファームウェアをRAMにダウンロードする機能があるため <a class="footnote-reference" href="#bcm-patchram" id="id7">[2]</a> 、標準ではないクラスコードとなっているようである。
 とりあえずファームウェアをダウンロードしなくてもROM上のファームウェアが使われるだけのようなので、どうにかして標準ドライバを使用することを考える。</p>
                 <p>ドライバがどのデバイスに対応しているのかは、INFファイル内に記載されている対応デバイスのIDやクラスコードで判定されている。たとえば、
 BTH_MC.inf では以下のよに記述されている。</p>
@@ -222,15 +228,15 @@ Generic Bluetooth Adapter=                       BthUsb, USBVid_0B05&amp;Pid_171
 ドライバ本体のファイルは元々インストールされているはずなので、INFファイル内のファイルコピーを行う部分をすべて削除して再度実行したところ、標準ドライバへの置き換えに成功した。</p>
                 <img alt="../_images/BCM20702_DevCon_Installed.PNG" src="../images/BCM20702_DevCon_Installed.PNG" />
               </div>
-              <div class="section" id="id7">
-                <h2>Bluetoothデバイスのペアリング<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-                <p>Windows 10 IoT CoreではBluetoothデバイスのペアリング画面が実装されておらず、デバイスとの接続が行えない。また、ペアリングを行うためのAPIも現時点では用意されていない <a class="footnote-reference" href="#winble-pairing" id="id8">[3]</a> ということなので、BLEデバイスとの接続は試すことができなかった。
+              <div class="section" id="id8">
+                <h2>Bluetoothデバイスのペアリング<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+                <p>Windows 10 IoT CoreではBluetoothデバイスのペアリング画面が実装されておらず、デバイスとの接続が行えない。また、ペアリングを行うためのAPIも現時点では用意されていない <a class="footnote-reference" href="#winble-pairing" id="id9">[3]</a> ということなので、BLEデバイスとの接続は試すことができなかった。
 BLEデバイスの場合、デバイスへの接続に認証を必要としない使い方もできるため、OSによるペアリング操作を必須とすると利用方法が限られてしまう。将来的にOSによるペアリング操作なしで接続できるようになることを期待したい。</p>
                 <p>ここで一旦Windows 10 IoT CoreでのBLEデバイスとの通信をあきらめようと思ったが、Windows10で新たにAdvertisementをスキャンするためのAPIが追加されていることが分かったので、Advertisementのスキャンを試してみた。</p>
               </div>
               <div class="section" id="bluetoothleadvertisementwatcher">
                 <h2>BluetoothLEAdvertisementWatcher<a class="headerlink" href="#bluetoothleadvertisementwatcher" title="Permalink to this headline">¶</a></h2>
-                <p>Advertisementのスキャンには、 <em>BluetoothLEAdvertisementWatcher</em><a class="footnote-reference" href="#winble-watcher" id="id9">[4]</a> もしくは <em>BluetoothLEAdvertisementWatcherTrigger</em><a class="footnote-reference" href="#winble-trigger" id="id10">[5]</a>　を用いる。</p>
+                <p>Advertisementのスキャンには、 <em>BluetoothLEAdvertisementWatcher</em><a class="footnote-reference" href="#winble-watcher" id="id10">[4]</a> もしくは <em>BluetoothLEAdvertisementWatcherTrigger</em><a class="footnote-reference" href="#winble-trigger" id="id11">[5]</a>　を用いる。</p>
                 <p>前者はフィルタ条件に合致したAdvertisementを受信した場合にReceivedイベントを受け取ることができる。後者はフィルタ条件に合致した際にバックグラウンド処理を開始させることができる。
 今回は単純にアプリケーション起動中に受信したAdvertisementを受信するだけなので、 BluetoothLEAdvertisementWatcher を用いる。</p>
                 <p>Advertisementを受信すると、BluetoothLEAdvertisementWatcherのReceivedイベントが発生し、引数として <em>BluetoothLEAdvertisementReceivedEventArgs</em> 型のオブジェクトを受け取ることができる。
@@ -244,7 +250,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
                   <tbody valign="top">
                     <tr>
                       <td class="label">
-                        <a class="fn-backref" href="#id5">[1]</a>
+                        <a class="fn-backref" href="#id6">[1]</a>
                       </td>
                       <td>
                         <a class="reference external" href="http://blogs.msdn.com/b/jpwdkblog/archive/2009/07/06/9819612.aspx">ドライバ インストール時のトラブルシューティングの第一歩</a>
@@ -260,7 +266,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
                   <tbody valign="top">
                     <tr>
                       <td class="label">
-                        <a class="fn-backref" href="#id6">[2]</a>
+                        <a class="fn-backref" href="#id7">[2]</a>
                       </td>
                       <td>
                         <a class="reference external" href="http://comments.gmane.org/gmane.linux.bluez.kernel/47197">[PATCH] Bluetooth: btusb: Add BCM20702 firmware upgrade support</a>
@@ -276,7 +282,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
                   <tbody valign="top">
                     <tr>
                       <td class="label">
-                        <a class="fn-backref" href="#id8">[3]</a>
+                        <a class="fn-backref" href="#id9">[3]</a>
                       </td>
                       <td>
                         <a class="reference external" href="https://social.msdn.microsoft.com/Forums/windowsdesktop/en-US/3b62bdbf-9a55-4c0f-becf-f4e91d4bc027/windows-8-bluetooth-le-and?forum=wdk">Windows 8, Bluetooth LE and BluetoothFindFirstDevice/BluetoothFindNextDevice/BluetoothFindDeviceClose</a>
@@ -292,7 +298,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
                   <tbody valign="top">
                     <tr>
                       <td class="label">
-                        <a class="fn-backref" href="#id9">[4]</a>
+                        <a class="fn-backref" href="#id10">[4]</a>
                       </td>
                       <td>
                         <a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows.devices.bluetooth.advertisement.bluetoothleadvertisementwatcher.aspx">BluetoothLEAdvertisementWatcher</a>
@@ -308,7 +314,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
                   <tbody valign="top">
                     <tr>
                       <td class="label">
-                        <a class="fn-backref" href="#id10">[5]</a>
+                        <a class="fn-backref" href="#id11">[5]</a>
                       </td>
                       <td>
                         <a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows.applicationmodel.background.bluetoothleadvertisementwatchertrigger.aspx">BluetoothLEAdvertisementWatcherTrigger</a>
@@ -340,13 +346,16 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
                   <a class="reference internal" href="#id3">作ったもの</a>
                 </li>
                 <li>
+                  <a class="reference internal" href="#id4">注意</a>
+                </li>
+                <li>
                   <a class="reference internal" href="#bluetooth">Bluetoothアダプタを認識させる</a>
                 </li>
                 <li>
-                  <a class="reference internal" href="#id4">ドライバの入れ替え</a>
+                  <a class="reference internal" href="#id5">ドライバの入れ替え</a>
                 </li>
                 <li>
-                  <a class="reference internal" href="#id7">Bluetoothデバイスのペアリング</a>
+                  <a class="reference internal" href="#id8">Bluetoothデバイスのペアリング</a>
                 </li>
                 <li>
                   <a class="reference internal" href="#bluetoothleadvertisementwatcher">BluetoothLEAdvertisementWatcher</a>
@@ -360,7 +369,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
           </p>
           <h4>Next topic</h4>
           <p class="topless">
-            <a href="../avr.html" title="next chapter">AVR関係</a>
+            <a href="win10_iot_core_spi.html" title="next chapter">Windows10 IoT Core on RPi2のSPIのパフォーマンス</a>
           </p>
           <div role="note" aria-label="source link">
             <h3>This Page</h3>
@@ -395,7 +404,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
           <a href="../genindex.html" title="General Index">index</a>
         </li>
         <li class="right">
-          <a href="../avr.html" title="AVR関係">next</a> |</li>
+          <a href="win10_iot_core_spi.html" title="Windows10 IoT Core on RPi2のSPIのパフォーマンス">next</a> |</li>
         <li class="right">
           <a href="ble_gatt_services_in_a_device.html" title="WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法">previous</a> |</li>
         <li class="nav-item nav-item-0">
