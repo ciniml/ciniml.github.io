@@ -19,23 +19,23 @@
 			"file": "net/win10_iot_core_previw_ble.rst",
 			"settings":
 			{
-				"buffer_size": 5017,
+				"buffer_size": 9115,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "//yacht/C$/Windows/Inf/BTH_MC.INF",
+			"file": "net/win10_iot_core_spi.rst",
 			"settings":
 			{
-				"buffer_size": 34114,
+				"buffer_size": 1346,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "//yacht/C$/Windows/Inf/setupapi.dev.log",
+			"file": "net.rst",
 			"settings":
 			{
-				"buffer_size": 38289,
+				"buffer_size": 83,
 				"line_ending": "Windows"
 			}
 		}
@@ -47,12 +47,16 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 0.0,
-		"last_filter": "",
+		"height": 392.0,
+		"last_filter": "package",
 		"selected_items":
 		[
+			[
+				"package",
+				"Package Control: Install Package"
+			]
 		],
-		"width": 0.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -82,6 +86,37 @@
 	],
 	"file_history":
 	[
+		"/D/repos/ciniml.github.io/src/source/net/win10_iot_core_spi.rst",
+		"/C/Users/Kenta/Documents/10M08_pins.txt",
+		"/C/Users/Kenta/Downloads/BEMICRO_MAX10_J4.lib",
+		"/C/Users/Kenta/Documents/Test/BEMICRO_MAX10_J3.lib",
+		"/C/Users/Kenta/Downloads/10M08SA.lib",
+		"/D/repos/kicad-library/library/Altera.lib",
+		"/C/Users/Kenta/Documents/BEMICRO_MAX10_J4",
+		"/D/repos/RedPitaya/FPGA/config_openocd/redpitaya.cfg",
+		"/C/app/dev/openocd-develop/share/openocd/scripts/interface/ftdi/openocd-usb.cfg",
+		"/C/Users/Kenta/AppData/Roaming/Factorio/mods/MAIN-DyTech-Machine_1.0.3/MAIN-DyTech-Machine_1.0.3/prototypes/metallurgy/liquids/recipe-iron.lua",
+		"/C/Users/Kenta/AppData/Roaming/Factorio/mods/MAIN-DyTech-Machine_1.0.3/MAIN-DyTech-Machine_1.0.3/data.lua",
+		"/D/repos/SPITransmit/spi_transmitter.vhd",
+		"/C/Users/Kenta/office2016/configuration.xml",
+		"/C/Users/Kenta/Downloads/homelogapp_Windows_CS/homelogapp/homelogapp.Windows/packages.config",
+		"/C/Users/Kenta/Downloads/homelogapp_Windows_CS/homelogapp/homelogapp.Shared/homelogapp.Shared.shproj",
+		"/C/Users/Kenta/AppData/Roaming/Factorio/mods/5dim_core_0.0.1/5dim_core_0.0.1/prototypes/changes.lua",
+		"/C/Users/Kenta/AppData/Roaming/Factorio/mods/5dim_core_0.0.1/5dim_core_0.0.1/data.lua",
+		"/C/Users/Kenta/AppData/Roaming/Factorio/mods/MAIN-DyTech-Machine_1.0.3/MAIN-DyTech-Machine_1.0.3/prototypes/metallurgy/barrels/item.lua",
+		"/C/Users/Kenta/AppData/Roaming/Factorio/mods/MAIN-DyTech-Machine_1.0.3/MAIN-DyTech-Machine_1.0.3/prototypes/metallurgy/intermediates/item.lua",
+		"/C/Users/Kenta/Downloads/simple_spi_latest.tar/simple_spi/trunk/rtl/verilog/simple_spi_top.v",
+		"/C/app/dev/openocd-develop/share/openocd/scripts/cpld/xilinx-xcr3256.cfg",
+		"/C/app/dev/openocd-develop/share/openocd/scripts/cpld/lattice-lc4032ze.cfg",
+		"/C/app/dev/openocd-develop/share/openocd/scripts/interface/ftdi/openocd-usb-hs.cfg",
+		"/C/app/dev/openocd-develop/share/openocd/scripts/interface/ftdi/bl600dev.cfg",
+		"/C/app/dev/openocd-develop/share/openocd/scripts/target/zynq_7000.cfg",
+		"/D/repos/WindowsIoT/IoTBLE/IoTBLE/StartupTask.cs",
+		"//yacht/C$/Windows/Inf/setupapi.dev.log",
+		"//yacht/C$/drivers/bth_broadcomm/BCM20702.INF",
+		"//yacht/C$/Windows/Inf/BTH_MC.INF",
+		"//yacht/C$/drivers/bth_broadcomm/BTH_BROADCOMM.INF",
+		"/D/repos/WindowsIoT/Win10IoTBLEScanner/README.md",
 		"/D/repos/ciniml.github.io/src/source/avr/tpiprogrammer.rst",
 		"/D/repos/ciniml.github.io/src/source/index.rst",
 		"/D/repos/ciniml.github.io/src/source/net.rst",
@@ -178,42 +213,11 @@
 		"/D/repos/ciniml.github.io/src/Makefile",
 		"/D/dl/ocd/tcl/target/nrf51_cmsis-dap.tcl",
 		"/D/wk/a700/proprietary-files.txt",
-		"/D/repos/BL600/ble_send_sensor.sb",
-		"/F/keys/aws/aws-bzr.pem",
-		"/F/keys/aws/ciniml-aws-key.pem",
-		"/D/repos/BL600/Board/Stencil/BL600BaseBoard-F_Paste.dxf",
-		"/D/repos/BL600/Board/Gerber/BL600BaseBoard.txt",
-		"/D/repos/BL600/smartBASIC_Sample_Apps/lib/custom.battery.service.sblib",
-		"/D/repos/BL600/Board/Gerber/renameall.cmd",
-		"/C/Program Files (x86)/Microsoft Visual Studio 12.0/Common7/IDE/devenv.exe.config",
-		"/D/dl/Roslyn SDK Preview/Samples/CSharp/MakeConst/MakeConstCS.csproj",
-		"/D/repos/BL600/Board/Gerber/BL600BaseBoard-drl_map.pho",
-		"/D/repos/BL600/smartBASIC_Sample_Apps/lib/cli.proximity.sblib",
-		"/D/repos/BL600/smartBASIC_Sample_Apps/prx.proximity.sb",
-		"/D/repos/BL600/smartBASIC_Sample_Apps/lib/cli.gatts.server.sblib",
-		"/D/dl/ocd/tcl/softdev.hex",
-		"/D/dl/ocd/tcl/app.HEX",
-		"/D/repos/openocd-code/src/jtag/drivers/cmsis_dap_usb.c",
-		"/D/dl/ocd/tcl/target/lpc810_swd_flash.cfg",
-		"/D/dl/ocd/tcl/target/nrf51_stlink.tcl",
-		"/D/repos/VersaWriter/Image/Image.cs",
-		"/D/repos/VersaWriter/Image/ImageBuilder.cs",
-		"/D/repos/openocd-code/README",
-		"/D/dl/ocd/tcl/ITSE01021_08_s110_nrf51822_6.0.0_softdevice.hex",
-		"/D/dl/ocd/tcl/IENG01020_06A_BL600Phase1COMBINED_v1_5_65_0.HEX",
-		"/D/dl/IENG01020_06A_BL600_Firmware_and_Sample_smartBASIC_Apps_v1_5_65_0-r3/IENG01020_06A_BL600Phase1COMBINED_v1_5_65_0.HEX",
-		"/D/dl/ocd/tcl/target/lpc11xxx_8xx.cfg",
-		"/D/repos/AVR32Board/firm/bleskel/bleskel/profile.gatt",
-		"/D/repos/CMSIS-DAP/interface/Common/src/DAP.c",
-		"/D/repos/CMSIS-DAP/interface/mdk/lpc11u35/lpc11u35_interface.uvproj",
-		"/D/repos/CMSIS-DAP/tools/build.py",
-		"/D/repos/CMSIS-DAP/README.md",
-		"/D/repos/openocd-code/README.Windows",
-		"/D/dl/ocd/tcl/target/stm32f4x.cfg"
+		"/D/repos/BL600/ble_send_sensor.sb"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -255,7 +259,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -264,15 +268,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5017,
+						"buffer_size": 9115,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4305,
-								4305
+								8344,
+								8230
 							]
 						],
 						"settings":
@@ -282,65 +286,63 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 679.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "//yacht/C$/Windows/Inf/BTH_MC.INF",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 34114,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1206,
-								961
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2430.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "//yacht/C$/Windows/Inf/setupapi.dev.log",
+					"buffer": 1,
+					"file": "net/win10_iot_core_spi.rst",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 38289,
+						"buffer_size": 1346,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6212,
-								6212
+								203,
+								203
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/RestructuredText/reStructuredText.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1440.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "net.rst",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 83,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/RestructuredText/reStructuredText.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
