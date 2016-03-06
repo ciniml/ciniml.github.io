@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>ふがふが — ふがふが</title>
+    <title>FPGA関係 — ふがふが</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -20,8 +20,9 @@
     </script>
     <script type="text/javascript" src="_static/doctools.js">
     </script>
-    <link rel="top" title="ふがふが" href="#" />
-    <link rel="next" title="BL600関係" href="bl600.html" />
+    <link rel="top" title="ふがふが" href="index.html" />
+    <link rel="next" title="ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する" href="fpga/modelsim_ase_uvm_testbench.html" />
+    <link rel="prev" title="FT232HでATtiny10に書き込む" href="avr/tpiprogrammer.html" />
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,56 +32,45 @@
           <a href="genindex.html" title="General Index" accesskey="I">index</a>
         </li>
         <li class="right">
-          <a href="bl600.html" title="BL600関係" accesskey="N">next</a> |</li>
+          <a href="fpga/modelsim_ase_uvm_testbench.html" title="ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="avr/tpiprogrammer.html" title="FT232HでATtiny10に書き込む" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-          <a href="#">ふがふが</a> »</li>
+          <a href="index.html">ふがふが</a> »</li>
       </ul>
     </div>
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
-            <div class="section" id="id1">
-              <h1>ふがふが<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-              <p>なんか適当に試したことなどを書くサイト．</p>
+            <div class="section" id="fpga">
+              <h1>FPGA関係<a class="headerlink" href="#fpga" title="Permalink to this headline">¶</a></h1>
               <p>ページ:</p>
               <div class="toctree-wrapper compound">
                 <ul>
                   <li class="toctree-l1">
-                    <a class="reference internal" href="bl600.html">BL600関係</a>
+                    <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html">ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する</a>
                     <ul>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="bl600/advertise.html">BL600でアドバタイズする</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="toctree-l1">
-                    <a class="reference internal" href="net.html">.NET/WinRT関係</a>
-                    <ul>
-                      <li class="toctree-l2">
-                        <a class="reference internal" href="net/ble_gatt_services_in_a_device.html">WinRTのGATTクライアントであるサービスを含むデバイスの他のサービスを列挙する方法</a>
+                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html#id1">概要</a>
                       </li>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="net/win10_iot_core_previw_ble.html">Windows 10 IoT Core Preview版でBLEのAdvertisementを受信する</a>
+                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html#id2">背景</a>
                       </li>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="net/win10_iot_core_spi.html">Windows10 IoT Core on RPi2のSPIのパフォーマンス</a>
+                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html#uvm">UVMとは</a>
                       </li>
-                    </ul>
-                  </li>
-                  <li class="toctree-l1">
-                    <a class="reference internal" href="avr.html">AVR関係</a>
-                    <ul>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="avr/tpiprogrammer.html">FT232HでATtiny10に書き込む</a>
+                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html#id3">テストベンチでの記法</a>
                       </li>
-                    </ul>
-                  </li>
-                  <li class="toctree-l1">
-                    <a class="reference internal" href="fpga.html">FPGA関係</a>
-                    <ul>
                       <li class="toctree-l2">
-                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html">ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する</a>
+                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html#modelsim-ase">ModelSim-ASEでの使い方</a>
+                      </li>
+                      <li class="toctree-l2">
+                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html#qsys">Qsysのシミュレーションモデルでの使い方</a>
+                      </li>
+                      <li class="toctree-l2">
+                        <a class="reference internal" href="fpga/modelsim_ase_uvm_testbench.html#id4">参考</a>
                       </li>
                     </ul>
                   </li>
@@ -92,15 +82,19 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="avr/tpiprogrammer.html" title="previous chapter">FT232HでATtiny10に書き込む</a>
+          </p>
           <h4>Next topic</h4>
           <p class="topless">
-            <a href="bl600.html" title="next chapter">BL600関係</a>
+            <a href="fpga/modelsim_ase_uvm_testbench.html" title="next chapter">ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する</a>
           </p>
           <div role="note" aria-label="source link">
             <h3>This Page</h3>
             <ul class="this-page-menu">
               <li>
-                <a href="_sources/index.txt" rel="nofollow">Show Source</a>
+                <a href="_sources/fpga.txt" rel="nofollow">Show Source</a>
               </li>
             </ul>
           </div>
@@ -129,9 +123,11 @@
           <a href="genindex.html" title="General Index">index</a>
         </li>
         <li class="right">
-          <a href="bl600.html" title="BL600関係">next</a> |</li>
+          <a href="fpga/modelsim_ase_uvm_testbench.html" title="ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する">next</a> |</li>
+        <li class="right">
+          <a href="avr/tpiprogrammer.html" title="FT232HでATtiny10に書き込む">previous</a> |</li>
         <li class="nav-item nav-item-0">
-          <a href="#">ふがふが</a> »</li>
+          <a href="index.html">ふがふが</a> »</li>
       </ul>
     </div>
     <div class="footer" role="contentinfo">

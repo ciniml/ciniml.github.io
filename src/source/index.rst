@@ -15,3 +15,4 @@
    bl600
    net
    avr
+   fpga
