@@ -95,12 +95,14 @@ UVMのクラスの使い方とかはあまり理解してないので、適当�
                 <p>以下のコマンドでUVMをコンパイルする。:</p>
                 <div class="highlight-python">
                   <div class="highlight">
-                    <pre>vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC
+                    <pre>vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC $UVM_SRC/dpi/uvm_dpi.cc -ccflags -DQUESTA
 </pre>
                   </div>
                 </div>
-                <p>このとき、自動的にUVMのDPIモジュールが付属のgccでコンパイルされるようである。実に便利。
-次に、UVMのライブラリを追加する。:</p>
+                <p>UVMのDPIモジュールを一緒に指定すると、付属のgccでコンパイルされるようである。実に便利。
+また、<cite>-ccflags</cite> オプションでgccに渡す引数を指定することができる。
+ModelSim用にコンパイルするためには、 <cite>QUESTA</cite> マクロを定義しないと行けないようなので、<cite>-DQUESTA</cite> を指定している。</p>
+                <p>次に、UVMのライブラリを追加する。:</p>
                 <div class="highlight-python">
                   <div class="highlight">
                     <pre>vmap uvm $UVM_SRC
@@ -141,7 +143,7 @@ cd ./simulation/mentor
 source ./msim_setup.tcl
 
 com
-vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC
+vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC $UVM_SRC/dpi/uvm_dpi.cc -ccflags -DQUESTA
 ensure_lib $UVM_SRC
 vmap uvm $UVM_SRC
 
@@ -166,6 +168,20 @@ run -all
                   <dt>Release Notes For ModelSim Altera 10.0c</dt>
                   <dd>
                     <a class="reference external" href="https://www.altera.com/content/dam/altera-www/global/en_US/others/download/os-support/release-notes_10_0c.txt">https://www.altera.com/content/dam/altera-www/global/en_US/others/download/os-support/release-notes_10_0c.txt</a>
+                  </dd>
+                  <dt>Using the UVM libraries with Questa</dt>
+                  <dd>
+                    <p class="first">
+                      <a class="reference external" href="https://blogs.mentor.com/verificationhorizons/blog/2011/03/08/using-the-uvm-10-release-with-questa/">https://blogs.mentor.com/verificationhorizons/blog/2011/03/08/using-the-uvm-10-release-with-questa/</a>
+                    </p>
+                    <p class="last">UVM1.1用の内容で、1.2ではうまく行かない。</p>
+                  </dd>
+                  <dt>Problem generating “uvm_dpi.dll” for UVM1.2 for QuestaSim 10.2c in 64 bit Windows</dt>
+                  <dd>
+                    <p class="first">
+                      <a class="reference external" href="https://verificationacademy.com/forums/uvm/problem-generating-uvmdpi.dll-uvm1.2-questasim-10.2c-64-bit-windows">https://verificationacademy.com/forums/uvm/problem-generating-uvmdpi.dll-uvm1.2-questasim-10.2c-64-bit-windows</a>
+                    </p>
+                    <p class="last">dave_59 という人が vlogコマンドでUVMをコンパイルするMakefileをアップロードしている。vlogでのコンパイルの仕方の参考になる。</p>
                   </dd>
                 </dl>
               </div>

@@ -45,9 +45,12 @@ QuestaSimでの使い方は出てくるけど、Quartusに付いてくる無償�
 
 以下のコマンドでUVMをコンパイルする。::
 
-	vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC
+	vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC $UVM_SRC/dpi/uvm_dpi.cc -ccflags -DQUESTA
 
-このとき、自動的にUVMのDPIモジュールが付属のgccでコンパイルされるようである。実に便利。
+UVMのDPIモジュールを一緒に指定すると、付属のgccでコンパイルされるようである。実に便利。
+また、`-ccflags` オプションでgccに渡す引数を指定することができる。 
+ModelSim用にコンパイルするためには、 `QUESTA` マクロを定義しないと行けないようなので、`-DQUESTA` を指定している。
+
 次に、UVMのライブラリを追加する。::
 
 	vmap uvm $UVM_SRC
@@ -81,7 +84,7 @@ Qsysでシミュレーションモデルを生成すると、`simulation/mentor`
 	source ./msim_setup.tcl
 
 	com
-	vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC
+	vlog -sv $UVM_SRC/uvm.sv +incdir+$UVM_SRC $UVM_SRC/dpi/uvm_dpi.cc -ccflags -DQUESTA
 	ensure_lib $UVM_SRC
 	vmap uvm $UVM_SRC
 
@@ -103,3 +106,13 @@ UVM 1.2 User Guide
 Release Notes For ModelSim Altera 10.0c
 	https://www.altera.com/content/dam/altera-www/global/en_US/others/download/os-support/release-notes_10_0c.txt
 
+Using the UVM libraries with Questa
+	https://blogs.mentor.com/verificationhorizons/blog/2011/03/08/using-the-uvm-10-release-with-questa/
+
+	UVM1.1用の内容で、1.2ではうまく行かない。
+
+Problem generating "uvm_dpi.dll" for UVM1.2 for QuestaSim 10.2c in 64 bit Windows
+	https://verificationacademy.com/forums/uvm/problem-generating-uvmdpi.dll-uvm1.2-questasim-10.2c-64-bit-windows
+
+	dave_59 という人が vlogコマンドでUVMをコンパイルするMakefileをアップロードしている。vlogでのコンパイルの仕方の参考になる。
+	
