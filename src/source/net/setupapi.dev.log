@@ -1,0 +1,626 @@
+[Device Install Log]
+     OS Version = 10.0.10069
+     Service Pack = 0.0
+     Suite = 0x0100
+     ProductType = 1
+     Architecture = arm
+
+[BeginLog]
+
+[Boot Session: 2015/05/01 09:18:21.881]
+
+>>>  [Import Driver Package - C:\Windows\INF\BTH_MC.inf]
+>>>  Section start 2015/05/01 14:59:36.901
+      cmd: "C:\windows\system32\DEVCON.EXE" install BTH_MC.inf USB\VID_0A12&PID_0001\5&3753427A&0&4
+     sto: Driver Package = C:\Windows\INF\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/01 14:59:37.055
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\INF\BTH_MC.inf]
+>>>  Section start 2015/05/01 15:01:04.814
+      cmd: "C:\windows\system32\DEVCON.EXE" install BTH_MC.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\Windows\INF\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/01 15:01:04.939
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\INF\BTH_MC.inf]
+>>>  Section start 2015/05/01 15:01:21.685
+      cmd: "C:\windows\system32\DEVCON.EXE" install BTH_MC.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\Windows\INF\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/01 15:01:21.795
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\INF\BTH_MC.inf]
+>>>  Section start 2015/05/01 15:02:11.220
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_MC.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\Windows\INF\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/01 15:02:11.345
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\INF\BTH_MC.inf]
+>>>  Section start 2015/05/01 15:02:33.918
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_MC.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\Windows\INF\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/01 15:02:34.028
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\INF\BTH_MC.inf]
+>>>  Section start 2015/05/01 15:02:37.472
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_MC.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\Windows\INF\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/01 15:02:37.597
+<<<  [Exit status: SUCCESS]
+
+
+[Boot Session: 2015/05/06 04:51:34.445]
+
+>>>  [Import Driver Package - C:\windows\inf\BTH_MC.inf]
+>>>  Section start 2015/05/06 05:12:14.551
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\windows\inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/06 05:12:14.680
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\windows\inf\BTH_BROADCOMM.inf]
+>>>  Section start 2015/05/06 05:31:17.934
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_BROADCOMM.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\windows\inf\BTH_BROADCOMM.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+!    sto: Unable to determine presence of driver package. Error = 0x00000002
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\windows\inf\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}\BTH_BROADCOMM.inf'.
+!!!  flq: Error installing file (0x00000002)
+!!!  flq: Error 2: The system cannot find the file specified.
+!    flq:      SourceFile   - 'C:\windows\inf\BTHUSB.SYS'
+!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}\BTHUSB.SYS'
+!!!  cpy: Failed to copy file 'C:\windows\inf\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}\BTHUSB.SYS'. Error = 0x00000002
+!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  flq: FileQueueCommit aborting!
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{3802b68f-bbd7-584c-b900-470bfb4b484f}'. Error = 0x00000002
+<<<  Section end 2015/05/06 05:31:18.216
+<<<  [Exit status: FAILURE(0x00000002)]
+
+
+>>>  [Import Driver Package - C:\windows\inf\BTH_BROADCOMM.inf]
+>>>  Section start 2015/05/06 05:31:27.598
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_BROADCOMM.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\windows\inf\BTH_BROADCOMM.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+!    sto: Unable to determine presence of driver package. Error = 0x00000002
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{672fdd6e-73bc-1f40-8197-720119cbbe45}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\windows\inf\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{672fdd6e-73bc-1f40-8197-720119cbbe45}\BTH_BROADCOMM.inf'.
+!!!  flq: Error installing file (0x00000002)
+!!!  flq: Error 2: The system cannot find the file specified.
+!    flq:      SourceFile   - 'C:\windows\inf\BTHUSB.SYS'
+!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{672fdd6e-73bc-1f40-8197-720119cbbe45}\BTHUSB.SYS'
+!!!  cpy: Failed to copy file 'C:\windows\inf\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{672fdd6e-73bc-1f40-8197-720119cbbe45}\BTHUSB.SYS'. Error = 0x00000002
+!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  flq: FileQueueCommit aborting!
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{672fdd6e-73bc-1f40-8197-720119cbbe45}'. Error = 0x00000002
+<<<  Section end 2015/05/06 05:31:27.848
+<<<  [Exit status: FAILURE(0x00000002)]
+
+
+>>>  [Import Driver Package - C:\windows\inf\BTH_BROADCOMM.inf]
+>>>  Section start 2015/05/06 05:39:03.658
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_BROADCOMM.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\windows\inf\BTH_BROADCOMM.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+!    sto: Unable to determine presence of driver package. Error = 0x00000002
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{179faad3-0528-424c-b098-833aacbb555e}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\windows\inf\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{179faad3-0528-424c-b098-833aacbb555e}\BTH_BROADCOMM.inf'.
+!!!  flq: Error installing file (0x00000002)
+!!!  flq: Error 2: The system cannot find the file specified.
+!    flq:      SourceFile   - 'C:\windows\inf\BTHUSB.SYS'
+!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{179faad3-0528-424c-b098-833aacbb555e}\BTHUSB.SYS'
+!!!  cpy: Failed to copy file 'C:\windows\inf\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{179faad3-0528-424c-b098-833aacbb555e}\BTHUSB.SYS'. Error = 0x00000002
+!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  flq: FileQueueCommit aborting!
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{179faad3-0528-424c-b098-833aacbb555e}'. Error = 0x00000002
+<<<  Section end 2015/05/06 05:39:03.908
+<<<  [Exit status: FAILURE(0x00000002)]
+
+
+>>>  [Import Driver Package - C:\windows\inf\BTH_BROADCOMM.inf]
+>>>  Section start 2015/05/06 05:39:54.937
+      cmd: "C:\windows\system32\DEVCON.EXE" -r updateni BTH_BROADCOMM.inf USB\VID_0A5C&PID_21E8\000272C973A1
+     sto: Driver Package = C:\windows\inf\BTH_BROADCOMM.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+!    sto: Unable to determine presence of driver package. Error = 0x00000002
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{6a52029f-39a1-6545-a494-e82db383761a}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\windows\inf\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{6a52029f-39a1-6545-a494-e82db383761a}\BTH_BROADCOMM.inf'.
+!!!  flq: Error installing file (0x00000002)
+!!!  flq: Error 2: The system cannot find the file specified.
+!    flq:      SourceFile   - 'C:\windows\inf\BTHUSB.SYS'
+!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{6a52029f-39a1-6545-a494-e82db383761a}\BTHUSB.SYS'
+!!!  cpy: Failed to copy file 'C:\windows\inf\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{6a52029f-39a1-6545-a494-e82db383761a}\BTHUSB.SYS'. Error = 0x00000002
+!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  flq: FileQueueCommit aborting!
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{6a52029f-39a1-6545-a494-e82db383761a}'. Error = 0x00000002
+<<<  Section end 2015/05/06 05:39:55.156
+<<<  [Exit status: FAILURE(0x00000002)]
+
+
+[Boot Session: 2015/05/06 05:41:32.762]
+
+>>>  [Import Driver Package - C:\windows\inf\BTH_MC.inf]
+>>>  Section start 2015/05/06 05:53:55.631
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\windows\inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/06 05:53:55.756
+<<<  [Exit status: SUCCESS]
+
+
+[Boot Session: 2015/05/08 21:46:22.186]
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:32:55.160
+      cmd: "C:\windows\system32\DEVCON.EXE" -r updateni BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:32:55.269
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:33:07.886
+      cmd: "C:\windows\system32\DEVCON.EXE" -r update BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:33:08.011
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:33:13.536
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:33:13.630
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:45:47.155
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:45:47.264
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:45:55.945
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:45:56.039
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:52:17.202
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:52:17.311
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:52:22.899
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:52:23.024
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:52:42.805
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:52:42.898
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:53:35.936
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:53:36.046
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/08 23:58:42.109
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/08 23:58:42.218
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_MC.inf]
+>>>  Section start 2015/05/09 00:09:19.592
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_MC.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_MC.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Driver package already imported as 'bth_mc.inf'.
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_mc.inf_arm_560dd80861e324ea\bth_mc.inf
+<<<  Section end 2015/05/09 00:09:19.685
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_BROADCOMM.inf]
+>>>  Section start 2015/05/09 00:09:26.689
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni BTH_BROADCOMM.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_BROADCOMM.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+!    sto: Unable to determine presence of driver package. Error = 0x00000002
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{7bfda466-deef-6e43-97b1-c854e144a152}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\Windows\Inf\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{7bfda466-deef-6e43-97b1-c854e144a152}\BTH_BROADCOMM.inf'.
+!!!  flq: Error installing file (0x00000002)
+!!!  flq: Error 2: The system cannot find the file specified.
+!    flq:      SourceFile   - 'C:\Windows\Inf\BTHUSB.SYS'
+!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{7bfda466-deef-6e43-97b1-c854e144a152}\BTHUSB.SYS'
+!!!  cpy: Failed to copy file 'C:\Windows\Inf\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{7bfda466-deef-6e43-97b1-c854e144a152}\BTHUSB.SYS'. Error = 0x00000002
+!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  flq: FileQueueCommit aborting!
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{7bfda466-deef-6e43-97b1-c854e144a152}'. Error = 0x00000002
+<<<  Section end 2015/05/09 00:09:26.971
+<<<  [Exit status: FAILURE(0x00000002)]
+
+
+>>>  [Import Driver Package - C:\Windows\Inf\BTH_BROADCOMM.inf]
+>>>  Section start 2015/05/09 00:10:07.978
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_BROADCOMM.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\Windows\Inf\BTH_BROADCOMM.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+!    sto: Unable to determine presence of driver package. Error = 0x00000002
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{2c093ca9-3d4d-594b-bd47-0402ab02e43c}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\Windows\Inf\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{2c093ca9-3d4d-594b-bd47-0402ab02e43c}\BTH_BROADCOMM.inf'.
+!!!  flq: Error installing file (0x00000002)
+!!!  flq: Error 2: The system cannot find the file specified.
+!    flq:      SourceFile   - 'C:\Windows\Inf\BTHUSB.SYS'
+!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{2c093ca9-3d4d-594b-bd47-0402ab02e43c}\BTHUSB.SYS'
+!!!  cpy: Failed to copy file 'C:\Windows\Inf\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{2c093ca9-3d4d-594b-bd47-0402ab02e43c}\BTHUSB.SYS'. Error = 0x00000002
+!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  flq: FileQueueCommit aborting!
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{2c093ca9-3d4d-594b-bd47-0402ab02e43c}'. Error = 0x00000002
+<<<  Section end 2015/05/09 00:10:08.212
+<<<  [Exit status: FAILURE(0x00000002)]
+
+
+>>>  [Import Driver Package - C:\drivers\bth_broadcomm\BTH_BROADCOMM.inf]
+>>>  Section start 2015/05/09 00:23:25.617
+      cmd: "C:\windows\system32\DEVCON.EXE" update BTH_BROADCOMM.inf USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\drivers\bth_broadcomm\BTH_BROADCOMM.inf
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{7a2cd44b-2906-7e4e-a2af-7716d74b832d}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\drivers\bth_broadcomm\BTH_BROADCOMM.inf' to 'C:\Users\Administrator\AppData\Local\Temp\{7a2cd44b-2906-7e4e-a2af-7716d74b832d}\BTH_BROADCOMM.inf'.
+!!!  flq: Error installing file (0xe0000233)
+!!!  flq: Error 0xe0000233: Cannot copy to specified target.
+!    flq:      SourceFile   - 'C:\drivers\bth_broadcomm\C:\Windows\System32\Drivers\BTHUSB.SYS'
+!    flq:      TargetFile   - 'C:\Users\Administrator\AppData\Local\Temp\{7a2cd44b-2906-7e4e-a2af-7716d74b832d}\C:\Windows\System32\Drivers\BTHUSB.SYS'
+!!!  cpy: Failed to copy file 'C:\drivers\bth_broadcomm\C:\Windows\System32\Drivers\BTHUSB.SYS' to 'C:\Users\Administrator\AppData\Local\Temp\{7a2cd44b-2906-7e4e-a2af-7716d74b832d}\C:\Windows\System32\Drivers\BTHUSB.SYS'. Error = 0xE0000233
+!!!  flq: SPFQNOTIFY_COPYERROR: returned SPFQOPERATION_ABORT.
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  flq: FileQueueCommit aborting!
+!!!  flq: Error 995: The I/O operation has been aborted because of either a thread exit or an application request.
+!!!  sto: Failed to copy driver package to 'C:\Users\Administrator\AppData\Local\Temp\{7a2cd44b-2906-7e4e-a2af-7716d74b832d}'. Error = 0xE0000233
+<<<  Section end 2015/05/09 00:23:25.862
+<<<  [Exit status: FAILURE(0xe0000233)]
+
+
+[Boot Session: 2015/05/09 07:05:21.668]
+
+>>>  [Import Driver Package - C:\drivers\bth_broadcomm\BTH_BROADCOMM.INF]
+>>>  Section start 2015/05/09 08:03:47.892
+      cmd: "C:\windows\system32\DEVCON.EXE" updateni .\BTH_BROADCOMM.INF USB\VID_0A5C&PID_21E8
+     sto: Driver Package = C:\drivers\bth_broadcomm\BTH_BROADCOMM.INF
+     sto: Flags          = 0x00000000
+     inf: Provider       = Microsoft
+     inf: Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf: Driver Version = 06/21/2006,10.0.10069.0
+     inf: Version Flags  = 0x00000001
+     sto: Copying driver package files to 'C:\Users\Administrator\AppData\Local\Temp\{68347633-e5a9-3b46-9f26-120bdd895350}'.
+!    inf: Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf: Error 3: The system cannot find the path specified.
+!    inf: Could not find include INF file "machine.inf". Error = 0x00000003
+     inf: Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     flq: Copying 'C:\drivers\bth_broadcomm\BTH_BROADCOMM.INF' to 'C:\Users\Administrator\AppData\Local\Temp\{68347633-e5a9-3b46-9f26-120bdd895350}\BTH_BROADCOMM.INF'.
+     sto: {Stage Driver Package: C:\Users\Administrator\AppData\Local\Temp\{68347633-e5a9-3b46-9f26-120bdd895350}\BTH_BROADCOMM.INF} 08:03:48.313
+!    inf:      Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf:      Error 3: The system cannot find the path specified.
+!    inf:      Could not find include INF file "machine.inf". Error = 0x00000003
+     inf:      Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     inf:      {Query Configurability: C:\Users\Administrator\AppData\Local\Temp\{68347633-e5a9-3b46-9f26-120bdd895350}\BTH_BROADCOMM.INF} 08:03:48.434
+!    inf:           Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf:           Error 3: The system cannot find the path specified.
+!    inf:           Could not find include INF file "machine.inf". Error = 0x00000003
+     inf:           Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     inf:           Driver package 'BTH_BROADCOMM.INF' is configurable.
+     inf:      {Query Configurability: exit(0x00000000)} 08:03:48.544
+     flq:      Copying 'C:\Users\Administrator\AppData\Local\Temp\{68347633-e5a9-3b46-9f26-120bdd895350}\BTH_BROADCOMM.INF' to 'C:\windows\System32\DriverStore\Temp\{71f0f18c-5ae4-3845-b6c3-3656383e7467}\BTH_BROADCOMM.INF'.
+     sto:      {DRIVERSTORE IMPORT VALIDATE} 08:03:48.706
+     sto:      {DRIVERSTORE IMPORT VALIDATE: exit(0x00000000)} 08:03:48.706
+     sig:      Signer Score = 0x80000000
+     sig:      Signer Name  = <unsigned>
+     sto:      {DRIVERSTORE IMPORT BEGIN} 08:03:48.706
+     sto:      {DRIVERSTORE IMPORT BEGIN: exit(0x00000000)} 08:03:48.706
+     cpy:      {Copy Directory: C:\windows\System32\DriverStore\Temp\{71f0f18c-5ae4-3845-b6c3-3656383e7467}} 08:03:48.723
+     cpy:           Target Path = C:\windows\System32\DriverStore\FileRepository\bth_broadcomm.inf_arm_6f3a8eb212e89953
+     cpy:      {Copy Directory: exit(0x00000000)} 08:03:48.723
+     idb:      {Register Driver Package: C:\windows\System32\DriverStore\FileRepository\bth_broadcomm.inf_arm_6f3a8eb212e89953\BTH_BROADCOMM.INF} 08:03:48.738
+     idb:           Created driver package object 'bth_broadcomm.inf_arm_6f3a8eb212e89953' in SYSTEM database node.
+     idb:           Created driver INF file object 'oem0.inf' in SYSTEM database node.
+     idb:           Registered driver package 'bth_broadcomm.inf_arm_6f3a8eb212e89953' with 'oem0.inf'.
+     idb:      {Register Driver Package: exit(0x00000000)} 08:03:48.785
+     idb:      {Publish Driver Package: C:\windows\System32\DriverStore\FileRepository\bth_broadcomm.inf_arm_6f3a8eb212e89953\BTH_BROADCOMM.INF} 08:03:48.799
+     idb:           Activating driver package 'bth_broadcomm.inf_arm_6f3a8eb212e89953'.
+     cpy:           Published 'bth_broadcomm.inf_arm_6f3a8eb212e89953\bth_broadcomm.inf' to 'oem0.inf'.
+     idb:           Indexed 25 device IDs for 'bth_broadcomm.inf_arm_6f3a8eb212e89953'.
+     sto:           Flushed driver database node 'SYSTEM'. Time = 375 ms
+     idb:      {Publish Driver Package: exit(0x00000000)} 08:03:49.334
+     sto:      {DRIVERSTORE IMPORT END} 08:03:49.381
+     sto:      {DRIVERSTORE IMPORT END: exit(0x00000000)} 08:03:49.428
+     sto: {Stage Driver Package: exit(0x00000000)} 08:03:49.428
+     sto: Driver Store Filename = C:\windows\System32\DriverStore\FileRepository\bth_broadcomm.inf_arm_6f3a8eb212e89953\BTH_BROADCOMM.INF
+<<<  Section end 2015/05/09 08:03:49.475
+<<<  [Exit status: SUCCESS]
+
+
+>>>  [Device Install (Software initiated) - USB\VID_0A5C&PID_21E8\000272C973A1]
+>>>  Section start 2015/05/09 08:03:49.506
+     ndv: Driver INF Path: C:\windows\System32\DriverStore\FileRepository\bth_broadcomm.inf_arm_6f3a8eb212e89953\BTH_BROADCOMM.INF
+     ndv: Driver Node Name: oem0.inf:USB\VID_0A5C&PID_21E8
+     sto: {Configure Driver Package: C:\windows\System32\DriverStore\FileRepository\bth_broadcomm.inf_arm_6f3a8eb212e89953\bth_broadcomm.inf}
+     sto:      Source Filter  = USB\VID_0A5C&PID_21E8
+     inf:      Class GUID     = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+     inf:      Class Options  = Configurable BootCritical
+     inf:      Config Options = ForceConfigurable ForceCritical
+!    inf:      Unable to load INF: 'C:\windows\System32\DriverStore\FileRepository\machine.inf_arm_92575694ab9f31c7\machine.inf'(00000003)
+!    inf:      Error 3: The system cannot find the path specified.
+!    inf:      Could not find include INF file "machine.inf". Error = 0x00000003
+     inf:      Needed section [PciD3ColdSupported] not found, might exist in missing included INF.
+     inf:      {Configure Driver: Generic Bluetooth Adapter}
+     inf:           Section Name = BthUsb.NT
+     inf:           {Add Service: BTHUSB}
+     inf:                Start Type    = 3
+     inf:                Service Type  = 1
+     inf:                Error Control = 1
+     inf:                Image Path    = \SystemRoot\System32\Drivers\BTHUSB.sys
+     inf:                Display Name  = Bluetooth Radio USB Driver
+     inf:                Group         = PNP Filter
+     inf:                Updated service 'BTHUSB'.
+     inf:           {Add Service: exit(0x00000000)}
+     inf:           {Add Service: BTHPORT}
+     inf:                Start Type    = 3
+     inf:                Service Type  = 1
+     inf:                Error Control = 1
+     inf:                Image Path    = \SystemRoot\System32\Drivers\BTHport.sys
+     inf:                Display Name  = Bluetooth Port Driver
+     inf:                Group         = PNP Filter
+     inf:                Updated service 'BTHPORT'.
+     inf:           {Add Service: exit(0x00000000)}
+     inf:           Hardware Id  = USB\VID_0A5C&PID_21E8
+     inf:           {Configure Driver Configuration: BthUsb.NT}
+     inf:                Service Name  = BTHUSB
+     inf:                Exclude IDs   = USB\VID_8087&PID_0A2B
+     inf:                                USB\VID_8087&PID_0A2A
+     inf:                                USB\VID_8087&PID_07DC
+     inf:                                USB\VID_8087&PID_07DA
+     inf:                                USB\VID_0CF3&PID_0036
+     inf:                                USB\VID_0930&PID_021C
+     inf:                                USB\VID_0CF3&PID_E005
+     inf:                                USB\VID_0CF3&PID_E004
+     inf:                                USB\VID_0CF3&PID_E003
+     inf:                Included INFs = machine.inf
+     inf:                Config Flags  = 0x00000000
+     inf:           {Configure Driver Configuration: exit(0x00000000)}
+     inf:      {Configure Driver: exit(0x00000000)}
+     sto: {Configure Driver Package: exit(0x00000000)}
+     dvi: Install Device: Configuring device (oem0.inf:USB\VID_0A5C&PID_21E8,BthUsb.NT). 08:03:49.912
+     dvi: Install Device: Configuring device completed. 08:03:49.944
+     dvi: Install Device: Starting device. 08:03:49.944
+     dvi: Install Device: Starting device completed. 08:03:50.306
+<<<  Section end 2015/05/09 08:03:50.322
+<<<  [Exit status: SUCCESS]
+

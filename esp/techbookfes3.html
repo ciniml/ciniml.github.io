@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>技術書典3出展 — ふがふが</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="ESP-8266/ESP-32関係" href="../esp.html" />
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="../esp.html" title="ESP-8266/ESP-32関係" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../esp.html" accesskey="U">ESP-8266/ESP-32関係</a> »</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            <div class="section" id="id1">
+              <h1>技術書典3出展<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id2">
+                <h2>概要<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+                <p>2017年10月22日に秋葉原のUDXで開催された、技術書典3に出展したのでその経緯と結果について報告する。</p>
+                <a class="reference internal image-reference" href="../_images/top.png">
+                  <img alt="../_images/top.png" src="../images/top.png" style="width: 438.5px; height: 578.0px;" />
+                </a>
+              </div>
+              <div class="section" id="id3">
+                <h2>頒布物<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+                <p>「ESP-WROOM-32でBluetooth Low Energy使ってみる本」というタイトルで、ESP32のGATTクライアント周りの使い方について書いた物を頒布した。</p>
+                <a class="reference internal image-reference" href="../_images/toc1.png">
+                  <img alt="../_images/toc1.png" src="../images/toc1.png" style="width: 468.0px; height: 661.6px;" />
+                </a>
+                <a class="reference internal image-reference" href="../_images/toc2.png">
+                  <img alt="../_images/toc2.png" src="../images/toc2.png" style="width: 468.0px; height: 661.6px;" />
+                </a>
+              </div>
+              <div class="section" id="id4">
+                <h2>準備<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+                <p>技術書典、技術書典22を見に行って、出展したらもっと楽しそうと思ったので、とりあえず締め切りぎりぎりに申し込みをした。
+一応ESP32で遊び始めていたので、そのあたりのネタでなんかしら書こうと考えていた。</p>
+                <p>その後、いくつか雑誌の記事の執筆などがあったので、直前まで執筆作業には手が付けられずにいた。
+ネタの方は幸い、直前の記事の内容もESP32ネタだったので、その最中で雑誌のネタにならない細かいところの説明をすることにした。
+ただし、結局1週間前くらいまでほとんど作業時間が取れず、当日も朝方までサンプルコードと原稿の修正をしていた。</p>
+                <p>文章から図の清書まで全部自分で用意するのはなかなか大変で、文章のチェックもしてもらえないので、雑誌に書くときに編集者</p>
+                <p>さすがに印刷をしないと間に合わなさそうになった段階で、レーザープリンタで時間ギリギリまで印刷をしていた。
+自炊用に裁断機があったので化粧断ち的なことは簡単にできたのは良かった。</p>
+                <p>電子版頒布用のカードは、対面伝書というサービスを使った。
+印刷するなどして渡したシリアルコードを入力するとデータがダウンロードできるサービスで、シリアルコードの管理機能としてCSVにエクスポートすることができる。</p>
+                <p>このCSVからIllustratorの変数のデータセットに入力できるXMLを手作業で作成し、シリアルコードを印刷したカードを作った。
+変数機能は便利だが、変数に入力するデータセットはXMLで記述しなければならない。
+CSVからデータセット変換は割と面倒なので、自動化したいところである。</p>
+                <p>他には、デモ用の機材として、</p>
+                <blockquote>
+                  <div>
+                    <ul class="simple">
+                      <li>AE-ESP-WROOM-32</li>
+                      <li>ESP32-DevKitC</li>
+                      <li>CC2650STK SensorTag</li>
+                    </ul>
+                  </div>
+                </blockquote>
+                <p>を用意した。</p>
+              </div>
+              <div class="section" id="id5">
+                <h2>当日<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+                <p>上記の通り持ち物がA5の薄い冊子17部と電子版カード、あとはデモ用の器材だけだったので、30リットルくらいの
+バックパック1つで済んだ。
+当日はかなり雨が降っていたので結果的に良かった。</p>
+                <p>会場についたのは10:45くらいで、すでにほとんどの出展者が会場に入って準備を終えていた。</p>
+                <p>配置された場所は「き07」で、周りでは自作ハードウェアやキットの頒布をしているサークルが配置されているようで、電子工作・ハードウェアブロックのような感じだった。
+隣では「<cite>BEEP on USB &lt;http://beep.prioris.jp/&gt;</cite>」を頒布しており、なんだか懐かしい音が聞こえてきたりしたので、休憩中にフルセットを買った。</p>
+                <p>開始後1時間くらいで、用意した物理本17部中、見本用に残していた1部を除いて全部売れた。かなり予想外だった。
+昼頃までは持ってきたデモ用機材もアクセスポイントの設定の変更を忘れたため動作しておらず、単にブレッドボードにESP32-DevKitCを刺した状態でおいているだけだったにもかかわらず、割と見本誌を見てくださった方には買って言っていただけた。
+しまいには、「GATTサーバーではなくGATTクライアントの内容しかないが良いのか」と確認してから売るようになったが、それでも良いという方がほとんどだった。</p>
+                <p>最終的には、「物理本+ダウンロードカード」16部、「ダウンロードカードのみ」31部の合計47部を頒布した。
+当日の朝に見た被チェック数が30くらいだったので半分の15部くらいかなと思っていたが、それよりも多かったので驚いた。
+ある購入された方に言われたのが、「ESP-WROOM-32買ったけど積んでいるので気になった。積んでる人なら気になるのではないか」ということだったので、割とESP-WROOM-32を積んでいる方が多かったのかもしれない。</p>
+                <p>昼過ぎごろには前職の後輩が手伝いにきてくれたので、途中1時間くらい会場を見て回って欲しい本をいくつか購入することができた。
+ただ、あとで見返してみるといろいろ買いに行くのを忘れていたようである。</p>
+              </div>
+              <div class="section" id="id6">
+                <h2>反省点<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+                <div class="section" id="id7">
+                  <h3>頒布物<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+                  <p>まず何よりも頒布物のクオリティである。</p>
+                  <p>物理的なクオリティとしては、自分で印刷して製本作業を行っており、この手の作業は初めてだったのもあり、どうしても綺麗につくれていない。
+やはりきちんと外注して印刷してもらった方が良い。</p>
+                  <p>また、印刷前の原稿のレイアウトにもいくつか問題がある。
+直前まで書いていたので、レイアウトを調整する時間がなく、とくにRe:VIEWで弱いとされる表のレイアウトがどうしても調整できなかった。
+そのままだと表中の文字が枠を突き抜けて行ってしまうので、しかたなく強制改行したが、そうすると縦方向の位置がずれる。
+ここは解決できなかったが、拡張を導入するなどで対処している方もいらっしゃるようなので、今後解決していきたい。</p>
+                  <p>内容に関してもいろいろ不足している点がある。
+そもそも、GATTクライアントだけではなくGATTサーバーの実装例も記載するつもりだったが、実験が間に合わずGATTクライアントだけとなってしまった。
+そのため、タイトルから想像される、「ESP32でBLEデバイスをつくる(＝GATTサーバーの実装)」という内容がなくなってしまい、誤解しやすい状態になってしまった。
+内容が確定した時点でタイトルを変更すべきであった。
+このあたりは内容を追加してダウンロード版の方の更新で対応したいと思う。</p>
+                  <p>総じて言えるのは、準備に対する時間不足、スケジューリングの問題があったということである。</p>
+                  <p>次回があるのなら、もっと余裕をもって準備をおこないたい。</p>
+                </div>
+                <div class="section" id="id8">
+                  <h3>ブースの展示<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+                  <p>ブースの展示に関しては、会場について物を配置し始めてからいろいろ問題点に気づいた。</p>
+                  <p>まず、頒布物の価格を表示するものを用意し忘れた。
+これにかんしては、技術書典公式の「例の後払い決済」に登録していたため、運営側から頒布物の価格とQRコードを印刷したものを頂けたので、なんとかなった。
+本当に助かりました。</p>
+                  <p>次に、デモの準備である。
+一応デモとして、ESP-WROOM-32でCC2650のセンサ・データをBLE経由で受信して、AWS IoT Hubに投げるものを用意した。
+ただし、AWS IoT Hubに投げたあとのグラフ表示などの部分を用意できなかったので、AWSコンソールのIoT Hubテスト用画面でJSON形式で届いた温度と湿度データの内容を表示するだけの地味なものだった。
+やはりグラフ表示があった方が目を引くし、当日は台風が来ていたので温湿度に加えて気圧センサの内容も表示できると面白かったと思う。</p>
+                  <p>また、ブースでの電源利用申請をしていなかったので、途中でノートPCのバッテリが切れた。</p>
+                  <p>結局のところ準備不足である。</p>
+                </div>
+              </div>
+              <div class="section" id="id9">
+                <h2>まとめ<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+                <p>今回、初めて出展する側として参加したが、やはり、自分の興味のあることについていろいろな方とお話しできるというのはとても良かった。
+いろいろ準備不足ではあったものの、次回があればまた参加したいと思う。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">技術書典3出展</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id2">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id3">頒布物</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id4">準備</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id5">当日</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id6">反省点</a>
+                  <ul>
+                    <li>
+                      <a class="reference internal" href="#id7">頒布物</a>
+                    </li>
+                    <li>
+                      <a class="reference internal" href="#id8">ブースの展示</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id9">まとめ</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="../esp.html" title="previous chapter">ESP-8266/ESP-32関係</a>
+          </p>
+          <div role="note" aria-label="source link">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li>
+                <a href="../_sources/esp/techbookfes3.rst.txt" rel="nofollow">Show Source</a>
+              </li>
+            </ul>
+          </div>
+          <div id="searchbox" style="display: none" role="search">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <div>
+                <input type="text" name="q" />
+              </div>
+              <div>
+                <input type="submit" value="Go" />
+              </div>
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer">
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="../esp.html" title="ESP-8266/ESP-32関係">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../esp.html">ESP-8266/ESP-32関係</a> »</li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2014, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
