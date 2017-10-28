@@ -30,6 +30,10 @@ function Replace-Images($node)
     {
         $node.src = $node.src.Replace("_images", "images")
     }
+    if( $node.Name -eq "a" )
+    {
+        $node.href = $node.href.Replace("_images", "images")
+    }
     foreach($childNode in $node.ChildNodes)
     {
         Replace-Images $childNode
