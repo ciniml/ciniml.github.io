@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Windows10 64bitでQuartus Prime (Lite) 17.1付属のIntel HLS Compilerを試す — ふがふが</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する" href="modelsim_ase_uvm_testbench.html" />
+    <link rel="prev" title="FPGA関係" href="../fpga.html" />
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="modelsim_ase_uvm_testbench.html" title="ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="../fpga.html" title="FPGA関係" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../fpga.html" accesskey="U">FPGA関係</a> »</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            <div class="section" id="windows10-64bitquartus-prime-lite-17-1intel-hls-compiler">
+              <h1>Windows10 64bitでQuartus Prime (Lite) 17.1付属のIntel HLS Compilerを試す<a class="headerlink" href="#windows10-64bitquartus-prime-lite-17-1intel-hls-compiler" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id1">
+                <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+                <p>Intel HLS Compilerがクローズドβからオープンβ、もとい正式公開されたので、Windows10 64bitでサンプルの実行まで試した。</p>
+              </div>
+              <div class="section" id="id2">
+                <h2>背景<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+                <p>Intel HLS Compilerがリリースされたと聞いて、Vivado HLSみたいなツールを想像してQuartusをインストールして立ち上げて、Toolメニューを見てもそれっぽいものがない。</p>
+                <p>おかしいなと思っていると、リファレンスマニュアルのURLがTwitterに流れてきたので、必須要件とインストール方法を確認すると、どうも <cite>i++</cite> なるぐぐらびりてぃの低いコマンドが追加されたようであった。
+しかも、必須要件 <a class="footnote-reference" href="#id4" id="id3">[1]</a> として</p>
+                <ul class="simple">
+                  <li>Linux版: GCC 4.4.7</li>
+                  <li>Windows版: Visual Studio Professional 2010</li>
+                </ul>
+                <p>とか書いてある始末である。</p>
+                <p>Visual Studio Professional 2010とか使えるライセンスを持っているかつHLSに興味を示す人はそんなに多くないと思ったので、とりあえず Visual Studio 2010 Express で動かせるようにする手順を調べた。</p>
+                <table class="docutils footnote" frame="void" id="id4" rules="none">
+                  <colgroup>
+                    <col class="label" />
+                    <col />
+                  </colgroup>
+                  <tbody valign="top">
+                    <tr>
+                      <td class="label">
+                        <a class="fn-backref" href="#id3">[1]</a>
+                      </td>
+                      <td>
+                        <a class="reference external" href="https://www.altera.co.jp/content/altera-www/global/en_us/index/documentation/ewa1462479481465.html#lpd1467738276041">https://www.altera.co.jp/content/altera-www/global/en_us/index/documentation/ewa1462479481465.html#lpd1467738276041</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="section" id="id5">
+                <h2>必要なもの<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+                <ul class="simple">
+                  <li>
+                    <dl class="first docutils">
+                      <dt>Windows7以降の <cite>64bit</cite> OS (未確認：筆者はWin10 Pro Fall Creators Update適用後でしか試していない)</dt>
+                      <dd>
+                        <ul class="first last">
+                          <li>どうも、Intel HLS Compilerのライブラリが64bitでコンパイルされているらしい。</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li>Quartus Prime 17.1 (Lite)</li>
+                  <li>
+                    <dl class="first docutils">
+                      <dt>ModelSim Altera Starter Edition</dt>
+                      <dd>
+                        <ul class="first last">
+                          <li>IntelのサイトからDLして入れておく。</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li>
+                    <dl class="first docutils">
+                      <dt>Visual Studio 2010 Express</dt>
+                      <dd>
+                        <ul class="first last">
+                          <li>
+                            <a class="reference external" href="https://www.visualstudio.com/ja/vs/older-downloads/?rr=https%3A%2F%2Fwww.google.co.jp%2F">ここ</a> からダウンロードできる。</li>
+                          <li>ただし、Microsoftアカウントが必要 (MSDN Subscriptionは必要ない)</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li>
+                    <dl class="first docutils">
+                      <dt>Microsoft Windows SDK for Windows 7 and .NET Framework 4 のISOイメージ (以降Windows 7 SDKのISOイメージと呼ぶ)</dt>
+                      <dd>
+                        <ul class="first last">
+                          <li>Visual Studio 2010 Expressには64bit版コンパイラが含まれないので、Windows SDKに入っている64bit版コンパイラが必要</li>
+                          <li>
+                            <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=8442">ここ</a> からダウンロードできる。</li>
+                          <li>GRMSDK_EN_DVD.iso にチェックを入れて <em>Next</em> を押す。</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                </ul>
+                <p>Quartus Primeのインストール手順は特に書かないのでインストールしておくこと。</p>
+                <p>Visual Studio 2010 Expressはインストーラに従って特にオプションを変更することなくインストールすれば問題ないはずである。</p>
+              </div>
+              <div class="section" id="windows-sdk">
+                <h2>Windows SDKのインストール<a class="headerlink" href="#windows-sdk" title="Permalink to this headline">¶</a></h2>
+                <p>Windows 10でWindows 7 SDKを普通に入れようとすると、.NET Frameworkがプレリリース版が入っているので肝心の64bit版C++コンパイラがインストールできないとか言われる。
+Fall Creators Updateだけの現象かもしれないが、回避策を書いておく。
+以下の手順に従えば、要らないものが入らないので一石二鳥である。</p>
+                <ol class="arabic simple">
+                  <li>Windows 7 SDKのISOイメージをマウントする。(Windows 10なら、ダブルクリックするなどして開けば勝手にマウントする。)</li>
+                  <li>
+                    <dl class="first docutils">
+                      <dt>Setupディレクトリ以下の次のディレクトリにあるMSIインストーラを実行してインストールする。</dt>
+                      <dd>
+                        <ul class="first last">
+                          <li>vc_stdamd64</li>
+                          <li>vc_stdx86</li>
+                          <li>WinSDKBuild</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                </ol>
+                <p>これでWindows 7 SDKから必要最低限のパッケージをインストールすることができる。</p>
+              </div>
+              <div class="section" id="id8">
+                <h2>環境設定用バッチファイル<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+                <p>以降、Quartus Prime 17.1 Liteを <code class="docutils literal"><span class="pre">C:\intelFPGA_lite\17.1</span></code> にインストールしたものとして説明するので適宜読み替えていただきたい。</p>
+                <p>Intel HLS Compilerを実行するには、コマンドプロンプト上で <code class="docutils literal"><span class="pre">C:\intelFPGA_lite\17.1\hls\init_hls.bat</span></code> を実行して、環境変数を設定する必要がある。
+ただし、init_hls.batを実行する前にVC++のコンパイラやヘッダ、ライブラリ、ModelSimへのパスを通しておく必要がある。</p>
+                <p>面倒だったので <a class="reference external" href="https://gist.github.com/ciniml/60ccbf916da60cc728df6500c847ef26">バッチファイル</a> を作っておいたので確認の上使っていただければと思う。</p>
+                <p>バッチファイルの先頭の:</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+                      <span>
+                      </span>
+                      <span class="nd">@set</span> <span class="n">INTELFPGA_DIR</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">intelFPGA_lite</span>
+<span class="nd">@set</span> <span class="n">INTELFPGA_VER</span><span class="o">=</span><span class="mf">17.1</span>
+<span class="nd">@set</span> <span class="n">INTELFPGA_ROOT</span><span class="o">=%</span><span class="n">INTELFPGA_DIR</span><span class="o">%</span>\<span class="o">%</span><span class="n">INTELFPGA_VER</span><span class="o">%</span>
+<span class="nd">@set</span> <span class="n">MODELSIM_TYPE</span><span class="o">=</span><span class="n">modelsim_ase</span>
+</pre>
+                  </div>
+                </div>
+                <p>の部分は環境に合わせて適宜変更する必要がある。</p>
+                <p>
+                  <code class="docutils literal">
+                    <span class="pre">INTELFPGA_DIR</span>
+                  </code> はQuartusをインストールしたディレクトリのフルパスを指定する。</p>
+                <p>
+                  <code class="docutils literal">
+                    <span class="pre">MODELSIM_TYPE</span>
+                  </code> はModelSim Altera Starter Editionを入れた場合は <code class="docutils literal"><span class="pre">modelsim_ase</span></code> 、Altera Editionの場合は <code class="docutils literal"><span class="pre">modelsim_ae</span></code> とする。</p>
+              </div>
+              <div class="section" id="intel-hls-compiler">
+                <h2>Intel HLS Compilerの実行<a class="headerlink" href="#intel-hls-compiler" title="Permalink to this headline">¶</a></h2>
+                <p>上記のバッチファイルを実行すると、Intel HLS Compilerを使用できる状態のコマンドプロンプトが開く。
+とりあえずサンプルを実行するために、どこか適当な作業用ディレクトリに移動する。</p>
+                <p>その後、:</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+                      <span>
+                      </span>
+                      <span class="n">robocopy</span> <span class="o">/</span><span class="n">S</span> <span class="o">/</span><span class="n">E</span> <span class="s2">"%HLS_ROOT%\examples\*"</span> <span class="o">.</span>
+<span class="n">cd</span> <span class="n">counter</span>
+<span class="n">build</span> <span class="n">test</span><span class="o">-</span><span class="n">msvc</span>
+<span class="n">test</span><span class="o">-</span><span class="n">msvc</span><span class="o">.</span><span class="n">exe</span>
+</pre>
+                  </div>
+                </div>
+                <p>とすることで、counterサンプルのコピー、ビルド、実行を行うことができる。
+サンプルを実行しても、PASSEDと表示されるだけなので何かよくわからないが。</p>
+                <p>また、buildコマンドに test-fpga と指定すると、高位合成の結果をModelSimを使ってシミュレーションするようである。これもPASSEDと表示されるだけなのでよくわからない。</p>
+                <p>とりあえずコード見てみるしかないようである。</p>
+              </div>
+              <div class="section" id="id10">
+                <h2>参考<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+                <dl class="docutils">
+                  <dt>Visual C++ 2010 Expressで64bitコンパイル</dt>
+                  <dd>
+                    <a class="reference external" href="http://d.hatena.ne.jp/torutk/20100927/p1">http://d.hatena.ne.jp/torutk/20100927/p1</a>
+                  </dd>
+                  <dt>Intel High Level Synthesis Compiler Prerequisites</dt>
+                  <dd>
+                    <a class="reference external" href="https://www.altera.co.jp/content/altera-www/global/en_us/index/documentation/ewa1462479481465.html#lpd1467738276041">https://www.altera.co.jp/content/altera-www/global/en_us/index/documentation/ewa1462479481465.html#lpd1467738276041</a>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">Windows10 64bitでQuartus Prime (Lite) 17.1付属のIntel HLS Compilerを試す</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id1">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id2">背景</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id5">必要なもの</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#windows-sdk">Windows SDKのインストール</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id8">環境設定用バッチファイル</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#intel-hls-compiler">Intel HLS Compilerの実行</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id10">参考</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="../fpga.html" title="previous chapter">FPGA関係</a>
+          </p>
+          <h4>Next topic</h4>
+          <p class="topless">
+            <a href="modelsim_ase_uvm_testbench.html" title="next chapter">ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する</a>
+          </p>
+          <div role="note" aria-label="source link">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li>
+                <a href="../_sources/fpga/intel_hls_compiler_windows10.rst.txt" rel="nofollow">Show Source</a>
+              </li>
+            </ul>
+          </div>
+          <div id="searchbox" style="display: none" role="search">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <div>
+                <input type="text" name="q" />
+              </div>
+              <div>
+                <input type="submit" value="Go" />
+              </div>
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer">
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="modelsim_ase_uvm_testbench.html" title="ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する">next</a> |</li>
+        <li class="right">
+          <a href="../fpga.html" title="FPGA関係">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../fpga.html">FPGA関係</a> »</li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2014-2017, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
