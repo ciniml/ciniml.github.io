@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>FPGA+SoC+LinuxでXilinx AXI DMAを試す — ふがふが</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Windows10 64bitでQuartus Prime (Lite) 17.1付属のIntel HLS Compilerを試す" href="intel_hls_compiler_windows10.html" />
+    <link rel="prev" title="FPGA関係" href="../fpga.html" />
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="intel_hls_compiler_windows10.html" title="Windows10 64bitでQuartus Prime (Lite) 17.1付属のIntel HLS Compilerを試す" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="../fpga.html" title="FPGA関係" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../fpga.html" accesskey="U">FPGA関係</a> »</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            <div class="section" id="fpga-soc-linuxxilinx-axi-dma">
+              <h1>FPGA+SoC+LinuxでXilinx AXI DMAを試す<a class="headerlink" href="#fpga-soc-linuxxilinx-axi-dma" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id1">
+                <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+                <p>FPGA+SoC+Linux on PYNQ-Z1でDevice Tree Overlayと`udmabuf`を使ってXilinx AXI DMAを試した。</p>
+              </div>
+              <div class="section" id="id2">
+                <h2>背景<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+                <p>FPGA+SoC+Linux実践勉強会 <a class="footnote-reference" href="#id4" id="id3">[1]</a> に参加して、Device Tree Overlayとudmabufを使ったDMAを試そうとしたが、時間が足りず`UIO`経由でGPIOを操作してLEDを光らせることしかできなかった。</p>
+                <p>もともとDevice Tree Overlayと合わせてDMAを簡単に試すことが目的だったので、残りのDMAの部分を試してみた。</p>
+                <table class="docutils footnote" frame="void" id="id4" rules="none">
+                  <colgroup>
+                    <col class="label" />
+                    <col />
+                  </colgroup>
+                  <tbody valign="top">
+                    <tr>
+                      <td class="label">
+                        <a class="fn-backref" href="#id3">[1]</a>
+                      </td>
+                      <td>
+                        <a class="reference external" href="https://fpgax.connpass.com/event/71364/?utm_campaign=event_message_to_selected_participant&amp;utm_source=notifications&amp;utm_medium=email&amp;utm_content=title_link">https://fpgax.connpass.com/event/71364/?utm_campaign=event_message_to_selected_participant&amp;utm_source=notifications&amp;utm_medium=email&amp;utm_content=title_link</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="section" id="id5">
+                <h2>実験に用いたデザイン<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+                <p>下記のPYNQ-Z1 (XC7Z020-CLG400-1)用デザインを作成した。エクスポートしたものは <a class="reference external" href="https://gist.github.com/ciniml/8175719409d7f237654427425eaa4a99">ここ</a> にある
+また、プロジェクトのアーカイブを <a class="reference external" href="https://1drv.ms/u/s!AvgeuJrD0ORom6YVxgYtwghP90gCbA">OneDrive</a> に置いておく。</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design.PNG">
+                  <img alt="../_images/dma_test_design.PNG" src="../images/dma_test_design.PNG" style="width: 1086.0px; height: 247.75px;" />
+                </a>
+                <p>PSのACPポートにAXI DMAを接続し、DMAのM_AXIS_MM2SをS_AXIS_S2MMに繋いで、DMAでPSのメモリから読みだした内容をDMAでPSのメモリに書き込むという構成となっている。
+また、DMAの転送完了時の割り込みを受け取るために、AXI DMAのs2mm_intoutをPSのIRQ_F2Pに接続している。</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design_ps_pl_configuration.PNG">
+                  <img alt="../_images/dma_test_design_ps_pl_configuration.PNG" src="../images/dma_test_design_ps_pl_configuration.PNG" style="width: 525.0px; height: 398.0px;" />
+                </a>
+                <p>PSのACPポートでは、S AXI ACP Interfaceを有効にしている。また、AXI DMAはDirect Registerモードの場合、AxUSERの値を制御できないので、Tie off AxUSERを有効にしている。</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design_interrupts.PNG">
+                  <img alt="../_images/dma_test_design_interrupts.PNG" src="../images/dma_test_design_interrupts.PNG" style="width: 637.5px; height: 398.0px;" />
+                </a>
+                <p>PSの割り込みの設定では、IRQ_F2P[15:0]を有効にしている。これによりコア共有の割り込み(Shared Peripheral Interrupt : SPI)をPLから入力することができる。</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design_axi_dma.PNG">
+                  <img alt="../_images/dma_test_design_axi_dma.PNG" src="../images/dma_test_design_axi_dma.PNG" style="width: 653.0px; height: 470.0px;" />
+                </a>
+                <p>AXI DMAは上記の通り、Scatter Gather Engineを無効にし、Memory Map Data WidthやStream Data Widthを64bitに設定する。</p>
+                <p>DMAで一度に長い転送を行いたい場合は、 <cite>Width of Buffer Length Register</cite> を増やしておく。デフォルトでは14ビットなので、2^14 - (DataWidthBytes) = 16384 - 8 = 16,376バイトまでしか転送できない。
+最大で、8[MiB] - 8 バイトまで設定できる。</p>
+              </div>
+              <div class="section" id="id7">
+                <h2>実験に用いたコード<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+                <p>実験には、<a class="reference external" href="https://github.com/ikwzm/FPGA-SoC-Linux/">FPGA-SoC-Linuxのリポジトリ</a> にある`uio_irq_sample &lt;<a class="reference external" href="https://github.com/ikwzm/FPGA-SoC-Linux/tree/master/target/zynq-pynqz1/examples/uio_irq_sample">https://github.com/ikwzm/FPGA-SoC-Linux/tree/master/target/zynq-pynqz1/examples/uio_irq_sample</a>&gt;`_ をAXI DMA用に変更したコードを用いた。</p>
+                <p>uio_irq_sampleを適当にコピーし、 <em>sample1.c</em> と <em>sample_common.h</em> を変更した。</p>
+                <p>元のuio_irq_sampleで使用しているデザイン内のDMAコアと異なり、Xilinx AXI DMAのDirect Registerモードでは、転送バイト数を指定する <code class="docutils literal"><span class="pre">LENGTH</span></code> レジスタに書き込みを行うと転送を開始する。
+このため、<code class="docutils literal"><span class="pre">pump_setup</span></code> 関数から転送バイト数の引数を除き、<code class="docutils literal"><span class="pre">pump_start</span></code> 関数に転送バイト数の引数を追加している。</p>
+                <p>sample1.cの方は、上記の変更に合わせて、呼び出し時の引数を変更している。</p>
+                <p>sample_common.hの変更部分の抜粋</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+                      <span>
+                      </span>
+                      <span class="c1">#define  PUMP_OUTLET_DMACR      (0x0030)</span>
+<span class="c1">#define  PUMP_OUTLET_DMASR      (0x0034)</span>
+<span class="c1">#define  PUMP_OUTLET_DA         (0x0048)</span>
+<span class="c1">#define  PUMP_OUTLET_DA_MSB     (0x004c)</span>
+<span class="c1">#define  PUMP_OUTLET_LENGTH     (0x0058)</span>
+
+<span class="c1">#define  PUMP_INTAKE_DMACR      (0x0000)</span>
+<span class="c1">#define  PUMP_INTAKE_DMASR      (0x0004)</span>
+<span class="c1">#define  PUMP_INTAKE_SA         (0x0018)</span>
+<span class="c1">#define  PUMP_INTAKE_SA_MSB     (0x001c)</span>
+<span class="c1">#define  PUMP_INTAKE_LENGTH     (0x0028)</span>
+
+<span class="c1">#define  PUMP_CR_RS     (1u&lt;&lt;0)</span>
+<span class="c1">#define  PUMP_CR_RESET  (1u&lt;&lt;2)</span>
+<span class="c1">#define  PUMP_CR_IOC_IrqEn  (1u&lt;&lt;12)</span>
+<span class="c1">#define  PUMP_CR_ERR_IrqEn  (1u&lt;&lt;14)</span>
+
+<span class="c1">#define  PUMP_SR_HALTED (1u&lt;&lt;0)</span>
+<span class="c1">#define  PUMP_SR_IDLE   (1u&lt;&lt;1)</span>
+<span class="c1">#define  PUMP_SR_IOC_Irq    (1u&lt;&lt;12)</span>
+<span class="c1">#define  PUMP_SR_ERR_Irq    (1u&lt;&lt;14)</span>
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_intake_reset</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_DMACR</span><span class="p">,</span> <span class="n">PUMP_CR_RESET</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span> <span class="n">regs_read32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_DMACR</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">PUMP_CR_RESET</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_outlet_reset</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_DMACR</span><span class="p">,</span> <span class="n">PUMP_CR_RESET</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span> <span class="n">regs_read32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_DMACR</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">PUMP_CR_RESET</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_intake_setup</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">long</span> <span class="n">buf_addr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_DMACR</span> <span class="p">,</span> <span class="n">PUMP_CR_RS</span> <span class="o">|</span> <span class="n">PUMP_CR_IOC_IrqEn</span> <span class="o">|</span> <span class="n">PUMP_CR_ERR_IrqEn</span><span class="p">);</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_DMASR</span> <span class="p">,</span> <span class="n">PUMP_SR_IOC_Irq</span> <span class="o">|</span> <span class="n">PUMP_SR_ERR_Irq</span><span class="p">);</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_SA</span>    <span class="p">,</span> <span class="n">buf_addr</span><span class="p">);</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_SA_MSB</span><span class="p">,</span> <span class="n">buf_addr</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_outlet_setup</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">long</span> <span class="n">buf_addr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_DMACR</span> <span class="p">,</span> <span class="n">PUMP_CR_RS</span> <span class="o">|</span> <span class="n">PUMP_CR_IOC_IrqEn</span> <span class="o">|</span> <span class="n">PUMP_CR_ERR_IrqEn</span><span class="p">);</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_DMASR</span> <span class="p">,</span> <span class="n">PUMP_SR_IOC_Irq</span> <span class="o">|</span> <span class="n">PUMP_SR_ERR_Irq</span><span class="p">);</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_DA</span>    <span class="p">,</span> <span class="n">buf_addr</span><span class="p">);</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_DA_MSB</span><span class="p">,</span> <span class="n">buf_addr</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_intake_start</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">,</span> <span class="n">unsigned</span> <span class="nb">int</span> <span class="n">xfer_size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_LENGTH</span><span class="p">,</span> <span class="n">xfer_size</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_outlet_start</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">,</span> <span class="n">unsigned</span> <span class="nb">int</span> <span class="n">xfer_size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_LENGTH</span><span class="p">,</span> <span class="n">xfer_size</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_intake_clear_status</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_INTAKE_DMASR</span><span class="p">,</span> <span class="n">PUMP_SR_IOC_Irq</span> <span class="o">|</span> <span class="n">PUMP_SR_ERR_Irq</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_outlet_clear_status</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">regs_write32</span><span class="p">(</span><span class="n">regs</span> <span class="o">+</span> <span class="n">PUMP_OUTLET_DMASR</span><span class="p">,</span> <span class="n">PUMP_SR_IOC_Irq</span> <span class="o">|</span> <span class="n">PUMP_SR_ERR_Irq</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_reset</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">pump_intake_reset</span><span class="p">(</span><span class="n">regs</span><span class="p">);</span>
+    <span class="n">pump_outlet_reset</span><span class="p">(</span><span class="n">regs</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_setup</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">long</span> <span class="n">src_addr</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">long</span> <span class="n">dst_addr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">pump_outlet_setup</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="n">dst_addr</span><span class="p">);</span>
+    <span class="n">pump_intake_setup</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="n">src_addr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">pump_start</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">regs</span><span class="p">,</span> <span class="n">unsigned</span> <span class="nb">int</span> <span class="n">xfer_size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">pump_outlet_start</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="n">xfer_size</span><span class="p">);</span>
+    <span class="n">pump_intake_start</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="n">xfer_size</span><span class="p">);</span>
+<span class="p">}</span>
+</pre>
+                  </div>
+                </div>
+                <p>sample1.cの変更部分の抜粋</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+                      <span>
+                      </span>
+                      <span class="o">//</span>
+                      <span class="n">check_size</span> <span class="o">=</span> <span class="n">outlet_buf</span><span class="o">.</span><span class="n">buf_size</span><span class="p">;</span>
+<span class="n">check_size</span> <span class="o">=</span> <span class="mh">0x100</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s2">"Resetting DMA core... </span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+    <span class="o">//</span> <span class="n">Reset</span> <span class="n">DMA</span> <span class="n">core</span><span class="o">.</span>
+    <span class="n">pump_reset</span><span class="p">(</span><span class="n">regs</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">check_count</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">error_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">check_size</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">((</span><span class="n">unsigned</span> <span class="n">char</span><span class="o">*</span><span class="p">)(</span><span class="n">intake_buf</span><span class="o">.</span><span class="n">buf</span><span class="p">))[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">);</span>
+            <span class="p">((</span><span class="n">unsigned</span> <span class="n">char</span><span class="o">*</span><span class="p">)(</span><span class="n">outlet_buf</span><span class="o">.</span><span class="n">buf</span><span class="p">))[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start_time</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s2">"Setting up DMA... </span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+        <span class="n">pump_setup</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="n">intake_buf</span><span class="o">.</span><span class="n">phys_addr</span><span class="p">,</span> <span class="n">outlet_buf</span><span class="o">.</span><span class="n">phys_addr</span><span class="p">);</span>
+        <span class="n">uio_irq_on</span><span class="p">(</span><span class="n">uio_fd</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s2">"Starting DMA... </span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+        <span class="n">pump_start</span><span class="p">(</span><span class="n">regs</span><span class="p">,</span> <span class="n">check_size</span><span class="p">);</span>
+</pre>
+                  </div>
+                </div>
+                <p>元のコードではcheck_sizeをudmabufで確保したバッファの長さとしているが、前述のAXI DMAの転送可能な長さより大きいので、今回は256バイトに制限している。</p>
+                <p>あと、細かい点であるが、ビットストリームを更新しても <cite>rake install</cite> で <cite>/lib/firmware</cite> 以下のビットストリームが更新されなかったので、 <cite>Rakefile</cite> に依存関係を指定した。</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+                      <span>
+                      </span>
+                      <span class="n">file</span> <span class="s2">"/lib/firmware/#</span><span class="si">{FPGA_BITSTREAM_FILE}</span><span class="s2">"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"#</span><span class="si">{FPGA_BITSTREAM_FILE}</span><span class="s2">"</span><span class="p">]</span> <span class="n">do</span>
+<span class="n">sh</span> <span class="s2">"cp #</span><span class="si">{FPGA_BITSTREAM_FILE}</span><span class="s2"> /lib/firmware/#</span><span class="si">{FPGA_BITSTREAM_FILE}</span><span class="s2">"</span>
+<span class="n">end</span>
+</pre>
+                  </div>
+                </div>
+              </div>
+              <div class="section" id="id8">
+                <h2>実行結果<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+                <p>以下に実行時の出力を示す</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+                      <span>
+                      </span>fpga@debian-fpga:~/examples/uio_irq_sample_modified$ ./sample1
+Resetting DMA core...
+Setting up DMA...
+Starting DMA...
+time = 0.000134 sec
+check buffer error addr=00000001, i=01, o=00
+check buffer error addr=00000002, i=02, o=00
+check buffer error addr=00000003, i=03, o=00
+check buffer error addr=00000004, i=04, o=00
+check buffer error addr=00000005, i=05, o=00
+check buffer error addr=00000006, i=06, o=00
+check buffer error addr=00000007, i=07, o=00
+check buffer error addr=00000008, i=08, o=00
+check buffer error addr=00000009, i=09, o=00
+check buffer error addr=0000000a, i=0A, o=00
+check buffer error addr=0000000b, i=0B, o=00
+check buffer error addr=0000000c, i=0C, o=00
+check buffer error addr=0000000d, i=0D, o=00
+check buffer error addr=0000000e, i=0E, o=00
+check buffer error addr=0000000f, i=0F, o=00
+check buffer error addr=00000010, i=10, o=00
+check buffer error
+</pre>
+                  </div>
+                </div>
+                <p>なぜか転送結果が一致していないようである。デザイン中のPSのACPポートとインターコネクトの接続部分にILAを入れてあるので波形を観測した結果は次の通りである</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design_ila.PNG">
+                  <img alt="../_images/dma_test_design_ila.PNG" src="../images/dma_test_design_ila.PNG" style="width: 1325.5px; height: 379.0px;" />
+                </a>
+                <p>一番下の <cite>axi_dma_0_s2mm_introut</cite> が、メモリへのDMA転送完了時の割り込み信号である。ぱっと見た感じでは、書き込みのトランザクション完了後に割り込み信号が起きており、正常に動作しているように見える。</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design_ila_zoom.PNG">
+                  <img alt="../_images/dma_test_design_ila_zoom.PNG" src="../images/dma_test_design_ila_zoom.PNG" style="width: 1332.5px; height: 367.0px;" />
+                </a>
+                <p>また、最後の書き込みトランザクションの、最後の書き込みデータは 0xfffefdfc_fbfaf9f8 となっており、サンプルプログラムの期待値と一致する。</p>
+                <p>以上より、データ・キャッシュ周りが怪しいので、udmabufのデバイスを開くときに、O_SYNCを指定してキャッシュを無効化して再度実行した。</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+                      <span>
+                      </span>fpga@debian-fpga:~/examples/uio_irq_sample_modified$ ./sample1
+Resetting DMA core...
+Setting up DMA...
+Starting DMA...
+time = 0.000111 sec
+Setting up DMA...
+Starting DMA...
+time = 0.000166 sec
+</pre>
+                  </div>
+                </div>
+                <p>今度は成功したようである。</p>
+                <p>また、処理中の信号波形は以下のようになった。</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design_ila_wo_cache.PNG">
+                  <img alt="../_images/dma_test_design_ila_wo_cache.PNG" src="../images/dma_test_design_ila_wo_cache.PNG" style="width: 846.5px; height: 402.5px;" />
+                </a>
+                <p>転送時の波形の変化と、キャッシュの効果の関係については不明である。</p>
+                <p>念のため、合成結果でACPポートのAxUSERの接続について確認したが、SAXIACPARUSER、SAXIACPAWUSERともに1に固定となっている。
+また、O_SYNCを指定する前のAWCACHEの値も、以下の通り0x03となっている。</p>
+                <a class="reference internal image-reference" href="../images/dma_test_design_ila_awcache.PNG">
+                  <img alt="../_images/dma_test_design_ila_awcache.PNG" src="../images/dma_test_design_ila_awcache.PNG" style="width: 1225.0px; height: 537.5px;" />
+                </a>
+              </div>
+              <div class="section" id="id9">
+                <h2>まとめ<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+                <p>udmabufを使ったXilinx AXI DMAのDirect RegisterモードでのDMA転送はかなり簡単にできることが分かった。</p>
+                <p>ただし、ACPポートを使ったキャッシュ周りの管理は、もう少し調査が必要である。</p>
+              </div>
+              <div class="section" id="id10">
+                <h2>参考<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+                <dl class="docutils">
+                  <dt>ikwzm/FPGA-SoC-Linux</dt>
+                  <dd>
+                    <a class="reference external" href="https://github.com/ikwzm/FPGA-SoC-Linux/">https://github.com/ikwzm/FPGA-SoC-Linux/</a>
+                  </dd>
+                  <dt>FPGA+SoC+Linux+Device Tree Overlay+FPGA Manager(PYNQ-Z1対応)</dt>
+                  <dd>
+                    <a class="reference external" href="https://qiita.com/ikwzm/items/d6fdaa859906252fd8b0">https://qiita.com/ikwzm/items/d6fdaa859906252fd8b0</a>
+                  </dd>
+                  <dt>Linux Kernel 4.10でのFPGAサポート事情</dt>
+                  <dd>
+                    <a class="reference external" href="https://qiita.com/ikwzm/items/2ff7d5429da8ace7c0bd">https://qiita.com/ikwzm/items/2ff7d5429da8ace7c0bd</a>
+                  </dd>
+                  <dt>Linux の FPGA Manager で Xilinx のビットストリームファイルを扱う方法</dt>
+                  <dd>
+                    <p class="first">
+                      <a class="reference external" href="https://qiita.com/ikwzm/items/1bb63be0b86a1e0e56fa">https://qiita.com/ikwzm/items/1bb63be0b86a1e0e56fa</a>
+                    </p>
+                    <p class="last">FPGA Managerにビットストリームを渡す場合は、ヘッダを除去してエンディアン変換しないといけないらしい。</p>
+                  </dd>
+                  <dt>Zynq-7000 All Programmable SoC Technical Reference Manual (UG585)</dt>
+                  <dd>
+                    <p class="first">
+                      <a class="reference external" href="https://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf">https://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf</a>
+                    </p>
+                    <p class="last">pp.103-106にACPポートのAxCACHE、AxUSERの意味の説明が書いてある。</p>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">FPGA+SoC+LinuxでXilinx AXI DMAを試す</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id1">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id2">背景</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id5">実験に用いたデザイン</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id7">実験に用いたコード</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id8">実行結果</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id9">まとめ</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id10">参考</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="../fpga.html" title="previous chapter">FPGA関係</a>
+          </p>
+          <h4>Next topic</h4>
+          <p class="topless">
+            <a href="intel_hls_compiler_windows10.html" title="next chapter">Windows10 64bitでQuartus Prime (Lite) 17.1付属のIntel HLS Compilerを試す</a>
+          </p>
+          <div role="note" aria-label="source link">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li>
+                <a href="../_sources/fpga/fpga_soc_linux_xilinx_dma.rst.txt" rel="nofollow">Show Source</a>
+              </li>
+            </ul>
+          </div>
+          <div id="searchbox" style="display: none" role="search">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <div>
+                <input type="text" name="q" />
+              </div>
+              <div>
+                <input type="submit" value="Go" />
+              </div>
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer">
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="intel_hls_compiler_windows10.html" title="Windows10 64bitでQuartus Prime (Lite) 17.1付属のIntel HLS Compilerを試す">next</a> |</li>
+        <li class="right">
+          <a href="../fpga.html" title="FPGA関係">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../fpga.html">FPGA関係</a> »</li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2014-2017, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
