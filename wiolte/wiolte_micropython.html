@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Wio LTEでMicroPythonを動かす — ふがふが</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Wio LTE関係" href="../wiolte.html" />
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="../wiolte.html" title="Wio LTE関係" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../wiolte.html" accesskey="U">Wio LTE関係</a> »</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            <div class="section" id="wio-ltemicropython">
+              <h1>Wio LTEでMicroPythonを動かす<a class="headerlink" href="#wio-ltemicropython" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id1">
+                <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+                <p>Seeed StudioのLTE通信モジュール付きボードであるWio LTEで、組み込み向けのPython実装であるMicroPythonを動かしてとりあえずLチカまでしてみた。</p>
+                <p>
+                  <a class="reference external" href="mpy-seeed_wio_lte.zip">ビルド済みイメージ</a>
+                </p>
+              </div>
+              <div class="section" id="wio-lte">
+                <h2>Wio LTE<a class="headerlink" href="#wio-lte" title="Permalink to this headline">¶</a></h2>
+                <p>Wio LTEは、STMicroelectronicsのCortex-M4Fマイコン <em>STM32F405</em> とQuectelのLTE通信モジュール <em>EC21-J</em> を搭載したLTEによる通信を用いるシステムを構築するためのプロトタイプ用ボードである。</p>
+                <p>Seeed Studioが開発・製造しているため、同社のモジュール接続規格である、 <em>Groove</em> に準拠したモジュールを接続することができる。</p>
+                <p>
+                  <a class="reference external" href="http://wiki.seeed.cc/Wio_LTE_Cat.1/">公式の開発環境</a> としては、Arduino IDEおよび、JavaScriptを使ったプロトタイピング環境である <em>Espriuno</em> を <a class="reference external" href="http://www.espruino.com/WioLTE">サポート</a> している。</p>
+                <p>
+                  <a class="reference external" href="https://soracom.jp/products/wio_lte/">SORACOM</a>、<a class="reference external" href="https://www.switch-science.com/catalog/3600/">スイッチサイエンス</a>、<a class="reference external" href="http://akizukidenshi.com/catalog/g/gM-12855/">秋月電子通商</a>　などから入手できる。</p>
+              </div>
+              <div class="section" id="micropython">
+                <h2>MicroPythonのビルド<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h2>
+                <p>WindowsのMSYS2上でビルドを試したが、シンボリックリンクなどいろいろうまくいかないところがあるので、おとなしくWindows10上のWSL上でビルドした。
+もちろん、通常のLinuxでも問題ないはずである。</p>
+                <p>まずは、Linux上で <a class="reference external" href="https://github.com/micropython/micropython">MicroPythonのリポジトリ</a> からソースコードをcloneする。
+また、MicroPython用のライブラリが <a class="reference external" href="https://github.com/micropython/micropython-lib">micropython-libリポジトリ</a> にあるので、こちらもcloneしておく。このとき、clone先の名前はmicropython-libのままになるようにしておく。</p>
+                <p>cloneしたMicroPythonのリポジトリのportsディレクトリ以下に、対応しているプラットフォームごとのソースコードやビルド用のスクリプトが配置されている。
+Wio LTEはSTM32を使用しているので、 <cite>ports/stm32</cite> ディレクトリに移動する。</p>
+                <p>
+                  <cite>ports/stm32/board</cite> ディレクトリ以下には、対象のボードごとの設定が入っている。標準ではWio LTE用の設定がないため、を <cite>SEEED_WIO_LTE</cite> 等の名前で一番構成の近い <em>NETDUINO_PLUS_2</em> のコピーを作成する。。</p>
+                <p>コピーした SEEED_WIO_LTE ディレクトリの下には、以下のファイルがある。</p>
+                <dl class="docutils">
+                  <dt>board_init.c</dt>
+                  <dd>ボード固有の初期化コードを含むファイル。今回は使用しないので削除する。</dd>
+                  <dt>mpconfigboard.h</dt>
+                  <dd>UART, SPI, I2CといったMicroPythonがサポートしているペリフェラルの割り当てといったボードの機能を定義するファイル。
+Wio LTEに対応するように変更する必要がある。</dd>
+                  <dt>mpconfigboard.mk</dt>
+                  <dd>ビルドの設定を定義するファイル。Wio LTEは NETDUINO Plus 2と同じ設定を使うので、変更する必要はない。</dd>
+                  <dt>pins.csv</dt>
+                  <dd>GPIOのピンの名称を設定するファイル。必要に応じて変更する。</dd>
+                  <dt>stm32f4xxx_hal_conf.h</dt>
+                  <dd>STM32のHALライブラリを設定するためのファイル。STM32 Cube MXを使って生成したファイルをベースに、MicroPythonで使えるように手を加える必要がある。</dd>
+                </dl>
+                <p>上記のファイルを <a class="reference external" href="SEEED_WIO_LTE.zip">Wio LTE用に変更したもの</a> を置いておくので、boardsディレクトリ以下に展開する。</p>
+                <p>その後、 <cite>ports/stm32</cite> ディレクトリで</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+$ make BOARD=SEEED_WIO_LTE
+</pre>
+                  </div>
+                </div>
+                <p>とすると、 <cite>ports/stm32/build-SEEED_WIO_LTE/firmware.dfu</cite> にDFUで書き込むためのイメージが生成される。</p>
+              </div>
+              <div class="section" id="id9">
+                <h2>書き込み<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+                <p>作成したイメージの書き込みには、Arduino IDEを使った場合と同様に dfu-tool を用いる。</p>
+                <p>dfu-toolのビルド済みバイナリが <a class="reference external" href="https://github.com/Seeed-Studio/Seeed_Platform">Seeed Studioにのリポジトリ</a> に用意されているので、これを <a class="reference external" href="https://github.com/Seeed-Studio/Seeed_Platform/raw/master/stm32_dfu_upload_tool_v1.0.0.tar.bz2">ダウンロード</a> する。
+ファイル名は <cite>stm32_dfu_upload_tool_vx.y.z.tar.bz2</cite> である。(x.y.zはバージョン番号)</p>
+                <p>ダウンロードしたファイルを展開すると、<cite>stm32_dfu_upload_toolwin`以下にWindows用のバイナリがあるので、どこか使いやすいところにコピーする。
+以降、`C:devdfu-util</cite> にコピーしたものとして説明する。</p>
+                <p>
+                  <cite>–list</cite> オプションを付けて実行すると、現在接続されているDFU対象デバイスのリストを表示する。</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+<span class="o">&gt;</span> <span class="n">C</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="o">--</span><span class="nb">list</span>
+
+<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="mf">0.8</span>
+
+<span class="n">Copyright</span> <span class="mi">2005</span><span class="o">-</span><span class="mi">2009</span> <span class="n">Weston</span> <span class="n">Schmidt</span><span class="p">,</span> <span class="n">Harald</span> <span class="n">Welte</span> <span class="ow">and</span> <span class="n">OpenMoko</span> <span class="n">Inc</span><span class="o">.</span>
+<span class="n">Copyright</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">2014</span> <span class="n">Tormod</span> <span class="n">Volden</span> <span class="ow">and</span> <span class="n">Stefan</span> <span class="n">Schmidt</span>
+<span class="n">This</span> <span class="n">program</span> <span class="ow">is</span> <span class="n">Free</span> <span class="n">Software</span> <span class="ow">and</span> <span class="n">has</span> <span class="n">ABSOLUTELY</span> <span class="n">NO</span> <span class="n">WARRANTY</span>
+<span class="n">Please</span> <span class="n">report</span> <span class="n">bugs</span> <span class="n">to</span> <span class="n">dfu</span><span class="o">-</span><span class="n">util</span><span class="nd">@lists</span><span class="o">.</span><span class="n">gnumonks</span><span class="o">.</span><span class="n">org</span>
+
+<span class="n">Found</span> <span class="n">DFU</span><span class="p">:</span> <span class="p">[</span><span class="mi">0483</span><span class="p">:</span><span class="n">df11</span><span class="p">]</span> <span class="n">ver</span><span class="o">=</span><span class="mi">2200</span><span class="p">,</span> <span class="n">devnum</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">intf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"@Device Feature/0xFFFF0000/01*004 e"</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="s2">"396036853436"</span>
+<span class="n">Found</span> <span class="n">DFU</span><span class="p">:</span> <span class="p">[</span><span class="mi">0483</span><span class="p">:</span><span class="n">df11</span><span class="p">]</span> <span class="n">ver</span><span class="o">=</span><span class="mi">2200</span><span class="p">,</span> <span class="n">devnum</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">intf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"@OTP Memory /0x1FFF7800/01*512 e,01*016 e"</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="s2">"396036853436"</span>
+<span class="n">Found</span> <span class="n">DFU</span><span class="p">:</span> <span class="p">[</span><span class="mi">0483</span><span class="p">:</span><span class="n">df11</span><span class="p">]</span> <span class="n">ver</span><span class="o">=</span><span class="mi">2200</span><span class="p">,</span> <span class="n">devnum</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">intf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"@Option Bytes  /0x1FFFC000/01*016 e"</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="s2">"396036853436"</span>
+<span class="n">Found</span> <span class="n">DFU</span><span class="p">:</span> <span class="p">[</span><span class="mi">0483</span><span class="p">:</span><span class="n">df11</span><span class="p">]</span> <span class="n">ver</span><span class="o">=</span><span class="mi">2200</span><span class="p">,</span> <span class="n">devnum</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">intf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"@Internal Flash  /0x08000000/04*016Kg,01*064Kg,07*128Kg"</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="s2">"396036853436"</span>
+</pre>
+                  </div>
+                </div>
+                <p>
+                  <cite>micropythonportsstm32build-SEEED_WIO_LTEfirmware.dfu</cite> をビルドしたDFU用イメージのパスとする。</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+<span class="o">&gt;</span> <span class="n">C</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="o">-</span><span class="n">i</span> <span class="mi">0</span> <span class="o">-</span><span class="n">a</span> <span class="mi">0</span> <span class="o">-</span><span class="n">D</span> <span class="n">micropython</span>\<span class="n">ports</span>\<span class="n">stm32</span>\<span class="n">build</span><span class="o">-</span><span class="n">SEEED_WIO_LTE</span>\<span class="n">firmware</span><span class="o">.</span><span class="n">dfu</span>
+<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="mf">0.8</span>
+
+<span class="n">Copyright</span> <span class="mi">2005</span><span class="o">-</span><span class="mi">2009</span> <span class="n">Weston</span> <span class="n">Schmidt</span><span class="p">,</span> <span class="n">Harald</span> <span class="n">Welte</span> <span class="ow">and</span> <span class="n">OpenMoko</span> <span class="n">Inc</span><span class="o">.</span>
+<span class="n">Copyright</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">2014</span> <span class="n">Tormod</span> <span class="n">Volden</span> <span class="ow">and</span> <span class="n">Stefan</span> <span class="n">Schmidt</span>
+<span class="n">This</span> <span class="n">program</span> <span class="ow">is</span> <span class="n">Free</span> <span class="n">Software</span> <span class="ow">and</span> <span class="n">has</span> <span class="n">ABSOLUTELY</span> <span class="n">NO</span> <span class="n">WARRANTY</span>
+<span class="n">Please</span> <span class="n">report</span> <span class="n">bugs</span> <span class="n">to</span> <span class="n">dfu</span><span class="o">-</span><span class="n">util</span><span class="nd">@lists</span><span class="o">.</span><span class="n">gnumonks</span><span class="o">.</span><span class="n">org</span>
+
+<span class="n">Match</span> <span class="n">vendor</span> <span class="n">ID</span> <span class="kn">from</span> <span class="nn">file</span><span class="p">:</span> <span class="mi">0483</span>
+<span class="n">Match</span> <span class="n">product</span> <span class="n">ID</span> <span class="kn">from</span> <span class="nn">file</span><span class="p">:</span> <span class="n">df11</span>
+<span class="n">Opening</span> <span class="n">DFU</span> <span class="n">capable</span> <span class="n">USB</span> <span class="n">device</span><span class="o">...</span>
+<span class="n">ID</span> <span class="mi">0483</span><span class="p">:</span><span class="n">df11</span>
+<span class="n">Run</span><span class="o">-</span><span class="n">time</span> <span class="n">device</span> <span class="n">DFU</span> <span class="n">version</span> <span class="mi">011</span><span class="n">a</span>
+<span class="n">Claiming</span> <span class="n">USB</span> <span class="n">DFU</span> <span class="n">Interface</span><span class="o">...</span>
+<span class="n">Setting</span> <span class="n">Alternate</span> <span class="n">Setting</span> <span class="c1">#0 ...</span>
+<span class="n">Determining</span> <span class="n">device</span> <span class="n">status</span><span class="p">:</span> <span class="n">state</span> <span class="o">=</span> <span class="n">dfuERROR</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">dfuERROR</span><span class="p">,</span> <span class="n">clearing</span> <span class="n">status</span>
+<span class="n">Determining</span> <span class="n">device</span> <span class="n">status</span><span class="p">:</span> <span class="n">state</span> <span class="o">=</span> <span class="n">dfuIDLE</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">dfuIDLE</span><span class="p">,</span> <span class="n">continuing</span>
+<span class="n">DFU</span> <span class="n">mode</span> <span class="n">device</span> <span class="n">DFU</span> <span class="n">version</span> <span class="mi">011</span><span class="n">a</span>
+<span class="n">Device</span> <span class="n">returned</span> <span class="n">transfer</span> <span class="n">size</span> <span class="mi">2048</span>
+<span class="n">DfuSe</span> <span class="n">interface</span> <span class="n">name</span><span class="p">:</span> <span class="s2">"Internal Flash  "</span>
+<span class="n">file</span> <span class="n">contains</span> <span class="mi">1</span> <span class="n">DFU</span> <span class="n">images</span>
+<span class="n">parsing</span> <span class="n">DFU</span> <span class="n">image</span> <span class="mi">1</span>
+<span class="n">image</span> <span class="k">for</span> <span class="n">alternate</span> <span class="n">setting</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span> <span class="n">elements</span><span class="p">,</span> <span class="n">total</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">301816</span><span class="p">)</span>
+<span class="n">parsing</span> <span class="n">element</span> <span class="mi">1</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="mh">0x08000000</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14984</span>
+<span class="n">Download</span>        <span class="p">[</span><span class="o">=========================</span><span class="p">]</span> <span class="mi">100</span><span class="o">%</span>        <span class="mi">14984</span> <span class="nb">bytes</span>
+<span class="n">Download</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">parsing</span> <span class="n">element</span> <span class="mi">2</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="mh">0x08020000</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">286816</span>
+<span class="n">Download</span>        <span class="p">[</span><span class="o">=========================</span><span class="p">]</span> <span class="mi">100</span><span class="o">%</span>       <span class="mi">286816</span> <span class="nb">bytes</span>
+<span class="n">Download</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">done</span> <span class="n">parsing</span> <span class="n">DfuSe</span> <span class="n">file</span>
+</pre>
+                  </div>
+                </div>
+                <p>以上で書き込みは完了なので、ボードのリセットボタンを押してリセットする。</p>
+              </div>
+              <div class="section" id="l">
+                <h2>Lチカ<a class="headerlink" href="#l" title="Permalink to this headline">¶</a></h2>
+                <p>リセットすると、接続しているPCからは、シリアルポートとストレージとして見えるようになる。</p>
+                <p>対応するシリアルポートをTeraTermなどで開き、Enterを入力すると、<cite>&gt;&gt;&gt;</cite> のようにPythonのREPLのプロンプトが表示される。</p>
+                <p>この状態でdir()関数を実行すると、</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="nb">dir</span>
+<span class="p">()</span>
+<span class="go">['machine', '__name__', 'pyb']</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre>
+                  </div>
+                </div>
+                <p>のように、グローバル空間にあるシンボルの名前が表示される。
+また、以下のコードを入力して実行すると、1秒ごとに　<cite>RX_LED (PB13)</cite> ピンに接続されたLEDが点滅するのを10回繰り返す。</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+<span class="n">pin</span> <span class="o">=</span> <span class="n">pyb</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="s1">'RX_LED'</span><span class="p">)</span>
+<span class="n">pin</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">pin</span><span class="o">.</span><span class="n">OUT_PP</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="n">pin</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="ow">not</span> <span class="n">pin</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
+    <span class="n">pyb</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre>
+                  </div>
+                </div>
+              </div>
+              <div class="section" id="lte">
+                <h2>LTE通信<a class="headerlink" href="#lte" title="Permalink to this headline">¶</a></h2>
+                <p>EC-21の制御コードをMicroPythonに移植していないので、LTE通信はまだできない。</p>
+              </div>
+              <div class="section" id="id11">
+                <h2>参考<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+                <dl class="docutils">
+                  <dt>micropython/micropython</dt>
+                  <dd>
+                    <a class="reference external" href="https://github.com/micropython/micropython/">https://github.com/micropython/micropython/</a>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">Wio LTEでMicroPythonを動かす</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id1">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#wio-lte">Wio LTE</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#micropython">MicroPythonのビルド</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id9">書き込み</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#l">Lチカ</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#lte">LTE通信</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id11">参考</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="../wiolte.html" title="previous chapter">Wio LTE関係</a>
+          </p>
+          <div role="note" aria-label="source link">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li>
+                <a href="../_sources/wiolte/wiolte_micropython.rst.txt" rel="nofollow">Show Source</a>
+              </li>
+            </ul>
+          </div>
+          <div id="searchbox" style="display: none" role="search">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <div>
+                <input type="text" name="q" />
+              </div>
+              <div>
+                <input type="submit" value="Go" />
+              </div>
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer">
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="../wiolte.html" title="Wio LTE関係">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../wiolte.html">Wio LTE関係</a> »</li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2014-2017, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
