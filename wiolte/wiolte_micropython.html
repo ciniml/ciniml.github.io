@@ -23,6 +23,7 @@
     </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Wio LTEをMicroPythonで使ってみる本" href="wiolte_micropython_support.html" />
     <link rel="prev" title="Wio LTE関係" href="../wiolte.html" />
   </head>
   <body>
@@ -32,6 +33,8 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index" accesskey="I">index</a>
         </li>
+        <li class="right">
+          <a href="wiolte_micropython_support.html" title="Wio LTEをMicroPythonで使ってみる本" accesskey="N">next</a> |</li>
         <li class="right">
           <a href="../wiolte.html" title="Wio LTE関係" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
@@ -91,7 +94,8 @@ Wio LTEに対応するように変更する必要がある。</dd>
                 <div class="highlight-default">
                   <div class="highlight">
                     <pre>
-$ make BOARD=SEEED_WIO_LTE
+                      <span>
+                      </span>$ make BOARD=SEEED_WIO_LTE
 </pre>
                   </div>
                 </div>
@@ -109,7 +113,9 @@ $ make BOARD=SEEED_WIO_LTE
                 <div class="highlight-default">
                   <div class="highlight">
                     <pre>
-<span class="o">&gt;</span> <span class="n">C</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="o">--</span><span class="nb">list</span>
+                      <span>
+                      </span>
+                      <span class="o">&gt;</span> <span class="n">C</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="o">--</span><span class="nb">list</span>
 
 <span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="mf">0.8</span>
 
@@ -130,7 +136,9 @@ $ make BOARD=SEEED_WIO_LTE
                 <div class="highlight-default">
                   <div class="highlight">
                     <pre>
-<span class="o">&gt;</span> <span class="n">C</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="o">-</span><span class="n">i</span> <span class="mi">0</span> <span class="o">-</span><span class="n">a</span> <span class="mi">0</span> <span class="o">-</span><span class="n">D</span> <span class="n">micropython</span>\<span class="n">ports</span>\<span class="n">stm32</span>\<span class="n">build</span><span class="o">-</span><span class="n">SEEED_WIO_LTE</span>\<span class="n">firmware</span><span class="o">.</span><span class="n">dfu</span>
+                      <span>
+                      </span>
+                      <span class="o">&gt;</span> <span class="n">C</span><span class="p">:</span>\<span class="n">dev</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span>\<span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="o">-</span><span class="n">i</span> <span class="mi">0</span> <span class="o">-</span><span class="n">a</span> <span class="mi">0</span> <span class="o">-</span><span class="n">D</span> <span class="n">micropython</span>\<span class="n">ports</span>\<span class="n">stm32</span>\<span class="n">build</span><span class="o">-</span><span class="n">SEEED_WIO_LTE</span>\<span class="n">firmware</span><span class="o">.</span><span class="n">dfu</span>
 <span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="mf">0.8</span>
 
 <span class="n">Copyright</span> <span class="mi">2005</span><span class="o">-</span><span class="mi">2009</span> <span class="n">Weston</span> <span class="n">Schmidt</span><span class="p">,</span> <span class="n">Harald</span> <span class="n">Welte</span> <span class="ow">and</span> <span class="n">OpenMoko</span> <span class="n">Inc</span><span class="o">.</span>
@@ -175,9 +183,11 @@ $ make BOARD=SEEED_WIO_LTE
                 <div class="highlight-default">
                   <div class="highlight">
                     <pre>
-<span class="gp">&gt;&gt;&gt; </span>
-<span class="nb">dir</span>
-<span class="p">()</span>
+                      <span>
+                      </span>
+                      <span class="gp">&gt;&gt;&gt; </span>
+                      <span class="nb">dir</span>
+                      <span class="p">()</span>
 <span class="go">['machine', '__name__', 'pyb']</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre>
@@ -188,7 +198,9 @@ $ make BOARD=SEEED_WIO_LTE
                 <div class="highlight-default">
                   <div class="highlight">
                     <pre>
-<span class="n">pin</span> <span class="o">=</span> <span class="n">pyb</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="s1">'RX_LED'</span><span class="p">)</span>
+                      <span>
+                      </span>
+                      <span class="n">pin</span> <span class="o">=</span> <span class="n">pyb</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="s1">'RX_LED'</span><span class="p">)</span>
 <span class="n">pin</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">pin</span><span class="o">.</span><span class="n">OUT_PP</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
     <span class="n">pin</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="ow">not</span> <span class="n">pin</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
@@ -251,6 +263,10 @@ $ make BOARD=SEEED_WIO_LTE
           <p class="topless">
             <a href="../wiolte.html" title="previous chapter">Wio LTE関係</a>
           </p>
+          <h4>Next topic</h4>
+          <p class="topless">
+            <a href="wiolte_micropython_support.html" title="next chapter">Wio LTEをMicroPythonで使ってみる本</a>
+          </p>
           <div role="note" aria-label="source link">
             <h3>This Page</h3>
             <ul class="this-page-menu">
@@ -284,6 +300,8 @@ $ make BOARD=SEEED_WIO_LTE
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index">index</a>
         </li>
+        <li class="right">
+          <a href="wiolte_micropython_support.html" title="Wio LTEをMicroPythonで使ってみる本">next</a> |</li>
         <li class="right">
           <a href="../wiolte.html" title="Wio LTE関係">previous</a> |</li>
         <li class="nav-item nav-item-0">

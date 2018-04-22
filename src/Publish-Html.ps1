@@ -1,5 +1,6 @@
 $scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $targetDir = (Get-Item -Path "$scriptDir/build/html").FullName
+$sourceDir = (Get-Item -Path "$scriptDir/source").FullName
 $destinationDir = "$scriptDir/.."
 
 $cssDir = "$destinationDir/css"
@@ -59,6 +60,12 @@ foreach( $file in $htmlFiles )
     }
     Replace-Images $xml.html
     $xml.Save("$destinationDir/$relativePath")
+}
+$zipFiles = Get-ChildItem -Path $sourceDir -Filter *.zip -Recurse
+foreach( $file in $zipFiles )
+{
+    $relativePath = $file.FullName.Replace($sourceDir, ".")
+    Copy-Item -Path $file.FullName -Destination "$destinationDir/$relativePath" -Force
 }
 $stylesheets = Get-ChildItem -Path "$targetDir/_static" -Filter *.css
 $stylesheets | Copy-Item -Destination $cssDir
