@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SORACOM Technology Camp 2018 参加レポート — ふがふが</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js">
+    </script>
+    <script type="text/javascript" src="../_static/underscore.js">
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+    </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="技術書典4出展" href="techbookfes4.html" />
+    <link rel="prev" title="Wio LTE関係" href="../wiolte.html" />
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index" accesskey="I">index</a>
+        </li>
+        <li class="right">
+          <a href="techbookfes4.html" title="技術書典4出展" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="../wiolte.html" title="Wio LTE関係" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../wiolte.html" accesskey="U">Wio LTE関係</a> »</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            <div class="section" id="soracom-technology-camp-2018">
+              <h1>SORACOM Technology Camp 2018 参加レポート<a class="headerlink" href="#soracom-technology-camp-2018" title="Permalink to this headline">¶</a></h1>
+              <div class="section" id="id1">
+                <h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+                <p>2018年4月26日に大崎ブライトコアホールで開催された　<a class="reference external" href="https://technology-camp2018.soracom.jp/">SORACOM Technology Camp 2018</a> に参加したので、感想などをここに書く。</p>
+              </div>
+              <div class="section" id="id3">
+                <h2>受付<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+                <p>会場には12:40ごろに着いた。とりあえず受付を済ませたあと、受付周辺に展示されていた、SORACOMを使ったデモの説明を聞いていた。</p>
+                <p>その中で気になったのが、Wio LTE専用ケースの <strong>PUSH for Wio</strong> だった。</p>
+                <a class="reference internal image-reference" href="../images/PUSH_for_Wio.jpg">
+                  <img alt="../_images/PUSH_for_Wio.jpg" src="../images/PUSH_for_Wio.jpg" style="width: 770.25px; height: 450.75px;" />
+                </a>
+                <p>PUSH for WioはLTEモジュール付きマイコンボード Wio LTE 専用のプラスチック・ケースで、通常であればDMM Makeから3Dプリンタの出力を依頼して入手することができる。(<a class="reference external" href="https://make.dmm.com/item/904124/">リンク</a>)
+この PUSH for Wio が会場限定で3,000円で購入できるとのことだった。(通常は6,000くらいかかる)
+Wio LTE用のケースを自分で設計して3Dプリンタで出力しようと思っていたところだったので、一旦はスルーしたものの、会場に荷物を置いてから購入しに受付に戻った。</p>
+                <p>Wio LTEを使っている人の共通の課題として、ケースをどうするかということがあるようで、最終的に会場での限定数10個はすべて売れたとのことである。</p>
+              </div>
+              <div class="section" id="id5">
+                <h2>セッション1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+                <p>初めの枠はトラックA <strong>ここで一句: SORACOMの全サービスのご紹介</strong> を聴講した。</p>
+                <p>このセッションでは、タイトルの通り、SORACOMの全サービスの網羅的な説明を聞くことができた。
+私自身が使ったことがあるサービスは、SORACOM Air (SIM)、SORACOM Beam、SORACOM Harvestだけだったので、そのほかのサービスの概要について聞けたのは良かった。</p>
+                <p>その中で、<strong>SORACOM Inventory</strong> というサービスが気になった。
+SORACOM Inventoryはデバイスの管理を行うためのサービスで、SORACOM Airでつながっているデバイスの監視ができる。
+デバイスの監視をするには、デバイス側が OMA LwM2Mという、デバイス管理用のプロトコルを実装していれば良いようである。
+ただし、このLwM2MはUDP用のTLSであるDTLS上のプロトコルであるため、デバイス側でもDTLSを実装しなければならない。</p>
+                <p>プロトコル変換によりデバイス側でのTLSの処理を不要にできるSORACOM Beamがあるので、SORACOM Inventoryも将来的にデバイス側のDTLS処理が不要となると良いと感じた。</p>
+                <p>SORACOM Inventory自体はついこの間まではLimited Preview (クローズドβ)だったのが、Public Betaとなり、一般ユーザも使用可能になったので、そのうち試してみたいと思う。</p>
+              </div>
+              <div class="section" id="id6">
+                <h2>セッション2<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+                <p>2番目の枠はトラックB <strong>通信モジュール内蔵デバイス制作のための心構え</strong> を聴講した。</p>
+                <p>ここでは、SORACOMがリファレンス・デバイスとしてWio LTEやLoRaWANシールド、Sigfoxのドライコンタクトコンバーターを販売している理由についての説明があった。</p>
+                <p>ハードウェアを作るのには時間がかかる(半年くらい)ので、まずはリファレンス・デバイスを使ってPoCを作成し、その後、量産へすすむという話が合った。</p>
+                <p>また、Seeedの坪井さんからは、Seeedのサービスや、試作と量産に対する心がまえについての話が合った。</p>
+                <p>例えば、試作をするときは量産を見越して、</p>
+                <ul class="simple">
+                  <li>
+                    <dl class="first docutils">
+                      <dt>そのまま量産に使えるような部品を使って試作する</dt>
+                      <dd>
+                        <ul class="first last">
+                          <li>性能は良いが高価であったり入手性に難があって量産に使えないものなどは使わない。</li>
+                          <li>バッテリ駆動なら消費電力についてきちんと考えておく</li>
+                        </ul>
+                      </dd>
+                    </dl>
+                  </li>
+                </ul>
+                <p>といったことに留意し、再現性のある試作品を作ることが重要とのことだった。</p>
+                <p>また、SeeedでのODMサービスの事例紹介などがあった。実際の事例として、RF Explorerの例が紹介された。
+RF Explorerは海外のソフトウェア・エンジニアの方が試作したものを、SeeedのODMサービスで設計、製造、販売までを行っているそうである。</p>
+                <p>セッション終了後、EC21-Jと対応するアンテナを使ったボードを自作した場合、工事設計認証はどうなるのかについて聞きに行こうと思っていたが、次のセッションが始まりそうだったのであきらめた。</p>
+              </div>
+              <div class="section" id="id7">
+                <h2>セッション3<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+                <p>3番目の枠はトラックB <strong>SORACOMで実現するデバイス管理</strong> を聴講した。</p>
+                <p>このセッションの内容は、APIを使ったSORACOM Airなどのデバイスを管理する方法についての説明と、前述のSORACOM Inventoryについての説明であった。</p>
+              </div>
+              <div class="section" id="id8">
+                <h2>セッション4<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+                <p>4番目の枠はトラックA <strong>明日からできるLPWA開発の基礎</strong> を聴講した。</p>
+                <p>実はLoRaWANシールドは早々に買って積んでいるのだが、そもそもLPWAについてよくわかっていない。</p>
+                <p>だれが基地局を設置するのかが、SigfoxとLoRaWANの大きなちがいとのこと。Sigfoxは専門の業者が設置するのに対し、LoRaWANはどちらも選べる。
+このため、LoRaWANは1つの工場といった、数kmの範囲の特定領域に対して使うといった使い分けをする。</p>
+                <p>また、LoRaWANやSigfoxのペイロード長さは11バイトと非常に短いが、これは暗号化を行っているためである。
+そのため、LoRaWANやSigfoxの性質上、対象の基地局以外にも受信されるが、暗号化されているので平文を送信しても内容が漏れることはない。</p>
+              </div>
+              <div class="section" id="soracom-ug-tokyo-10">
+                <h2>SORACOM UG Tokyo #10<a class="headerlink" href="#soracom-ug-tokyo-10" title="Permalink to this headline">¶</a></h2>
+                <p>Technology Campの後は、同じ会場で18:30より <strong>SORACOM UG Tokyo #10</strong> が開催された。</p>
+                <p>とりあえず開場後、飲み物を取って部屋の奥の方に移動した。そこでMicroPythonを入れたWio LTEを動かして部屋の温度などを測定していた。</p>
+                <p>SORACOM 安川さんのIPアドレスに関するLTを聞いているときは、MicroPythonのREPLを使って、その場でSORACOMサービスのIPを引いて確認するなどをしていた。</p>
+                <div class="highlight-default">
+                  <div class="highlight">
+                    <pre>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">wiolte</span><span class="o">.</span><span class="n">get_comm</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">get_ip_address</span><span class="p">(</span><span class="s1">'harvest.soracom.io'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+<span class="go">100.127.111.111</span>
+</pre>
+                  </div>
+                </div>
+                <p>とすると、REPLでSORACOMサービスのエンドポイント(例ではSORACOM Harvest)のIPを引くことができる。</p>
+                <p>ちなみに、HarvestのIPの111.111は草が生い茂っているのを表しているらしい。Harvestなので実り多い感じとのことである。</p>
+                <p>また、近くにいた方や、maxことSORACOMの松下さんに技術書典4のWio LTE+MicroPython本のダウンロード・カードを渡したりしていた。
+MicroPythonに興味を持ってもらえればいいなと思う。</p>
+                <p>LTの中で興味があったのは、やはりWio LTEの消費電力に関するものである。
+消費電力に関するLTは2つあった。</p>
+                <p>1つ目は、EC21とSTM32F405をスリープにしても消費電流があまり下がらず、大きめのバッテリーでも8日間程度しか動かせなかったので、
+Wio LTE自体への電源供給をFETで制御できるようにし、外部のRTCで一定時間で起動するようにして解決したとのことである。</p>
+                <p>2つ目は、モバイル・バッテリの過充電防止機能(消費電流が小さくなったら自動的に電源を切る機能)を用いて、モバイル・バッテリのボタンによる強制電源ON後に自動的にWio LTEへの電源供給を遮断するというものであった。
+モバイル・バッテリのボタンの部分は改造して、別の方法でONにできるようにしているとのことである。</p>
+              </div>
+              <div class="section" id="push-for-wio">
+                <h2>PUSH for Wio<a class="headerlink" href="#push-for-wio" title="Permalink to this headline">¶</a></h2>
+                <p>帰宅後、購入した PUSH for Wioを組み立てた。</p>
+                <p>もともと、GPSトラッカーを作るためのケースなので、固定できるセンサにいくつか制限があるようである。</p>
+                <a class="reference internal image-reference" href="../images/PUSH_for_Wio_sensor_paste.jpg">
+                  <img alt="../_images/PUSH_for_Wio_sensor_paste.jpg" src="../images/PUSH_for_Wio_sensor_paste.jpg" style="width: 448.5px; height: 539.75px;" />
+                </a>
+                <p>プッシュ・ボタンは写真のものではなく、<a class="reference external" href="https://www.switch-science.com/catalog/1246/">こちら</a> のものでなければ使えないようである。</p>
+                <p>センサ固定側は、コネクタ部分と筐体の隙間が狭いため、配線を折り曲げてから固定する必要がある。
+また、2つのセンサを止めようにも、筐体への固定がタッピング・ビスであるため、スペーサなどを付加するのは難しい。</p>
+                <p>今回は、温湿度センサの上に温湿度センサを両面テープを使って固定した。</p>
+                <a class="reference internal image-reference" href="../images/PUSH_for_Wio_sensor.jpg">
+                  <img alt="../_images/PUSH_for_Wio_sensor.jpg" src="../images/PUSH_for_Wio_sensor.jpg" style="width: 492.25px; height: 539.75px;" />
+                </a>
+                <p>LED導光用の樹脂は圧入で固定かと思ったら、割と緩いようで衝撃で外れてしまった。止め方がまちがっているのかもしれない。
+この辺りは改良が必要ではないかと思う。</p>
+                <a class="reference internal image-reference" href="../images/PUSH_for_Wio_LED.jpg">
+                  <img alt="../_images/PUSH_for_Wio_LED.jpg" src="../images/PUSH_for_Wio_LED.jpg" style="width: 117.5px; height: 106.5px;" />
+                </a>
+              </div>
+              <div class="section" id="id10">
+                <h2>感想<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+                <p>今度はUGでMicroPythonのLTをしてみたいと思う。</p>
+                <p>Wio LTE+MicroPythonについて興味がある方は、<a class="reference external" href="http://www.fugafuga.org/wiolte/techbookfes4.html">こちらのページ</a> をどうぞ。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+          <h3>
+            <a href="../index.html">Table Of Contents</a>
+          </h3>
+          <ul>
+            <li>
+              <a class="reference internal" href="#">SORACOM Technology Camp 2018 参加レポート</a>
+              <ul>
+                <li>
+                  <a class="reference internal" href="#id1">概要</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id3">受付</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id5">セッション1</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id6">セッション2</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id7">セッション3</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id8">セッション4</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#soracom-ug-tokyo-10">SORACOM UG Tokyo #10</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#push-for-wio">PUSH for Wio</a>
+                </li>
+                <li>
+                  <a class="reference internal" href="#id10">感想</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Previous topic</h4>
+          <p class="topless">
+            <a href="../wiolte.html" title="previous chapter">Wio LTE関係</a>
+          </p>
+          <h4>Next topic</h4>
+          <p class="topless">
+            <a href="techbookfes4.html" title="next chapter">技術書典4出展</a>
+          </p>
+          <div role="note" aria-label="source link">
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li>
+                <a href="../_sources/wiolte/soracom_tech_camp_2018.rst.txt" rel="nofollow">Show Source</a>
+              </li>
+            </ul>
+          </div>
+          <div id="searchbox" style="display: none" role="search">
+            <h3>Quick search</h3>
+            <form class="search" action="../search.html" method="get">
+              <div>
+                <input type="text" name="q" />
+              </div>
+              <div>
+                <input type="submit" value="Go" />
+              </div>
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer">
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index">index</a>
+        </li>
+        <li class="right">
+          <a href="techbookfes4.html" title="技術書典4出展">next</a> |</li>
+        <li class="right">
+          <a href="../wiolte.html" title="Wio LTE関係">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+          <a href="../index.html">ふがふが</a> »</li>
+        <li class="nav-item nav-item-1">
+          <a href="../wiolte.html">Wio LTE関係</a> »</li>
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2014-2018, Kenta IDA.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-50817404-3">
+    </script>
+    <script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-50817404-3');
+</script>
+  </body>
+</html>
