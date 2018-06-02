@@ -1,19 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>ModelSim Altera Starter EditionでUVM1.2を使ったテストベンチを実行する — ふがふが</title>
     <link rel="stylesheet" href="../css/style.css" type="text/css" />
     <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js">
     </script>
     <script type="text/javascript" src="../_static/jquery.js">
     </script>
@@ -67,7 +60,7 @@
               <div class="section" id="id3">
                 <h2>テストベンチでの記法<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
                 <p>テストベンチのファイルの先頭などで:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -84,7 +77,7 @@ UVMのクラスの使い方とかはあまり理解してないので、適当�
                 <p>QuestaSimでの使い方は出てくるけど、Quartusに付いてくる無償版ModelSimである、ModelSim Altera Starter Editionでの使い方は出てこなかったので、いろいろ試行錯誤した結果使えるようになった。</p>
                 <p>試したModelSim-ASEのバージョンは <cite>10.4b</cite> であるので、他のバージョンではどうなのかは分からない。</p>
                 <p>まず、UVM自体はModelSimにソースコードが付属しているようなので、ModelSimからコンパイルしておく。UVMのソースコードはModelSimのインストール先ディレクトリを <cite>C:/altera/15.1/modelsim_ase</cite> とすると:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -109,7 +102,7 @@ UVMのクラスの使い方とかはあまり理解してないので、適当�
                   </div>
                 </div>
                 <p>に格納されている。このディレクトリは後でよく使うので、:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -120,7 +113,7 @@ UVMのクラスの使い方とかはあまり理解してないので、適当�
                 </div>
                 <p>などとして変数に設定しておくと良い。</p>
                 <p>以下のコマンドでUVMをコンパイルする。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -132,7 +125,7 @@ UVMのクラスの使い方とかはあまり理解してないので、適当�
 また、<cite>-ccflags</cite> オプションでgccに渡す引数を指定することができる。
 ModelSim用にコンパイルするためには、 <cite>QUESTA</cite> マクロを定義しないと行けないようなので、<cite>-DQUESTA</cite> を指定している。</p>
                 <p>次に、UVMのライブラリを追加する。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -141,7 +134,7 @@ ModelSim用にコンパイルするためには、 <cite>QUESTA</cite> マクロ
                   </div>
                 </div>
                 <p>最後に、テストベンチをコンパイルする。テストベンチの名前は <cite>testbench.sv</cite> とする。</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -152,7 +145,7 @@ ModelSim用にコンパイルするためには、 <cite>QUESTA</cite> マクロ
                 <p>これで、必要なモジュールのコンパイルが出来たので、シミュレーションを実行する。
 ここで、シミュレーション実行時にUVMのDPIモジュールを自動的にリンクするようなので、UVMのモジュールが依存しているライブラリをリンクするようにリンカオプションをvsimコマンドの　<cite>-ldflags</cite> オプションで指定する。
 UVMはregexとstdc++に依存しているので、:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -169,7 +162,7 @@ UVMはregexとstdc++に依存しているので、:</p>
 このスクリプトを <cite>source</cite> で読み込むと、 <cite>elab</cite> というコマンドでシミュレーションを開始できるようになる。
 このコマンドは内部で <cite>vsim</cite> を呼び出しているが、その際の引数を <cite>USER_DEFINED_ELAB_OPTIONS</cite> 変数で追加できるので、ここに前述の <cite>-ldflags</cite> を書いておけば良い。</p>
                 <p>実際に以下のようなスクリプトを作成してシミュレーションを行えることを確認した。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -278,16 +271,14 @@ run -all
           </div>
           <div id="searchbox" style="display: none" role="search">
             <h3>Quick search</h3>
-            <form class="search" action="../search.html" method="get">
-              <div>
+            <div class="searchformwrapper">
+              <form class="search" action="../search.html" method="get">
                 <input type="text" name="q" />
-              </div>
-              <div>
                 <input type="submit" value="Go" />
-              </div>
-              <input type="hidden" name="check_keywords" value="yes" />
-              <input type="hidden" name="area" value="default" />
-            </form>
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </div>
           </div>
           <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -313,7 +304,7 @@ run -all
     </div>
     <div class="footer" role="contentinfo">
         © Copyright 2014-2018, Kenta IDA.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-50817404-3">

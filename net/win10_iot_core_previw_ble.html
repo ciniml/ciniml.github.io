@@ -1,19 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Windows 10 IoT Core Preview版でBLEのAdvertisementを受信する — ふがふが</title>
     <link rel="stylesheet" href="../css/style.css" type="text/css" />
     <link rel="stylesheet" href="../css/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js">
     </script>
     <script type="text/javascript" src="../_static/jquery.js">
     </script>
@@ -112,7 +105,7 @@ Windows 10 IoT Coreでも標準ドライバに入れ替えられればBluetooth�
                 <h2>ドライバの入れ替え<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
                 <p>Windows 10 IoT Coreでにはデバイスマネージャが付属していない代わりに devcon.exe というコマンドラインツールが付属している。このコマンドを用いてデバイスドライバの変更を行う。
 まず、現在のデバイスの状況を <em>status</em>　コマンドで確認する。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -127,7 +120,7 @@ Windows 10 IoT Coreでも標準ドライバに入れ替えられればBluetooth�
                 </div>
                 <p>devconの出力より、BCM20702は”28”というエラーコードのエラーが発生していることがわかる。この”28”はドライバが見つからないというエラーである。
 試しに BTH_MC.infを使用するように <em>updateni</em>　コマンドでドライバの更新をしてみる。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -139,7 +132,7 @@ Windows 10 IoT Coreでも標準ドライバに入れ替えられればBluetooth�
                   </div>
                 </div>
                 <p>とりあえずどうなったか確認したところ、:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -154,7 +147,7 @@ Windows 10 IoT Coreでも標準ドライバに入れ替えられればBluetooth�
                 </div>
                 <p>何も変化していないようである。devcon.exeのエラーの詳細は画面に表示されないようなので、何かログなどは出ないのかとググった <a class="footnote-reference" href="#drvinst" id="id6">[1]</a> ところ、 <em>setupapi.dev.log</em> というファイルが出力されるようである。
 中身は以下の通りであり特にエラーとみられるメッセージは出力されていない。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -176,7 +169,7 @@ Windows 10 IoT Coreでも標準ドライバに入れ替えられればBluetooth�
                   </div>
                 </div>
                 <p>他に何か情報はないのかとdevcon.exeのコマンドをいろいろ試したところ、 <em>hwids</em> コマンドでBCM20702のクラスコードが(0xff,0x01,0x01)となっていることがわかった。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -208,7 +201,7 @@ Generic Bluetooth Adapter=                       BthUsb, USBVid_0B05&amp;Pid_171
                 <p>Bluetoothアダプタのクラスコード (0xE0, 0x01, 0x01) を持つデバイスや、一部のMicrosoft製デバイスが対応するようになっている。
 よって、この部分にBCM20702のデバイスIDを追加すればdevconによりインストールできそうである。</p>
                 <p>オリジナルのBTH_MC.infを変更するのはアレなので、BTH_BROADCOMM.infという名前でコピーして対応デバイスの記述を以下の通り置き換えた。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -218,7 +211,7 @@ Generic Bluetooth Adapter=                       BthUsb, USBVid_0B05&amp;Pid_171
                   </div>
                 </div>
                 <p>BCM20702に対してこのinfファイルのドライバパッケージが対応するように指定しdevcon.exeを実行したところ、以下のエラーが発生した。:</p>
-                <div class="highlight-default">
+                <div class="highlight-default notranslate">
                   <div class="highlight">
                     <pre>
                       <span>
@@ -401,16 +394,14 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
           </div>
           <div id="searchbox" style="display: none" role="search">
             <h3>Quick search</h3>
-            <form class="search" action="../search.html" method="get">
-              <div>
+            <div class="searchformwrapper">
+              <form class="search" action="../search.html" method="get">
                 <input type="text" name="q" />
-              </div>
-              <div>
                 <input type="submit" value="Go" />
-              </div>
-              <input type="hidden" name="check_keywords" value="yes" />
-              <input type="hidden" name="area" value="default" />
-            </form>
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </div>
           </div>
           <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -436,7 +427,7 @@ BluetoothLEAdvertisementReceivedEventArgsには、受信したAdvertisementに�
     </div>
     <div class="footer" role="contentinfo">
         © Copyright 2014-2018, Kenta IDA.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.5.
     </div>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-50817404-3">
