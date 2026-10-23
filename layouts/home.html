@@ -1,0 +1,9 @@
+{{ define "main" }}
+<div class="intro">{{ .Content }}</div>
+{{ range .Sections.ByWeight }}
+<section class="section-block">
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{ partial "page-list.html" . }}
+</section>
+{{ end }}
+{{ end }}

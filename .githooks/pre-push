@@ -1,0 +1,29 @@
+#!/bin/sh
+# Refuse to push master when docs/ does not match a fresh build of the
+# commit being pushed (forgot to run scripts/build.sh or to commit docs/).
+set -eu
+
+zero=0000000000000000000000000000000000000000
+status=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+    [ "$remote_ref" = "refs/heads/master" ] || continue
+    [ "$local_sha" != "$zero" ] || continue
+
+    tmp=$(mktemp -d)
+    trap 'rm -rf "$tmp"' EXIT
+    git archive "$local_sha" | tar -x -C "$tmp"
+    if ! hugo --quiet --minify --source "$tmp" --destination "$tmp/.out" >"$tmp/.log" 2>&1; then
+        cat "$tmp/.log" >&2
+        echo "pre-push: hugo build failed." >&2
+        status=1
+        continue
+    fi
+    if ! diff -r -q "$tmp/.out" "$tmp/docs" >"$tmp/.diff" 2>&1; then
+        sed 's|'"$tmp"'/||g' "$tmp/.diff" >&2
+        echo "pre-push: docs/ is out of date. Run scripts/build.sh and commit docs/." >&2
+        status=1
+    fi
+done
+
+exit $status

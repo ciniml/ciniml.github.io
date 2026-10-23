@@ -1,0 +1,18 @@
+baseURL = "https://www.fugafuga.org/"
+languageCode = "ja"
+defaultContentLanguage = "ja"
+title = "ふがふが"
+copyright = "2014-2026 Kenta IDA"
+# Keep the *.html URLs that Sphinx produced (support pages are cited in books).
+uglyURLs = true
+# Built locally and committed; GitHub Pages serves master:/docs.
+publishDir = "docs"
+disableKinds = ["taxonomy", "term", "rss"]
+enableGitInfo = false
+
+[markup.goldmark.renderer]
+unsafe = false
+
+[markup.highlight]
+noClasses = false
+guessSyntax = false

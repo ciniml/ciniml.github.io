@@ -1,5 +1,2 @@
-/src/build
-/_images
-/_sources
-/_static
-.buildinfo
+/resources/
+.hugo_build.lock

@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{ partial "breadcrumb.html" . }}
+<article class="content">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+{{ $pages := sort .CurrentSection.Pages "File.BaseFileName" }}
+{{ $prev := "" }}{{ $next := "" }}
+{{ range $i, $p := $pages }}
+  {{ if eq $p $ }}
+    {{ if gt $i 0 }}{{ $prev = index $pages (sub $i 1) }}{{ end }}
+    {{ if lt (add $i 1) (len $pages) }}{{ $next = index $pages (add $i 1) }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ if or $prev $next }}
+<nav class="pager" aria-label="同じカテゴリの記事">
+  {{ with $prev }}<a class="prev" href="{{ .RelPermalink }}"><small>前の記事</small>{{ .Title }}</a>{{ end }}
+  {{ with $next }}<a class="next" href="{{ .RelPermalink }}"><small>次の記事</small>{{ .Title }}</a>{{ end }}
+</nav>
+{{ end }}
+{{ end }}

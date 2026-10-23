@@ -1,0 +1,5 @@
+<ul class="page-list">
+  {{ range sort .Pages "File.BaseFileName" }}
+  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>

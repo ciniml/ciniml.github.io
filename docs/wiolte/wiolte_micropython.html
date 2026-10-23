@@ -1,0 +1,59 @@
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Wio LTEでMicroPythonを動かす | ふがふが</title><meta name=description content="概要 Seeed StudioのLTE通信モジュール付きボードであるWio LTEで、組み込み向けのPython実装であるMicroPythonを動かしてとりあえずLチカまでしてみた。
+ビルド済みイメージ
+Wio LTE Wio LTEは …"><link rel=canonical href=https://www.fugafuga.org/wiolte/wiolte_micropython.html><link rel=stylesheet href=/css/main.min.08b5ef5793174187850e51c85e81d4e05e9e09386d77ddf5c9a3e4a6d307ce90.css></head><body><header class=site-header><div class=wrap><a class=site-title href=/>ふがふが</a></div></header><main class=wrap><nav class=breadcrumb aria-label=パンくずリスト><a href=/>ふがふが</a>
+<span aria-hidden=true>›</span><a href=/wiolte.html>Wio LTE関係</a></nav><article class=content><h1>Wio LTEでMicroPythonを動かす</h1><h2 id=概要>概要</h2><p>Seeed StudioのLTE通信モジュール付きボードであるWio LTEで、組み込み向けのPython実装であるMicroPythonを動かしてとりあえずLチカまでしてみた。</p><p><a href=mpy-seeed_wio_lte.zip>ビルド済みイメージ</a></p><h2 id=wio-lte>Wio LTE</h2><p>Wio LTEは、STMicroelectronicsのCortex-M4Fマイコン <em>STM32F405</em> とQuectelのLTE通信モジュール <em>EC21-J</em> を搭載したLTEによる通信を用いるシステムを構築するためのプロトタイプ用ボードである。</p><p>Seeed Studioが開発・製造しているため、同社のモジュール接続規格である、 <em>Groove</em> に準拠したモジュールを接続することができる。</p><p><a href=http://wiki.seeed.cc/Wio_LTE_Cat.1/>公式の開発環境</a> としては、Arduino IDEおよび、JavaScriptを使ったプロトタイピング環境である <em>Espriuno</em> を <a href=http://www.espruino.com/WioLTE>サポート</a> している。</p><p><a href=https://soracom.jp/products/wio_lte/>SORACOM</a>、<a href=https://www.switch-science.com/catalog/3600/>スイッチサイエンス</a>、<a href=http://akizukidenshi.com/catalog/g/gM-12855/>秋月電子通商</a>　などから入手できる。</p><h2 id=micropythonのビルド>MicroPythonのビルド</h2><p>WindowsのMSYS2上でビルドを試したが、シンボリックリンクなどいろいろうまくいかないところがあるので、おとなしくWindows10上のWSL上でビルドした。 もちろん、通常のLinuxでも問題ないはずである。</p><p>まずは、Linux上で <a href=https://github.com/micropython/micropython>MicroPythonのリポジトリ</a> からソースコードをcloneする。 また、MicroPython用のライブラリが <a href=https://github.com/micropython/micropython-lib>micropython-libリポジトリ</a> にあるので、こちらもcloneしておく。このとき、clone先の名前はmicropython-libのままになるようにしておく。</p><p>cloneしたMicroPythonのリポジトリのportsディレクトリ以下に、対応しているプラットフォームごとのソースコードやビルド用のスクリプトが配置されている。 Wio LTEはSTM32を使用しているので、 <code>ports/stm32</code> ディレクトリに移動する。</p><p><code>ports/stm32/board</code> ディレクトリ以下には、対象のボードごとの設定が入っている。標準ではWio LTE用の設定がないため、を <code>SEEED_WIO_LTE</code> 等の名前で一番構成の近い <em>NETDUINO_PLUS_2</em> のコピーを作成する。。</p><p>コピーした SEEED_WIO_LTE ディレクトリの下には、以下のファイルがある。</p><p>board_init.c<br>ボード固有の初期化コードを含むファイル。今回は使用しないので削除する。</p><p>mpconfigboard.h<br>UART, SPI, I2CといったMicroPythonがサポートしているペリフェラルの割り当てといったボードの機能を定義するファイル。 Wio LTEに対応するように変更する必要がある。</p><p>mpconfigboard.mk<br>ビルドの設定を定義するファイル。Wio LTEは NETDUINO Plus 2と同じ設定を使うので、変更する必要はない。</p><p>pins.csv<br>GPIOのピンの名称を設定するファイル。必要に応じて変更する。</p><p>stm32f4xxx_hal_conf.h<br>STM32のHALライブラリを設定するためのファイル。STM32 Cube MXを使って生成したファイルをベースに、MicroPythonで使えるように手を加える必要がある。</p><p>上記のファイルを <a href=SEEED_WIO_LTE.zip>Wio LTE用に変更したもの</a> を置いておくので、boardsディレクトリ以下に展開する。</p><p>その後、 <code>ports/stm32</code> ディレクトリで</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ make BOARD=SEEED_WIO_LTE
+</span></span></code></pre></div><p>とすると、 <code>ports/stm32/build-SEEED_WIO_LTE/firmware.dfu</code> にDFUで書き込むためのイメージが生成される。</p><h2 id=書き込み>書き込み</h2><p>作成したイメージの書き込みには、Arduino IDEを使った場合と同様に dfu-tool を用いる。</p><p>dfu-toolのビルド済みバイナリが <a href=https://github.com/Seeed-Studio/Seeed_Platform>Seeed Studioにのリポジトリ</a> に用意されているので、これを <a href=https://github.com/Seeed-Studio/Seeed_Platform/raw/master/stm32_dfu_upload_tool_v1.0.0.tar.bz2>ダウンロード</a> する。 ファイル名は <code>stm32_dfu_upload_tool_vx.y.z.tar.bz2</code> である。(x.y.zはバージョン番号)</p><p>ダウンロードしたファイルを展開すると、<code>stm32_dfu_upload_tool\win</code>以下にWindows用のバイナリがあるので、どこか使いやすいところにコピーする。 以降、<code>C:\dev\dfu-util</code> にコピーしたものとして説明する。</p><p><code>--list</code> オプションを付けて実行すると、現在接続されているDFU対象デバイスのリストを表示する。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>&gt; C:\dev\dfu-util\dfu-util --list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>dfu-util 0.8
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+</span></span><span class=line><span class=cl>Copyright 2010-2014 Tormod Volden and Stefan Schmidt
+</span></span><span class=line><span class=cl>This program is Free Software and has ABSOLUTELY NO WARRANTY
+</span></span><span class=line><span class=cl>Please report bugs to dfu-util@lists.gnumonks.org
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Found DFU: [0483:df11] ver=2200, devnum=22, cfg=1, intf=0, alt=3, name=&#34;@Device Feature/0xFFFF0000/01*004 e&#34;, serial=&#34;396036853436&#34;
+</span></span><span class=line><span class=cl>Found DFU: [0483:df11] ver=2200, devnum=22, cfg=1, intf=0, alt=2, name=&#34;@OTP Memory /0x1FFF7800/01*512 e,01*016 e&#34;, serial=&#34;396036853436&#34;
+</span></span><span class=line><span class=cl>Found DFU: [0483:df11] ver=2200, devnum=22, cfg=1, intf=0, alt=1, name=&#34;@Option Bytes  /0x1FFFC000/01*016 e&#34;, serial=&#34;396036853436&#34;
+</span></span><span class=line><span class=cl>Found DFU: [0483:df11] ver=2200, devnum=22, cfg=1, intf=0, alt=0, name=&#34;@Internal Flash  /0x08000000/04*016Kg,01*064Kg,07*128Kg&#34;, serial=&#34;396036853436&#34;
+</span></span></code></pre></div><p><code>micropython\ports\stm32\build-SEEED_WIO_LTE\firmware.dfu</code> をビルドしたDFU用イメージのパスとする。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>&gt; C:\dev\dfu-util\dfu-util -i 0 -a 0 -D micropython\ports\stm32\build-SEEED_WIO_LTE\firmware.dfu
+</span></span><span class=line><span class=cl>dfu-util 0.8
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+</span></span><span class=line><span class=cl>Copyright 2010-2014 Tormod Volden and Stefan Schmidt
+</span></span><span class=line><span class=cl>This program is Free Software and has ABSOLUTELY NO WARRANTY
+</span></span><span class=line><span class=cl>Please report bugs to dfu-util@lists.gnumonks.org
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Match vendor ID from file: 0483
+</span></span><span class=line><span class=cl>Match product ID from file: df11
+</span></span><span class=line><span class=cl>Opening DFU capable USB device...
+</span></span><span class=line><span class=cl>ID 0483:df11
+</span></span><span class=line><span class=cl>Run-time device DFU version 011a
+</span></span><span class=line><span class=cl>Claiming USB DFU Interface...
+</span></span><span class=line><span class=cl>Setting Alternate Setting #0 ...
+</span></span><span class=line><span class=cl>Determining device status: state = dfuERROR, status = 10
+</span></span><span class=line><span class=cl>dfuERROR, clearing status
+</span></span><span class=line><span class=cl>Determining device status: state = dfuIDLE, status = 0
+</span></span><span class=line><span class=cl>dfuIDLE, continuing
+</span></span><span class=line><span class=cl>DFU mode device DFU version 011a
+</span></span><span class=line><span class=cl>Device returned transfer size 2048
+</span></span><span class=line><span class=cl>DfuSe interface name: &#34;Internal Flash  &#34;
+</span></span><span class=line><span class=cl>file contains 1 DFU images
+</span></span><span class=line><span class=cl>parsing DFU image 1
+</span></span><span class=line><span class=cl>image for alternate setting 0, (2 elements, total size = 301816)
+</span></span><span class=line><span class=cl>parsing element 1, address = 0x08000000, size = 14984
+</span></span><span class=line><span class=cl>Download        [=========================] 100%        14984 bytes
+</span></span><span class=line><span class=cl>Download done.
+</span></span><span class=line><span class=cl>parsing element 2, address = 0x08020000, size = 286816
+</span></span><span class=line><span class=cl>Download        [=========================] 100%       286816 bytes
+</span></span><span class=line><span class=cl>Download done.
+</span></span><span class=line><span class=cl>done parsing DfuSe file
+</span></span></code></pre></div><p>以上で書き込みは完了なので、ボードのリセットボタンを押してリセットする。</p><h2 id=lチカ>Lチカ</h2><p>リセットすると、接続しているPCからは、シリアルポートとストレージとして見えるようになる。</p><p>対応するシリアルポートをTeraTermなどで開き、Enterを入力すると、<code>>>></code> のようにPythonのREPLのプロンプトが表示される。</p><p>この状態でdir()関数を実行すると、</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>&gt;&gt;&gt; dir()
+</span></span><span class=line><span class=cl>[&#39;machine&#39;, &#39;__name__&#39;, &#39;pyb&#39;]
+</span></span><span class=line><span class=cl>&gt;&gt;&gt;
+</span></span></code></pre></div><p>のように、グローバル空間にあるシンボルの名前が表示される。 また、以下のコードを入力して実行すると、1秒ごとに　<code>RX_LED (PB13)</code> ピンに接続されたLEDが点滅するのを10回繰り返す。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>pin = pyb.Pin(&#39;RX_LED&#39;)
+</span></span><span class=line><span class=cl>pin.init(pin.OUT_PP)
+</span></span><span class=line><span class=cl>for i in range(0, 20):
+</span></span><span class=line><span class=cl>    pin.value(not pin.value())
+</span></span><span class=line><span class=cl>    pyb.delay(1000)
+</span></span></code></pre></div><h2 id=lte通信>LTE通信</h2><p>EC-21の制御コードをMicroPythonに移植していないので、LTE通信はまだできない。</p><h2 id=参考>参考</h2><p>micropython/micropython<br><a href=https://github.com/micropython/micropython/>https://github.com/micropython/micropython/</a></p></article><nav class=pager aria-label=同じカテゴリの記事><a class=prev href=/wiolte/techbookfes4.html><small>前の記事</small>技術書典4出展</a>
+<a class=next href=/wiolte/wiolte_micropython_support.html><small>次の記事</small>Wio LTEをMicroPythonで使ってみる本</a></nav></main><footer class=site-footer><div class=wrap>© 2014-2026 Kenta IDA</div></footer></body></html>
