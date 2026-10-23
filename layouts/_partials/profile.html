@@ -1,0 +1,23 @@
+{{ with site.Params.profile }}
+<section class="profile">
+  <img class="profile-icon" src="{{ .icon | relURL }}" alt="" width="96" height="96">
+  <div>
+    <p class="profile-name">{{ .name }}</p>
+    <dl class="profile-links">
+      <dt>X</dt><dd><a href="https://x.com/{{ .x }}">@{{ .x }}</a></dd>
+      <dt>GitHub</dt><dd><a href="https://github.com/{{ .github }}">{{ .github }}</a></dd>
+      <dt>Mail</dt><dd><a href="mailto:{{ .email }}">{{ .email }}</a></dd>
+    </dl>
+  </div>
+</section>
+{{ end }}
+{{ with site.Params.works }}
+<section class="works">
+  <h2>主な成果物</h2>
+  <ul>
+    {{ range . }}
+    <li><a href="{{ .url }}">{{ .name }}</a> — {{ .description }}</li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

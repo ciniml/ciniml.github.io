@@ -1,5 +1,6 @@
 {{ define "main" }}
 <div class="intro">{{ .Content }}</div>
+{{ partial "profile.html" . }}
 {{ range .Sections.ByWeight }}
 <section class="section-block">
   <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>

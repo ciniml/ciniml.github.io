@@ -16,3 +16,25 @@ unsafe = false
 [markup.highlight]
 noClasses = false
 guessSyntax = false
+
+[params.profile]
+name = "Kenta IDA"
+icon = "/images/profile.png"
+x = "ciniml"
+github = "ciniml"
+email = "fuga@fugafuga.org"
+
+[[params.works]]
+name = "stackchan-idf"
+url = "https://github.com/ciniml/stackchan-idf"
+description = "ESP-IDF ベースのスタックチャン ファームウェア"
+
+[[params.works]]
+name = "fpga_samples"
+url = "https://github.com/ciniml/fpga_samples"
+description = "FPGA のサンプル集"
+
+[[params.works]]
+name = "atom_display_fpga"
+url = "https://github.com/ciniml/atom_display_fpga"
+description = "ATOM Display の FPGA デザイン"

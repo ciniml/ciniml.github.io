@@ -90,6 +90,13 @@ blockquote { margin: 0 0 1.2em; padding: 0 1em; border-left: 4px solid var(--bor
 .footnotes hr { border: 0; border-top: 1px solid var(--border); }
 
 .intro { margin-bottom: 1rem; }
+.profile { display: flex; gap: 1.25rem; align-items: center; padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+.profile-icon { flex: none; width: 96px; height: 96px; border-radius: 50%; border: 1px solid var(--border); background: #ffffff; }
+.profile-name { font-size: 1.25rem; font-weight: 700; margin: 0 0 0.25rem; }
+.profile-links { display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.75rem; margin: 0; }
+.profile-links dt { color: var(--muted); }
+.profile-links dd { margin: 0; }
+.works ul { padding-left: 1.2em; }
 .section-block h2 { margin-top: 1.8em; }
 .section-block h2 a { color: inherit; }
 .page-list { padding-left: 1.2em; }
@@ -106,4 +113,5 @@ blockquote { margin: 0 0 1.2em; padding: 0 1em; border-left: 4px solid var(--bor
 @media (max-width: 600px) {
   h1 { font-size: 1.5rem; }
   .pager { flex-direction: column; }
+  .profile-icon { width: 72px; height: 72px; }
 }
