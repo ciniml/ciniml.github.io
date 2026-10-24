@@ -4,7 +4,8 @@
   <h1>{{ .Title }}</h1>
   {{ .Content }}
 </article>
-{{ $pages := sort .CurrentSection.Pages "File.BaseFileName" }}
+{{ $pages := slice }}
+{{ if not .CurrentSection.IsHome }}{{ $pages = sort .CurrentSection.Pages "File.BaseFileName" }}{{ end }}
 {{ $prev := "" }}{{ $next := "" }}
 {{ range $i, $p := $pages }}
   {{ if eq $p $ }}
