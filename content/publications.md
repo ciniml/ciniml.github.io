@@ -7,8 +7,25 @@ url: "/publications.html"
 - [RISC-VとChiselで学ぶ はじめてのCPU自作](https://gihyo.jp/book/2021/978-4-297-12305-5)（技術評論社、2021年9月、西山 悠太朗氏と共著）
 - [基礎から学ぶ 組込みRust](https://www.c-r.com/book/detail/1403)（C&R研究所、2021年4月、中林 智之氏と共著）
 
-## 同人誌（技術書典）
+## BOOTHで販売中の書籍
 
+- [GOWIN SERDES活用](https://fugafuga.booth.pm/items/9034048)（ダウンロード版 700円／紙＋ダウンロード版 1,000円）
+- [中古FPGAボードEBAZ4205で試す FPGA Ethernet通信 Ethernet MAC編](https://fugafuga.booth.pm/items/3049316)（300円）
+- [カスタマイズして遊ぶWio Terminal](https://fugafuga.booth.pm/items/2379418)（500円）
+- [M5Stackで始める組み込みRust](https://fugafuga.booth.pm/items/1569213)（500円）
+- [カスタマイズして遊ぶM5Stack](https://fugafuga.booth.pm/items/1317046)（300円）
+- [M5Stackの拡張モジュールを作ってみる本](https://fugafuga.booth.pm/items/1043228)（300円）
+- [Wio LTEをMicroPythonで使ってみる本](https://fugafuga.booth.pm/items/830540)（300円、[サンプル版](https://fugafuga.booth.pm/items/830550)は無料）
+
+## 同人誌（技術書典・技術書同人誌博覧会）
+
+- Zephyrではじめる組込みRust（技術書典18）
+- M5Stack NanoC6で試す Matterデバイス開発入門（技書博10）
+- 格安FPGAボードで試せる FPGA Ethernet通信処理 (UDP編)（技書博7、技術書典14）
+- ATOM Displayで試す ディスプレイのレイテンシ測定（技術書典13）
+- 中古FPGAボードEBAZ4205で試す FPGA Ethernet通信処理 (Ethernet MAC編)（技書博5）
+- カスタマイズして遊ぶWio Terminal（技術書典9）
+- M5Stackで始める組み込みRust（技術書典7）
 - カスタマイズして遊ぶM5Stack（技術書典6、[サポートページ](/m5stack/techbookfes6_support.html)）
 - M5Stackの拡張モジュールを作ってみる本（技術書典5、[サポートページ](/m5stack/techbookfes5_support.html)）
 - Wio LTEをMicroPythonで使ってみる本（技術書典4、[サポートページ](/wiolte/wiolte_micropython_support.html)）
@@ -62,3 +79,26 @@ url: "/publications.html"
 ## トランジスタ技術（CQ出版）
 
 - [2019年5月号](https://toragi.cqpub.co.jp/magazine/201905/)：ワークショップ① 電流センサ直結！クラウド電力計の製作
+
+## Zenn
+
+- 2025年2月6日：[Module LLMの音声入力まわり](https://zenn.dev/ciniml/articles/module_llm_audio_system)
+- 2024年12月26日：[OpenAI Embedded SDKをPSRAMなしで動かす](https://zenn.dev/ciniml/articles/openai_embedded_sdk)
+- 2023年12月12日：[AIｽﾀｯｸﾁｬﾝにAAC圧縮機能を組み込む](https://zenn.dev/ciniml/articles/ai_stackchan_aac)
+- 2022年6月25日：[Gowin EDAのインストール](https://zenn.dev/ciniml/articles/gowin-eda-installation)
+- 2022年1月11日：[RTICメモ](https://zenn.dev/ciniml/articles/rust-rtic-memo)
+- 2021年12月7日：[WireGuard for ESP32の実装的なところ](https://zenn.dev/ciniml/articles/wireguard-esp32)
+- 2020年12月18日：[Wio TerminalのFreeRTOSの構造](https://zenn.dev/ciniml/articles/wioterminal_freertos)
+- 2020年12月9日：[M5AtomでXilinx FPGAの無線接続書き込みアダプタを作る](https://zenn.dev/ciniml/articles/port-xvc-to-m5atom)
+- 2020年11月7日：[Raspberry Pi 4でhw_serverを動かす](https://zenn.dev/ciniml/articles/rpi_hwserver)
+- 2020年10月24日：[QuickLogic Feather お試しめも](https://zenn.dev/ciniml/articles/quicklogic_memo)
+
+## Qiita
+
+- 2021年12月1日：[ATOM Displayの内部処理概要](https://qiita.com/ciniml/items/30759f0083df5e07865f)
+- 2020年4月10日：[Tang NanoのFPGAとPC間でUART通信をする](https://qiita.com/ciniml/items/05ac7fd2515ceed3f88d)
+- 2019年12月24日：[Wio LTEのMicroPythonの通信処理を使いやすくする (未完)](https://qiita.com/ciniml/items/ccf40f9c1797cc5bb279)
+- 2019年12月14日：[自作モジュール用のUI Flowのカスタムブロックを作る](https://qiita.com/ciniml/items/618899c9065d51d5c54e)
+- 2019年11月4日：[Sipeed Tang Nanoで遊んでみる (Linux版)](https://qiita.com/ciniml/items/bb9723673c91d8374b63)
+- 2019年10月23日：[UIFlowで大きめのMicroPythonスクリプトをimportする](https://qiita.com/ciniml/items/68bc7f362d6985efc640)
+- 2018年12月18日：[M5Stack用MicroPythonのビルドとカスタマイズ](https://qiita.com/ciniml/items/1378d02bc14098b959ef)
